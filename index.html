@@ -842,5 +842,94 @@
 
 </div>
 
+
+<style>
+    .math-portal-container {
+        text-align: center;
+        margin: 60px auto;
+        padding: 50px 30px;
+        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
+        border: 1px solid #e2e8f0;
+        max-width: 850px;
+    }
+    .math-portal-title {
+        color: #1a365d;
+        font-size: 1.8em;
+        margin-top: 0;
+        margin-bottom: 35px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+    .math-btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .math-fancy-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px 36px;
+        font-size: 1.15em;
+        font-weight: bold;
+        color: #ffffff !important;
+        text-decoration: none;
+        background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%);
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 6px 15px rgba(43, 108, 176, 0.25);
+        overflow: hidden;
+        border: 2px solid transparent;
+    }
+    /* The shine sweep effect on hover */
+    .math-fancy-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%; width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        transition: all 0.6s;
+    }
+    .math-fancy-btn:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 15px 25px rgba(26, 54, 93, 0.35);
+        border-color: #90cdf4;
+    }
+    .math-fancy-btn:hover::before {
+        left: 100%;
+    }
+    .math-symbol {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.5em;
+        font-style: italic;
+        color: #90cdf4;
+        font-weight: normal;
+        margin-right: 4px;
+    }
+</style>
+
+<div class="math-portal-container">
+    <h3 class="math-portal-title">🌌 Explore the Advanced ISI Mathematics Solutions</h3>
+    <div class="math-btn-group">
+        
+        <a href="STB.html" class="math-fancy-btn">
+            <span class="math-symbol">∫</span> ISI JRF STB 2026
+        </a>
+
+        <a href="STA_2025.html" class="math-fancy-btn">
+            <span class="math-symbol">∑</span> ISI STA_2025
+        </a>
+
+        <a href="STB_2025.html" class="math-fancy-btn">
+            <span class="math-symbol">∏</span> ISI STB 2025
+        </a>
+
+    </div>
+</div>
+
 </body>
 </html>
