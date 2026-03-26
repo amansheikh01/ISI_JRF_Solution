@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STB Advanced Examination Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="#">⬅️ View Other ISI Papers</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STB (Statistics B) — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Statistics_&_Probability-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STB-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous, step-by-step descriptive proofs for the Indian Statistical Institute B.Stat / M.Stat Entrance.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Markov Chains on a Cycle Graph (15 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider a square with four vertices $A, B, C$, and $D$ arranged clockwise. A particle starts moving from the vertex $A$, and at any stage, it moves to either its clockwise neighbour or its anticlockwise neighbour with respective probabilities $0.6$ and $0.4$. Let $X_n \in \{A, B, C, D\}$ be the position after the $n$-th step, for $n \geq 1$.<br><br>
+            (a) Find $\mathbb{P}(X_{12} = A)$.<br>
+            (b) Find the stationary distribution of the Markov chain. Does the distribution of $X_n$ converge to this stationary distribution as $n \to \infty$? Justify your answer.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem models a <strong>Random Walk on a Cycle Graph</strong> ($C_4$). 
+        <ul>
+            <li><strong>For part (a):</strong> While a binomial combinatorial sum is possible, the most rigorous and elegant approach involves utilizing the spectral properties of the transition matrix. Since the state space forms a ring, the transition matrix is a <strong>Circulant Matrix</strong>, whose eigenvalues are easily found using roots of unity.</li>
+            <li><strong>For part (b):</strong> We verify double-stochasticity for the stationary distribution. For convergence, we must analyze the <strong>Periodicity</strong> of the chain. Bipartite graphs strictly oscillate, precluding point-wise convergence.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Setting up the Transition Matrix</strong></p>
+        <p>Let us index the state space $S = \{A, B, C, D\}$ as $\{0, 1, 2, 3\}$. The particle moves clockwise ($+1 \pmod 4$) with probability $p=0.6$, and anticlockwise ($-1 \pmod 4$) with probability $q=0.4$. The 1-step transition matrix $\mathbf{P}$ is:</p>
+        <div class="math-display">
+            $$ \mathbf{P} = \begin{pmatrix} 0 & 0.6 & 0 & 0.4 \\ 0.4 & 0 & 0.6 & 0 \\ 0 & 0.4 & 0 & 0.6 \\ 0.6 & 0 & 0.4 & 0 \end{pmatrix} $$
+        </div>
+        
+        <p><strong>Step 2: Spectral Decomposition of the Circulant Matrix</strong></p>
+        <p>Matrix $\mathbf{P}$ is a circulant matrix defined by its first row vector $\mathbf{c} = [0, 0.6, 0, 0.4]$. The eigenvalues $\lambda_k$ of a $4 \times 4$ circulant matrix are given by the Discrete Fourier Transform of $\mathbf{c}$:</p>
+        <div class="math-display">
+            $$ \lambda_k = \sum_{j=0}^{3} c_j \omega^{jk}, \quad \text{where } \omega = e^{2\pi i / 4} = i $$
+        </div>
+        <p>Substituting $c_1 = p = 0.6$ and $c_3 = q = 0.4$, we compute the four eigenvalues:</p>
+        <ul>
+            <li>$\lambda_0 = p + q = 1$</li>
+            <li>$\lambda_1 = p(i) + q(-i) = (0.6 - 0.4)i = 0.2i$</li>
+            <li>$\lambda_2 = p(-1) + q(-1) = -1$</li>
+            <li>$\lambda_3 = p(-i) + q(i) = -(0.6 - 0.4)i = -0.2i$</li>
+        </ul>
+
+        <p><strong>Step 3: Calculating $\mathbb{P}(X_{12} = A)$</strong></p>
+        <p>Because the eigenvectors of a circulant matrix are independent of its entries (they are the columns of the Fourier matrix), the $n$-step transition probability returning to the starting state $P_{00}^{(n)}$ is simply the average of the $n$-th powers of its eigenvalues:</p>
+        <div class="math-display">
+            $$ P_{00}^{(n)} = \frac{1}{4} \sum_{k=0}^{3} \lambda_k^n $$
+        </div>
+        <p>For $n = 12$, we evaluate the 12th power of each eigenvalue:</p>
+        <ul>
+            <li>$\lambda_0^{12} = 1^{12} = 1$</li>
+            <li>$\lambda_1^{12} = (0.2i)^{12} = (0.2)^{12} (i^4)^3 = 0.2^{12} \cdot 1 = 0.2^{12}$</li>
+            <li>$\lambda_2^{12} = (-1)^{12} = 1$</li>
+            <li>$\lambda_3^{12} = (-0.2i)^{12} = 0.2^{12} (i^4)^3 = 0.2^{12}$</li>
+        </ul>
+        <div class="math-display">
+            $$ P_{00}^{(12)} = \frac{1}{4} \left( 1 + 0.2^{12} + 1 + 0.2^{12} \right) = \frac{1}{4} \left( 2 + 2(0.2)^{12} \right) = \frac{1 + 0.2^{12}}{2} $$
+        </div>
+
+        <p><strong>Step 4: Finding the Stationary Distribution for Part (b)</strong></p>
+        <p>A stationary distribution $\boldsymbol{\pi} = (\pi_A, \pi_B, \pi_C, \pi_D)$ must satisfy $\boldsymbol{\pi} \mathbf{P} = \boldsymbol{\pi}$ and $\sum \pi_i = 1$. By inspecting the transition matrix $\mathbf{P}$, we observe that both the row sums and the column sums are exactly $1$.</p>
+        <p>Because $\mathbf{P}$ is a <strong>doubly stochastic matrix</strong> over a finite state space, the unique stationary distribution is the uniform distribution:</p>
+        <div class="math-display">
+            $$ \boldsymbol{\pi} = \left( \frac{1}{4}, \frac{1}{4}, \frac{1}{4}, \frac{1}{4} \right) $$
+        </div>
+
+        <p><strong>Step 5: Analyzing Convergence and Periodicity</strong></p>
+        <p>For a discrete-time Markov chain to converge pointwise to its stationary distribution ($\lim_{n \to \infty} P_{ij}^{(n)} = \pi_j$), the chain must be irreducible, positive recurrent, and <strong>aperiodic</strong>.</p>
+        <p>Let us define the period $d$ of state $A$. The period is the greatest common divisor of all $n$ such that returning to $A$ is possible: $d = \gcd\{n : P_{00}^{(n)} > 0\}$. Because the graph is a square (a bipartite graph), any path that starts at $A$ and returns to $A$ must take an <strong>even</strong> number of steps.</p>
+        <div class="math-display">
+            $$ d = \gcd(2, 4, 6, \dots) = 2 $$
+        </div>
+        <p>Because the period $d = 2 > 1$, the Markov chain is <strong>periodic</strong>. Specifically, $P_{00}^{(2k+1)} = 0$ for all integers $k$, meaning the probability sequence strictly oscillates and does not converge to $1/4$.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The probability $\mathbb{P}(X_{12} = A) = \frac{1 + 0.2^{12}}{2}$.<br>
+            (b) The stationary distribution is $\boldsymbol{\pi} = (1/4, 1/4, 1/4, 1/4)$. However, the distribution of $X_n$ <strong>does not converge</strong> to this stationary distribution because the Markov chain is periodic with period $d=2$ (bipartite state space).
+        </div>
+    </div>
+
+    <!-- ==================== Q2 ==================== -->
+    <div class="question-section" id="q2">
+        <h2>📌 Q2 Discrete MLE and Asymptotic Degeneracy (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_n$ ($n > 1$) be independent $U(0, \theta)$ random variables where $\theta$ is an unknown <em>positive integer</em>.<br><br>
+            (a) Find the maximum likelihood estimator $\hat{\theta}_n$ of $\theta$.<br>
+            (b) Show that $\mathbb{P}(\hat{\theta}_n = \theta)$ converges to 1 as $n \to \infty$.<br>
+            (c) Find the limiting distribution of $n(\theta - \hat{\theta}_n)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem introduces a boundary-constrained optimization where the parameter space is restricted to integers ($\theta \in \mathbb{N}$).
+        <ul>
+            <li><strong>For part (a):</strong> The likelihood function is strictly decreasing with respect to $\theta$. Therefore, the MLE is the smallest permissible integer that covers all observed data.</li>
+            <li><strong>For part (b):</strong> We evaluate the probability of hitting the exact true parameter using the Cumulative Distribution Function (CDF) of the maximum order statistic $X_{(n)}$.</li>
+            <li><strong>For part (c):</strong> We apply the definitions of <strong>convergence in probability</strong> and <strong>convergence in distribution</strong> to show that an estimator with an exact hit probability approaching $1$ forces the scaled error to converge to a degenerate point mass.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding the MLE for Part (a)</strong></p>
+        <p>The probability density function for a single observation is $f(x_i | \theta) = \frac{1}{\theta} \mathbb{I}(0 < x_i \leq \theta)$. The joint likelihood function for the sample is the product of the marginals:</p>
+        <div class="math-display">
+            $$ L(\theta | \mathbf{X}) = \frac{1}{\theta^n} \prod_{i=1}^n \mathbb{I}(0 < X_i \leq \theta) = \frac{1}{\theta^n} \mathbb{I}(X_{(n)} \leq \theta) $$
+        </div>
+        <p>where $X_{(n)} = \max(X_1, \dots, X_n)$ is the maximum order statistic. To maximize $L(\theta)$, we must minimize $\theta$ subject to two constraints:</p>
+        <ol>
+            <li>$\theta \geq X_{(n)}$ (to keep the indicator function non-zero).</li>
+            <li>$\theta \in \{1, 2, 3, \dots\}$ (since $\theta$ is a positive integer).</li>
+        </ol>
+        <p>The smallest integer that is greater than or equal to $X_{(n)}$ is mathematically defined as the <strong>ceiling function</strong>. Thus, the MLE is:</p>
+        <div class="math-display">
+            $$ \hat{\theta}_n = \lceil X_{(n)} \rceil $$
+        </div>
+
+        <p><strong>Step 2: Proving Asymptotic Consistency for Part (b)</strong></p>
+        <p>We want to find the probability that our estimator exactly matches the true integer parameter $\theta$.</p>
+        <div class="math-display">
+            $$ \mathbb{P}(\hat{\theta}_n = \theta) = \mathbb{P}(\lceil X_{(n)} \rceil = \theta) $$
+        </div>
+        <p>For the ceiling of a number to equal integer $\theta$, the number must fall strictly between $\theta - 1$ and $\theta$. Therefore:</p>
+        <div class="math-display">
+            $$ \mathbb{P}(\lceil X_{(n)} \rceil = \theta) = \mathbb{P}(\theta - 1 < X_{(n)} \leq \theta) $$
+        </div>
+        <p>Since the true distribution of $X_i$ is bounded strictly at $\theta$, the upper condition $X_{(n)} \leq \theta$ happens with probability 1. We can rewrite the probability using the complement rule:</p>
+        <div class="math-display">
+            $$ \mathbb{P}(\hat{\theta}_n = \theta) = 1 - \mathbb{P}(X_{(n)} \leq \theta - 1) $$
+        </div>
+        <p>The CDF of the maximum order statistic $X_{(n)}$ for uniform data is $F_{(n)}(x) = \left(\frac{x}{\theta}\right)^n$ for $x \in (0, \theta)$. Substituting $x = \theta - 1$:</p>
+        <div class="math-display">
+            $$ \mathbb{P}(\hat{\theta}_n = \theta) = 1 - \left( \frac{\theta - 1}{\theta} \right)^n = 1 - \left( 1 - \frac{1}{\theta} \right)^n $$
+        </div>
+        <p>Since $\theta \geq 1$, the term $(1 - 1/\theta)$ is strictly less than $1$ (for $\theta > 1$) or exactly $0$ (for $\theta = 1$). In either case, as $n \to \infty$:</p>
+        <div class="math-display">
+            $$ \lim_{n \to \infty} \left( 1 - \frac{1}{\theta} \right)^n = 0 \implies \lim_{n \to \infty} \mathbb{P}(\hat{\theta}_n = \theta) = 1 $$
+        </div>
+
+        <p><strong>Step 3: Finding the Limiting Distribution for Part (c)</strong></p>
+        <p>Let $Z_n = n(\theta - \hat{\theta}_n)$ be the sequence of scaled error random variables. We analyze the probability mass at exactly zero.</p>
+        <div class="math-display">
+            $$ \mathbb{P}(Z_n = 0) = \mathbb{P}\left(n(\theta - \hat{\theta}_n) = 0\right) = \mathbb{P}(\hat{\theta}_n = \theta) $$
+        </div>
+        <p>From Part (b), we know that $\lim_{n \to \infty} \mathbb{P}(\hat{\theta}_n = \theta) = 1$. Therefore:</p>
+        <div class="math-display">
+            $$ \lim_{n \to \infty} \mathbb{P}(Z_n = 0) = 1 $$
+        </div>
+        <p>Because the probability mass concentrates entirely at the single point $0$ as $n$ approaches infinity, the sequence of random variables $Z_n$ <strong>converges in probability</strong> to the constant $0$ ($Z_n \xrightarrow{p} 0$).</p>
+        <p>It is a standard theorem in asymptotic statistics that convergence in probability to a constant implies <strong>convergence in distribution</strong> to a degenerate random variable at that constant.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The MLE is $\hat{\theta}_n = \lceil X_{(n)} \rceil$.<br>
+            (b) $\mathbb{P}(\hat{\theta}_n = \theta) = 1 - (1 - 1/\theta)^n$, which converges to $1$ as $n \to \infty$.<br>
+            (c) The limiting distribution of $n(\theta - \hat{\theta}_n)$ is a <strong>degenerate distribution at 0</strong> (a point mass/Dirac delta at 0).
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Mixture Distributions and Popoviciu's Inequality (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_n$ and $U$ be independent random variables, where $X_i \sim N(i, \sigma_i^2)$ and $\mathbb{P}(U = i) = \lambda_i$ for $i = 1, 2, \dots, n$ with $\sum_{i=1}^n \lambda_i = 1$. Define $Y = X_i$ if $U = i$. Let $V_1 = \text{Var}(Y)$ and $V_2 = \sum_{i=1}^n \lambda_i \sigma_i^2$.<br><br>
+            (a) Which one is bigger $V_1$ or $V_2$? Justify your answer.<br>
+            (b) Find $(\lambda_1, \lambda_2, \dots, \lambda_n)$ such that $|V_1 - V_2|$ is maximum.<br>
+            (c) Find the maximum value of $|V_1 - V_2|$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>The variable $Y$ is a <strong>Gaussian Mixture Model</strong> conditioned on the latent variable $U$. 
+        <ul>
+            <li><strong>For part (a):</strong> The variance of a mixture is elegantly decomposed using the <strong>Law of Total Variance</strong> (EVE's Law). The difference between the total variance and the expected conditional variance is the variance of the conditional means.</li>
+            <li><strong>For parts (b &amp; c):</strong> We must maximize the variance of the bounded discrete random variable $U \in \{1, \dots, n\}$. By <strong>Popoviciu's Inequality on Variances</strong> (or a simple extreme-point proof), the variance of a bounded distribution is maximized when the entire probability mass is split evenly between the extreme absolute bounds.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Applying the Law of Total Variance for Part (a)</strong></p>
+        <p>By definition, $Y$ conditioned on $U = i$ has the distribution of $X_i$, which means $Y | U \sim N(U, \sigma_U^2)$. From this conditional distribution, we extract the conditional mean and conditional variance:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[Y | U] = U \quad \text{and} \quad \text{Var}(Y | U) = \sigma_U^2 $$
+        </div>
+        <p>We use the <strong>Law of Total Variance</strong> to compute $V_1 = \text{Var}(Y)$:</p>
+        <div class="math-display">
+            $$ \text{Var}(Y) = \mathbb{E}[\text{Var}(Y | U)] + \text{Var}(\mathbb{E}[Y | U]) $$
+        </div>
+        <p>Let us analyze the two components on the right-hand side:</p>
+        <ol>
+            <li>The expected conditional variance is $\mathbb{E}[\sigma_U^2] = \sum_{i=1}^n \mathbb{P}(U=i) \sigma_i^2 = \sum_{i=1}^n \lambda_i \sigma_i^2$. This is exactly defined as $V_2$.</li>
+            <li>The variance of the conditional mean is $\text{Var}(U)$.</li>
+        </ol>
+        <p>Substituting these into the equation yields:</p>
+        <div class="math-display">
+            $$ V_1 = V_2 + \text{Var}(U) $$
+        </div>
+        <p>Since the variance of any real-valued random variable is strictly non-negative ($\text{Var}(U) \geq 0$), it must follow that $V_1 \geq V_2$. Therefore, $V_1$ is bigger (or equal if $U$ is a degenerate constant).</p>
+
+        <p><strong>Step 2: Formulating the Optimization Problem for Part (b)</strong></p>
+        <p>We need to maximize the absolute difference $|V_1 - V_2|$. From Step 1, we know:</p>
+        <div class="math-display">
+            $$ |V_1 - V_2| = V_1 - V_2 = \text{Var}(U) $$
+        </div>
+        <p>Our goal is to find the probability vector $\boldsymbol{\lambda}$ that maximizes $\text{Var}(U)$ subject to the constraint that $U$ is supported on the integers $\{1, 2, \dots, n\}$. Let us expand $\text{Var}(U)$:</p>
+        <div class="math-display">
+            $$ \text{Var}(U) = \mathbb{E}[U^2] - (\mathbb{E}[U])^2 = \sum_{i=1}^n \lambda_i i^2 - \left( \sum_{i=1}^n \lambda_i i \right)^2 $$
+        </div>
+
+        <p><strong>Step 3: Proving the Extreme Point Mass Maximum</strong></p>
+        <p>Notice that for any $1 \leq i \leq n$, the quadratic product $(i - 1)(n - i) \geq 0$. Expanding this geometric bound gives:</p>
+        <div class="math-display">
+            $$ in - i^2 - n + i \geq 0 \implies i^2 \leq (n+1)i - n $$
+        </div>
+        <p>Taking the expectation on both sides with respect to $\boldsymbol{\lambda}$:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[U^2] \leq (n+1)\mathbb{E}[U] - n $$
+        </div>
+        <p>Substitute this upper bound back into the variance equation to create a function $g(x)$ where $x = \mathbb{E}[U]$:</p>
+        <div class="math-display">
+            $$ \text{Var}(U) \leq (n+1)\mathbb{E}[U] - n - (\mathbb{E}[U])^2 = g(\mathbb{E}[U]) $$
+        </div>
+        <p>To maximize this bounding quadratic function $g(x) = -x^2 + (n+1)x - n$, we take the derivative with respect to $x$ and set it to zero:</p>
+        <div class="math-display">
+            $$ g'(x) = -2x + (n+1) = 0 \implies x = \frac{n+1}{2} $$
+        </div>
+        <p>Thus, the variance is maximized when the expected value is exactly at the midpoint of the interval. For the inequality $i^2 \leq (n+1)i - n$ to achieve <em>strict equality</em> (which is required to reach the maximum theoretical variance), the probability mass must be $0$ everywhere the inequality is strict.</p>
+        <p>The inequality is strictly $0$ if and only if $i = 1$ or $i = n$. This forces $\lambda_i = 0$ for all $1 < i < n$.</p>
+        <p>To satisfy $\mathbb{E}[U] = \frac{n+1}{2}$ with only $\lambda_1$ and $\lambda_n$ active:</p>
+        <div class="math-display">
+            $$ 1 \cdot \lambda_1 + n \cdot \lambda_n = \frac{n+1}{2} \quad \text{and} \quad \lambda_1 + \lambda_n = 1 $$
+        </div>
+        <p>Solving this system yields $\lambda_1 = 1/2$ and $\lambda_n = 1/2$.</p>
+
+        <p><strong>Step 4: Evaluating the Maximum Value for Part (c)</strong></p>
+        <p>We evaluate $\text{Var}(U)$ using our optimal discrete uniform distribution on the extremes:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[U] = \frac{n+1}{2} $$
+        </div>
+        <div class="math-display">
+            $$ \mathbb{E}[U^2] = 1^2\left(\frac{1}{2}\right) + n^2\left(\frac{1}{2}\right) = \frac{n^2 + 1}{2} $$
+        </div>
+        <div class="math-display">
+            $$ \text{Max } \text{Var}(U) = \frac{n^2 + 1}{2} - \left(\frac{n+1}{2}\right)^2 = \frac{2n^2 + 2 - (n^2 + 2n + 1)}{4} = \frac{n^2 - 2n + 1}{4} $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) $V_1$ is bigger than $V_2$ because $V_1 = V_2 + \text{Var}(U)$, and variance is non-negative.<br>
+            (b) The probability vector that maximizes the difference is $\lambda_1 = 1/2$, $\lambda_n = 1/2$, and $\lambda_i = 0$ for all $1 < i < n$.<br>
+            (c) The maximum absolute difference $|V_1 - V_2|$ is exactly $\frac{(n-1)^2}{4}$.
+        </div>
+    </div>
+
+    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+    <div class="question-section" id="summary-stb" style="border-bottom: none;">
+        <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
+        
+        <h3>🎯 Core Concepts Tested in This Paper</h3>
+        <ul>
+            <li><strong>Stochastic Processes (Q1):</strong> Utilizing the <strong>Spectral Theorem</strong> for circulant transition matrices over combinatorial brute-force methods. Understanding how the <strong>Periodicity</strong> of bipartite graph topologies prevents point-wise convergence to a stationary distribution.</li>
+            <li><strong>Asymptotic Theory &amp; Inference (Q2):</strong> Handling edge-cases in Maximum Likelihood Estimation where the parameter space is restricted to integers ($\mathbb{N}$). Using the CDF of extreme order statistics to prove convergence in probability to a <strong>degenerate distribution</strong>.</li>
+            <li><strong>Mixture Models &amp; Inequalities (Q3):</strong> Breaking down variance using the <strong>Law of Total Variance (EVE's law)</strong>. Applying <strong>Popoviciu's Inequality on Variances</strong> to rigorously prove that maximum variance of bounded variables occurs at extreme point masses.</li>
+        </ul>
+
+        <div class="hint-box">
+            <strong>💡 ISI Examiner Insight:</strong><br>
+            In the ISI STB paper, elegance matters just as much as correctness. For example, in Q1, while setting up a binomial expansion works, using discrete Fourier roots (eigenvalues of circulant matrices) demonstrates a deeper mathematical maturity. In Q3, explicitly proving the variance bound via the $(i-1)(n-i) \ge 0$ quadratic trick secures full subjective marks over simply stating "variance is maximized at extremes."
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
