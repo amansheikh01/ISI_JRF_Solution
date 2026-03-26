@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STB 2025 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+        <a href="STA.html">View STA Solutions ➡️</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STB (Statistics B) 2025 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Probability_%26_Statistics-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STB-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Joint Markov Chains and Irreducibility (15 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $\{X_n\}$ and $\{Y_n\}$ be two independent Markov chains on finite state spaces $S$ and $T$ with transition matrices $\mathbf{P} = ((p_{ij}))$ and $\mathbf{Q} = ((q_{ij}))$. Define $Z_n = (X_n, Y_n)$.<br>
+            (a) Show that $\{Z_n\}$ is a Markov chain on $S \times T$ and write its transition matrix.<br>
+            (b) If $\{X_n\}$ and $\{Y_n\}$ are irreducible, is $\{Z_n\}$ always irreducible? Justify.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This tests the structural properties of <strong>Product Markov Chains</strong>. 
+        <ul>
+            <li><strong>Part (a)</strong> requires using the definition of the Markov property and factoring the joint conditional probability using the independence of the chains.</li>
+            <li><strong>Part (b)</strong> is a classic trap regarding <strong>periodicity</strong>. While irreducibility means every state is reachable, periodic chains constrained to move in lock-step might never align to reach certain joint states, breaking joint irreducibility. We will provide a counterexample using deterministic bipartite graphs.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Proving the Markov Property for Part (a)</strong></p>
+        <p>To show that $\{Z_n\}$ is a Markov chain, we must verify that its future state depends only on its present state, not the past. Let $z_k = (x_k, y_k)$ denote a generic state in $S \times T$. We evaluate the conditional probability:</p>
+        <div class="math-display">
+            $$ P(Z_{n+1} = z_{n+1} \mid Z_n = z_n, Z_{n-1} = z_{n-1}, \dots, Z_0 = z_0) $$
+        </div>
+        <p>Substitute the definitions of $Z$ in terms of $X$ and $Y$:</p>
+        <div class="math-display">
+            $$ = P(X_{n+1}=x_{n+1}, Y_{n+1}=y_{n+1} \mid X_n=x_n, Y_n=y_n, \dots, X_0=x_0, Y_0=y_0) $$
+        </div>
+        <p>Because the chains $\{X_n\}$ and $\{Y_n\}$ are strictly independent, their joint probability factors into the product of their individual probabilities:</p>
+        <div class="math-display">
+            $$ = P(X_{n+1}=x_{n+1} \mid X_n=x_n, \dots) \times P(Y_{n+1}=y_{n+1} \mid Y_n=y_n, \dots) $$
+        </div>
+        <p>Since both $X$ and $Y$ are individually Markov chains, they depend only on their immediate previous states:</p>
+        <div class="math-display">
+            $$ = P(X_{n+1}=x_{n+1} \mid X_n=x_n) \times P(Y_{n+1}=y_{n+1} \mid Y_n=y_n) = p_{x_n, x_{n+1}} q_{y_n, y_{n+1}} $$
+        </div>
+        <p>Because this result depends solely on $(x_n, y_n) = Z_n$, the process $\{Z_n\}$ is a Markov chain. Its transition probability matrix $\mathbf{R}$ is the <strong>Kronecker product</strong> of $\mathbf{P}$ and $\mathbf{Q}$ ($\mathbf{R} = \mathbf{P} \otimes \mathbf{Q}$), where $R_{(i,k),(j,l)} = p_{ij} q_{kl}$.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Disproving Joint Irreducibility for Part (b)</strong></p>
+        <p>The claim is false. We construct a simple counterexample based on <strong>periodicity</strong>. Let $S = \{1, 2\}$ and $T = \{1, 2\}$. Assume both chains are deterministic oscillators with the transition matrix:</p>
+        <div class="math-display">
+            $$ \mathbf{P} = \mathbf{Q} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} $$
+        </div>
+        <p>Both chains are clearly irreducible because you can reach state 2 from state 1, and state 1 from state 2. Now consider the joint chain $Z_n$ on the state space $\{(1,1), (1,2), (2,1), (2,2)\}$.</p>
+        <p>Suppose the process starts at $Z_0 = (1,1)$.</p>
+        <ul>
+            <li>At $n=1$, $X$ must move to 2, and $Y$ must move to 2. Thus, $Z_1 = (2,2)$.</li>
+            <li>At $n=2$, $X$ must move to 1, and $Y$ must move to 1. Thus, $Z_2 = (1,1)$.</li>
+        </ul>
+        <p>The joint chain will strictly oscillate between $(1,1)$ and $(2,2)$. The states $(1,2)$ and $(2,1)$ are mathematically impossible to reach from $(1,1)$. Because there exist states that cannot communicate with each other, the joint chain $\{Z_n\}$ is <strong>not irreducible</strong>.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) $\{Z_n\}$ satisfies the Markov property due to independence. The transition probability is $P_{(i,k),(j,l)} = p_{ij} q_{kl}$.<br>
+            (b) No, $\{Z_n\}$ is not always irreducible. If the component chains are periodic, they can become phase-locked, making mixed states unreachable (as shown in the deterministic 2-state oscillator counterexample).
+        </div>
+    </div>
+
+    <!-- ==================== Q2 ==================== -->
+    <div class="question-section" id="q2">
+        <h2>📌 Q2 Consistency of the Empirical CDF at the Sample Mean (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, \dots, X_n \sim F$ i.i.d. with $\mathbb{E}(X_1) = \mu$. $F$ is continuous at $\mu$. The empirical CDF is $F_n(t) = \frac{1}{n}\sum_{i=1}^n \mathbf{1}(X_i \leq t)$. For $\bar{X}_n = \frac{1}{n}\sum X_i$, show that $F_n(\bar{X}_n)$ is a consistent estimator of $F(\mu)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This proof requires bridging two distinct forms of asymptotic convergence. 
+        <ul>
+            <li>First, we use the <strong>Weak Law of Large Numbers (WLLN)</strong> and the <strong>Continuous Mapping Theorem</strong> to show that the true CDF evaluated at the sample mean converges to the true CDF at the true mean: $F(\bar{X}_n) \xrightarrow{p} F(\mu)$.</li>
+            <li>Second, we invoke the <strong>Glivenko-Cantelli Theorem</strong>, which establishes the uniform convergence of the empirical CDF to the true CDF, ensuring that swapping $F$ for $F_n$ incurs an error that vanishes asymptotically.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Setting up the Triangle Inequality</strong></p>
+        <p>To prove that $F_n(\bar{X}_n)$ is a consistent estimator of $F(\mu)$, we must show that $F_n(\bar{X}_n) \xrightarrow{p} F(\mu)$, which means the absolute difference converges to zero in probability. We bound the error using the triangle inequality by introducing the intermediate term $F(\bar{X}_n)$:</p>
+        <div class="math-display">
+            $$ |F_n(\bar{X}_n) - F(\mu)| \leq |F_n(\bar{X}_n) - F(\bar{X}_n)| + |F(\bar{X}_n) - F(\mu)| $$
+        </div>
+        <p>We will show that both terms on the right-hand side converge to 0 in probability.</p>
+
+        <p><strong>Step 2: Bounding the First Term via Glivenko-Cantelli</strong></p>
+        <p>The term $|F_n(\bar{X}_n) - F(\bar{X}_n)|$ represents the error between the empirical CDF and the true CDF evaluated at a specific random point $\bar{X}_n$. This error is strictly bounded by the maximum error across the entire real line:</p>
+        <div class="math-display">
+            $$ |F_n(\bar{X}_n) - F(\bar{X}_n)| \leq \sup_{t \in \mathbb{R}} |F_n(t) - F(t)| $$
+        </div>
+        <p>By the <strong>Glivenko-Cantelli Theorem</strong> (the Fundamental Theorem of Statistics), the empirical CDF converges uniformly to the true CDF almost surely (and therefore in probability):</p>
+        <div class="math-display">
+            $$ \sup_{t \in \mathbb{R}} |F_n(t) - F(t)| \xrightarrow{p} 0 $$
+        </div>
+        <p>Consequently, $|F_n(\bar{X}_n) - F(\bar{X}_n)| \xrightarrow{p} 0$.</p>
+
+        <p><strong>Step 3: Bounding the Second Term via WLLN and Continuity</strong></p>
+        <p>By the <strong>Weak Law of Large Numbers (WLLN)</strong>, since $\mathbb{E}[X_1] = \mu$ exists and is finite, the sample mean converges in probability to the population mean:</p>
+        <div class="math-display">
+            $$ \bar{X}_n \xrightarrow{p} \mu $$
+        </div>
+        <p>We are explicitly given that the function $F$ is continuous at the point $\mu$. By the <strong>Continuous Mapping Theorem</strong>, continuous functions preserve convergence in probability. Therefore:</p>
+        <div class="math-display">
+            $$ F(\bar{X}_n) \xrightarrow{p} F(\mu) $$
+        </div>
+        <p>This implies that $|F(\bar{X}_n) - F(\mu)| \xrightarrow{p} 0$.</p>
+
+        <p><strong>Step 4: Conclusion</strong></p>
+        <p>Since both components of our triangle inequality bound converge to $0$ in probability, their sum also converges to $0$ in probability:</p>
+        <div class="math-display">
+            $$ |F_n(\bar{X}_n) - F(\mu)| \xrightarrow{p} 0 $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By decoupling the statistical estimation error (Glivenko-Cantelli) and the parameter estimation error (WLLN + Continuous Mapping Theorem), we strictly prove that $F_n(\bar{X}_n) \xrightarrow{p} F(\mu)$, satisfying the definition of a consistent estimator.
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Variances and Correlations of Dirichlet-like Ratios (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2, X_3$ be i.i.d positive random variables. Define $U_i = X_i / (X_1+X_2+X_3)$.<br>
+            (a) Give a choice of $(a_1, a_2, a_3)$ so $\text{Var}(a_1 U_1 + a_2 U_2 + a_3 U_3) = 0$.<br>
+            (b) Find the correlation matrix of $(U_1, U_2, U_3)$.<br>
+            (c) Find $a_1, a_2, a_3$ satisfying $\sum a_i^2 = 1$ that maximizes $\text{Var}(\sum a_i U_i)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem explores variables normalized to sum to $1$ (a simplex constraint). 
+        <ul>
+            <li><strong>For part (a):</strong> Because the sum of the variables is exactly $1$, a linear combination where all coefficients are equal will result in a constant, driving the variance to zero.</li>
+            <li><strong>For part (b):</strong> The sum constraint fundamentally forces negative covariances. Since the original $X_i$ are i.i.d, the $U_i$ variables are perfectly symmetric, allowing us to algebraically extract the exact correlation without knowing the underlying distribution.</li>
+            <li><strong>For part (c):</strong> Maximizing variance subject to a spherical constraint ($\sum a_i^2 = 1$) is a classic <strong>Rayleigh Quotient</strong> optimization. The maximum variance corresponds to the largest eigenvalue of the covariance matrix.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding the Zero-Variance Vector for Part (a)</strong></p>
+        <p>By definition, $U_1 + U_2 + U_3 = \frac{X_1 + X_2 + X_3}{X_1 + X_2 + X_3} = 1$.<br>
+        Because the sum is a deterministic constant, its variance is exactly $0$. Therefore, if we choose weights that simply sum the variables, the variance vanishes:</p>
+        <div class="math-display">
+            $$ a_1 = 1, \quad a_2 = 1, \quad a_3 = 1 $$
+        </div>
+        <p>(Any constant vector $c(1, 1, 1)$ works).</p>
+
+        <p><strong>Step 2: Deriving the Correlation Matrix for Part (b)</strong></p>
+        <p>Because $X_1, X_2, X_3$ are i.i.d, the variables $U_1, U_2, U_3$ are perfectly exchangeable. This means they share the exact same variance $v = \text{Var}(U_i)$ and the exact same covariance $c = \text{Cov}(U_i, U_j)$ for $i \neq j$.</p>
+        <p>We use the sum constraint to solve for $c$ in terms of $v$. Since $\text{Var}(U_1 + U_2 + U_3) = \text{Var}(1) = 0$:</p>
+        <div class="math-display">
+            $$ \text{Var}(U_1 + U_2 + U_3) = 3v + 6c = 0 \implies 6c = -3v \implies c = -\frac{1}{2}v $$
+        </div>
+        <p>The correlation coefficient $\rho$ between any pair is the covariance divided by the variance:</p>
+        <div class="math-display">
+            $$ \rho = \frac{\text{Cov}(U_i, U_j)}{\sqrt{\text{Var}(U_i)\text{Var}(U_j)}} = \frac{-\frac{1}{2}v}{v} = -\frac{1}{2} $$
+        </div>
+        <p>Thus, the correlation matrix $\mathbf{R}$ is:</p>
+        <div class="math-display">
+            $$ \mathbf{R} = \begin{pmatrix} 1 & -1/2 & -1/2 \\ -1/2 & 1 & -1/2 \\ -1/2 & -1/2 & 1 \end{pmatrix} $$
+        </div>
+
+        <p><strong>Step 3: Maximizing the Variance via Eigenvalues for Part (c)</strong></p>
+        <p>We want to maximize $\text{Var}(\mathbf{a}^\top \mathbf{U}) = \mathbf{a}^\top \mathbf{\Sigma} \mathbf{a}$ subject to $\mathbf{a}^\top \mathbf{a} = 1$. The covariance matrix is $\mathbf{\Sigma} = v \mathbf{R}$. By the Rayleigh Quotient theorem, the maximum variance is exactly the largest eigenvalue of $\mathbf{\Sigma}$, and the optimal vector $\mathbf{a}$ is the corresponding eigenvector.</p>
+        <p>Let's find the eigenvalues of $\mathbf{R}$. We can write $\mathbf{R}$ as a linear combination of the Identity matrix $\mathbf{I}$ and the all-ones matrix $\mathbf{J}$:</p>
+        <div class="math-display">
+            $$ \mathbf{R} = \frac{3}{2}\mathbf{I} - \frac{1}{2}\mathbf{J} $$
+        </div>
+        <p>The eigenvalues of $\mathbf{J}$ are $3$ (multiplicity 1, eigenvector $\mathbf{1}$) and $0$ (multiplicity 2, orthogonal to $\mathbf{1}$). Mapping these through our equation for $\mathbf{R}$:</p>
+        <ul>
+            <li>For $\lambda_J = 3$: $\lambda_R = \frac{3}{2}(1) - \frac{1}{2}(3) = 0$. (This confirms Part a).</li>
+            <li>For $\lambda_J = 0$: $\lambda_R = \frac{3}{2}(1) - \frac{1}{2}(0) = \frac{3}{2}$.</li>
+        </ul>
+        <p>The maximum eigenvalue of $\mathbf{\Sigma}$ is $\frac{3}{2}v$. This eigenvalue has a multiplicity of 2, corresponding to any eigenvector $\mathbf{a}$ that is orthogonal to the ones-vector $(1,1,1)^\top$. This requires $a_1 + a_2 + a_3 = 0$.</p>
+        <p>Combining this with the constraint $a_1^2 + a_2^2 + a_3^2 = 1$, any vector satisfying both conditions is an optimal solution. An easy choice is to set $a_3 = 0$:</p>
+        <div class="math-display">
+            $$ a_1 + a_2 = 0 \implies a_1 = -a_2 \quad \text{and} \quad 2a_1^2 = 1 \implies a_1 = \frac{1}{\sqrt{2}} $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The choice is $a_1 = 1, a_2 = 1, a_3 = 1$.<br>
+            (b) The correlation matrix has 1 on the diagonal and $-1/2$ on all off-diagonals.<br>
+            (c) To maximize the variance, choose any normalized vector orthogonal to $(1,1,1)$. A valid choice is $a_1 = \frac{1}{\sqrt{2}}, a_2 = -\frac{1}{\sqrt{2}}, a_3 = 0$.
+        </div>
+    </div>
+
+    <!-- ==================== Q4 ==================== -->
+    <div class="question-section" id="q4">
+        <h2>📌 Q4 Quadratic Forms of Standard Normal Vectors (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $\mathbf{X} = (X_1,\dots,X_4)^\top \sim N_4(\mathbf{0}, \mathbf{I}_4)$. Define:<br>
+            $Q_1 = \frac{1}{3} (3X_1^2 + X_2^2 + X_3^2 + X_4^2 + 2X_2X_3 + 2X_2X_4 + 2X_3X_4)$<br>
+            $Q_2 = \frac{1}{3} (2X_2^2 + 2X_3^2 + 2X_4^2 - 2X_2X_3 - 2X_2X_4 - 2X_3X_4)$<br>
+            (a) Find the distributions of $Q_1$ and $Q_2$.<br>
+            (b) Show that $Q_1$ and $Q_2$ are independent.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates distributions of quadratic forms using matrix algebra.
+        <ul>
+            <li><strong>For part (a):</strong> We can express a quadratic form as $\mathbf{X}^\top \mathbf{A} \mathbf{X}$. If $\mathbf{A}$ is an idempotent matrix, the quadratic form directly follows a <strong>Chi-Square ($\chi^2$) distribution</strong> with degrees of freedom equal to the rank (or trace) of $\mathbf{A}$.</li>
+            <li><strong>For part (b):</strong> We use <strong>Craig's Theorem</strong>, which states that two quadratic forms $\mathbf{X}^\top \mathbf{A} \mathbf{X}$ and $\mathbf{X}^\top \mathbf{B} \mathbf{X}$ of standard normal vectors are strictly independent if and only if $\mathbf{A}\mathbf{B} = \mathbf{0}$.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Matrix Representation of $Q_1$ and $Q_2$</strong></p>
+        <p>We can rewrite the polynomials by separating the variables into $X_1$ and a sub-vector $\mathbf{X}^* = (X_2, X_3, X_4)^\top$. Notice the cross-terms in the $X_2, X_3, X_4$ variables.</p>
+        <p>For $Q_1$:</p>
+        <div class="math-display">
+            $$ Q_1 = X_1^2 + \frac{1}{3}(X_2 + X_3 + X_4)^2 = X_1^2 + (\mathbf{X}^*)^\top \left(\frac{1}{3} \mathbf{J}_3\right) \mathbf{X}^* $$
+        </div>
+        <p>where $\mathbf{J}_3$ is the $3 \times 3$ matrix of all ones. The total matrix representation $Q_1 = \mathbf{X}^\top \mathbf{A}_1 \mathbf{X}$ uses a block diagonal matrix:</p>
+        <div class="math-display">
+            $$ \mathbf{A}_1 = \begin{pmatrix} 1 & \mathbf{0}^\top \\ \mathbf{0} & \frac{1}{3}\mathbf{J}_3 \end{pmatrix} $$
+        </div>
+        <p>For $Q_2$, observe that it perfectly complements the second part of $Q_1$. Specifically, $X_2^2 + X_3^2 + X_4^2 = (\mathbf{X}^*)^\top \mathbf{I}_3 \mathbf{X}^*$. If we subtract $\frac{1}{3}(X_2+X_3+X_4)^2$ from this sum of squares, we get exactly $Q_2$. Thus:</p>
+        <div class="math-display">
+            $$ Q_2 = (\mathbf{X}^*)^\top \left(\mathbf{I}_3 - \frac{1}{3} \mathbf{J}_3\right) \mathbf{X}^* $$
+        </div>
+        <p>The total matrix representation $Q_2 = \mathbf{X}^\top \mathbf{A}_2 \mathbf{X}$ is:</p>
+        <div class="math-display">
+            $$ \mathbf{A}_2 = \begin{pmatrix} 0 & \mathbf{0}^\top \\ \mathbf{0} & \mathbf{I}_3 - \frac{1}{3}\mathbf{J}_3 \end{pmatrix} $$
+        </div>
+
+        <p><strong>Step 2: Determining Distributions for Part (a)</strong></p>
+        <p>To prove these follow $\chi^2$ distributions, we check if $\mathbf{A}_1$ and $\mathbf{A}_2$ are idempotent. A matrix is idempotent if $\mathbf{A}^2 = \mathbf{A}$.</p>
+        <ul>
+            <li>For $\frac{1}{3}\mathbf{J}_3$: $\left(\frac{1}{3}\mathbf{J}_3\right)\left(\frac{1}{3}\mathbf{J}_3\right) = \frac{1}{9}(3\mathbf{J}_3) = \frac{1}{3}\mathbf{J}_3$. Since $1^2 = 1$, $\mathbf{A}_1$ is idempotent. Its rank is its trace: $1 + \text{Tr}(\frac{1}{3}\mathbf{J}_3) = 1 + \frac{3}{3} = 2$. Thus, $Q_1 \sim \chi^2_{(2)}$.</li>
+            <li>For $\mathbf{I}_3 - \frac{1}{3}\mathbf{J}_3$: It is the standard centering matrix, which is inherently idempotent. Its trace is $3 - 1 = 2$. Thus, $Q_2 \sim \chi^2_{(2)}$.</li>
+        </ul>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Proving Independence via Craig's Theorem for Part (b)</strong></p>
+        <p>By Craig's Theorem, $Q_1$ and $Q_2$ are independent if $\mathbf{A}_1 \mathbf{A}_2 = \mathbf{0}$. We multiply the block matrices:</p>
+        <div class="math-display">
+            $$ \mathbf{A}_1 \mathbf{A}_2 = \begin{pmatrix} 1 & \mathbf{0}^\top \\ \mathbf{0} & \frac{1}{3}\mathbf{J}_3 \end{pmatrix} \begin{pmatrix} 0 & \mathbf{0}^\top \\ \mathbf{0} & \mathbf{I}_3 - \frac{1}{3}\mathbf{J}_3 \end{pmatrix} $$
+        </div>
+        <div class="math-display">
+            $$ \mathbf{A}_1 \mathbf{A}_2 = \begin{pmatrix} (1)(0) & \mathbf{0}^\top \\ \mathbf{0} & \left(\frac{1}{3}\mathbf{J}_3\right)\left(\mathbf{I}_3 - \frac{1}{3}\mathbf{J}_3\right) \end{pmatrix} $$
+        </div>
+        <p>Evaluate the lower right block:</p>
+        <div class="math-display">
+            $$ \frac{1}{3}\mathbf{J}_3 - \left(\frac{1}{3}\mathbf{J}_3\right)\left(\frac{1}{3}\mathbf{J}_3\right) = \frac{1}{3}\mathbf{J}_3 - \frac{1}{3}\mathbf{J}_3 = \mathbf{0} $$
+        </div>
+        <p>Since the product matrix is completely $\mathbf{0}$, the quadratic forms are strictly independent.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) Both $Q_1$ and $Q_2$ follow a Chi-Square distribution with $2$ degrees of freedom ($\chi^2_2$).<br>
+            (b) Because the product of their symmetric idempotent matrices evaluates to the null matrix ($\mathbf{A}_1 \mathbf{A}_2 = \mathbf{0}$), Craig's Theorem confirms that $Q_1$ and $Q_2$ are strictly independent.
+        </div>
+    </div>
+
+    <!-- ==================== Q5 ==================== -->
+    <div class="question-section" id="q5">
+        <h2>📌 Q5 Asymptotic Efficiency via Delta Method (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Estimate $\theta = p^2$ using two strategies requiring $2n$ coin flips:<br>
+            (S1) Flip $2n$ times. $U_n = (S_{2n} / 2n)^2$.<br>
+            (S2) Flip pairs $n$ times. $Y_i = 1$ if HH. $V_n = \frac{1}{n}\sum Y_i$.<br>
+            (a) Show both are consistent.<br>
+            (b) Find asymptotic distributions of $\sqrt{n}(U_n - \theta)$ and $\sqrt{n}(V_n - \theta)$.<br>
+            (c) Which is preferred? Justify.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This evaluates asymptotic estimators using the <strong>Central Limit Theorem (CLT)</strong> and the <strong>Delta Method</strong>.
+        <ul>
+            <li><strong>For part (a):</strong> Consistency is proven by pairing the Weak Law of Large Numbers (WLLN) with the Continuous Mapping Theorem.</li>
+            <li><strong>For part (b):</strong> The Delta Method analytically transfers the asymptotic normality of a sample mean to a nonlinear function of that mean (squaring the sample proportion in $S1$).</li>
+            <li><strong>For part (c):</strong> Since both strategies utilize exactly $2n$ flips, establishing a fair "apples to apples" experimental cost, preference is determined entirely by algebraic comparison of their asymptotic variances.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Proving Consistency for Part (a)</strong></p>
+        <p>For $S1$: Let $\hat{p} = S_{2n}/2n$. By the WLLN, $\hat{p} \xrightarrow{p} p$. The function $g(x) = x^2$ is continuous. By the Continuous Mapping Theorem, $U_n = \hat{p}^2 \xrightarrow{p} p^2 = \theta$.</p>
+        <p>For $S2$: Each $Y_i \sim \text{Bernoulli}(p^2)$ since the probability of HH is $p \times p = p^2$. By the WLLN, the sample average $V_n = \bar{Y}_n \xrightarrow{p} \mathbb{E}[Y_1] = p^2 = \theta$. Both are consistent.</p>
+
+        <p><strong>Step 2: Deriving Asymptotic Distributions for Part (b)</strong></p>
+        <p><strong>For $V_n$:</strong> $V_n$ is the mean of $n$ i.i.d Bernoulli random variables with success parameter $p^2$. The variance of each observation is $p^2(1-p^2)$. By the standard Central Limit Theorem:</p>
+        <div class="math-display">
+            $$ \sqrt{n}(V_n - p^2) \xrightarrow{d} N\big(0, p^2(1-p^2)\big) $$
+        </div>
+        
+        <p><strong>For $U_n$:</strong> First, we define the CLT for the raw sample proportion over $2n$ trials:</p>
+        <div class="math-display">
+            $$ \sqrt{2n}(\hat{p} - p) \xrightarrow{d} N\big(0, p(1-p)\big) $$
+        </div>
+        <p>To match the scale requested by the problem ($\sqrt{n}$ instead of $\sqrt{2n}$), we divide the variance by 2:</p>
+        <div class="math-display">
+            $$ \sqrt{n}(\hat{p} - p) \xrightarrow{d} N\left(0, \frac{p(1-p)}{2}\right) $$
+        </div>
+        <p>Now, apply the <strong>Delta Method</strong> for the transformation $g(x) = x^2$, where $g'(x) = 2x$. The asymptotic variance is scaled by $[g'(p)]^2 = 4p^2$:</p>
+        <div class="math-display">
+            $$ \sqrt{n}(U_n - p^2) \xrightarrow{d} N\left(0, (4p^2) \frac{p(1-p)}{2}\right) \equiv N\big(0, 2p^3(1-p)\big) $$
+        </div>
+
+        <p><strong>Step 3: Comparing Efficiencies for Part (c)</strong></p>
+        <p>To determine the preferred estimator, we evaluate their asymptotic variances. We want to check if $\text{Var}_{asy}(U_n) < \text{Var}_{asy}(V_n)$:</p>
+        <div class="math-display">
+            $$ 2p^3(1-p) < p^2(1-p^2) $$
+        </div>
+        <p>Factor the right side using the difference of squares: $1-p^2 = (1-p)(1+p)$. Since $p \in (0,1)$, we can divide both sides by the positive quantity $p^2(1-p)$:</p>
+        <div class="math-display">
+            $$ 2p < 1 + p \implies p < 1 $$
+        </div>
+        <p>Because $p$ is a true probability strictly less than 1, this inequality is always true. Thus, $U_n$ has a strictly smaller asymptotic variance.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) Both estimators converge in probability to $p^2$, rendering them consistent.<br>
+            (b) $\sqrt{n}(U_n - \theta) \xrightarrow{d} N(0, 2p^3(1-p))$ and $\sqrt{n}(V_n - \theta) \xrightarrow{d} N(0, p^2(1-p^2))$.<br>
+            (c) $U_n$ (Strategy S1) is unequivocally preferred. Both strategies utilize the same total sample size ($2n$ flips), but $U_n$ extracts information from the marginal counts rather than just joint pairs, resulting in a strictly smaller asymptotic variance.
+        </div>
+    </div>
+
+    <!-- ==================== Q6 ==================== -->
+    <div class="question-section" id="q6">
+        <h2>📌 Q6 Exact Conditional Tests for Incomplete Bivariate Normal Data (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> $M$ observations are generated from $N_2(\mu, \mu, \sigma_1^2, \sigma_2^2, \rho)$. If we only know the numbers of observations in the first and third quadrant ($M_1$ and $M_3$), construct an exact test for $H_0: \mu = 0$ against $H_1: \mu > 0$. Justify your answer.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a missing-data hypothesis testing problem that pivots to Non-Parametric structures. Because we do not have the actual numerical coordinates or the counts for the 2nd and 4th quadrants, continuous likelihood ratio tests are impossible. We must use a <strong>Conditional Exact Binomial Test</strong> (similar to McNemar's logic). By conditioning on the sum of the known counts ($M_1 + M_3 = k$), we isolate a test statistic whose distribution under the null hypothesis is completely free of nuisance parameters ($\sigma_1, \sigma_2, \rho$).</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Identifying Probabilities under $H_0$ and $H_1$</strong></p>
+        <p>Let $p_1 = P(X > 0, Y > 0)$ be the probability of landing in the 1st quadrant, and $p_3 = P(X < 0, Y < 0)$ be the probability of landing in the 3rd quadrant.</p>
+        <p>Under the null hypothesis $H_0 : \mu = 0$, the bivariate normal distribution is centered exactly at the origin $(0,0)$. The distribution of $(X,Y)$ is symmetric about the origin, meaning $(-X, -Y)$ has the exact same distribution as $(X,Y)$. Consequently, the probability mass in the 1st quadrant perfectly equals the 3rd quadrant:</p>
+        <div class="math-display">
+            $$ p_1 = p_3 \quad (\text{under } H_0) $$
+        </div>
+        <p>Under the alternative hypothesis $H_1 : \mu > 0$, the entire distribution shifts to the upper-right. This strictly increases the mass in the 1st quadrant and decreases the mass in the 3rd quadrant:</p>
+        <div class="math-display">
+            $$ p_1 > p_3 \quad (\text{under } H_1) $$
+        </div>
+
+        <p><strong>Step 2: Constructing the Conditional Statistic</strong></p>
+        <p>We only observe $M_1$ and $M_3$. Because the total number of points falling into these two quadrants, $k = M_1 + M_3$, is a random variable dependent on the unknown nuisance parameters (like the covariance $\rho$), we condition on it to build an exact test.</p>
+        <p>Given that a point falls into either the 1st or 3rd quadrant, the conditional probability that it falls into the 1st quadrant is:</p>
+        <div class="math-display">
+            $$ \pi = P(\text{1st Quadrant} \mid \text{1st or 3rd Quadrant}) = \frac{p_1}{p_1 + p_3} $$
+        </div>
+        <ul>
+            <li>Under $H_0$: Since $p_1 = p_3$, we have $\pi = \frac{p_1}{2p_1} = \frac{1}{2}$.</li>
+            <li>Under $H_1$: Since $p_1 > p_3$, we have $\pi > \frac{1}{2}$.</li>
+        </ul>
+
+        <p><strong>Step 3: Defining the Exact Test</strong></p>
+        <p>Conditional on $M_1 + M_3 = k$, the count $M_1$ follows a Binomial distribution. We test $H_0^* : \pi = 0.5$ against $H_1^* : \pi > 0.5$.</p>
+        <div class="math-display">
+            $$ M_1 \mid (M_1 + M_3 = k) \sim \text{Binomial}\left(k, \frac{1}{2}\right) $$
+        </div>
+        <p>Because the alternative hypothesis sets $\pi > 0.5$, large values of $M_1$ provide evidence against the null hypothesis. The exact critical region of level $\alpha$ is to reject $H_0$ if $M_1 \geq c$, where the critical value $c$ is the smallest integer satisfying:</p>
+        <div class="math-display">
+            $$ \sum_{j=c}^{k} \binom{k}{j} \left(\frac{1}{2}\right)^k \leq \alpha $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Because the exact numerical coordinates and other quadrant counts are unknown, we condition on the sum $M_1 + M_3 = k$. Under $H_0$, symmetry dictates $M_1 \sim \text{Bin}(k, 1/2)$. The exact test rejects $H_0$ in favor of $H_1$ if $M_1 \geq c$, calculated directly from the standard Binomial CDF.
+        </div>
+    </div>
+
+    <!-- ==================== Q7 ==================== -->
+    <div class="question-section" id="q7">
+        <h2>📌 Q7 Probability Bounds on Order Statistics (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2, X_3$ be i.i.d continuous random variables with a strictly increasing CDF $F$. Define $\psi(x) = P(\min X_i \leq x \leq \max X_i)$. Show that $\psi(x)$ is maximum when $x$ is the median of the distribution.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem analyzes the spread of a random sample across a threshold. Because the distribution is strictly continuous, we can use the <strong>Probability Integral Transform</strong> $U_i = F(X_i)$ to map the problem into standard Uniform $(0,1)$ space. We then calculate the probability using the complement rule (the event fails only if all variables are strictly below $x$, or all are strictly above $x$) to create a simple optimization function.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Applying the Complement Rule</strong></p>
+        <p>The event $\{\min X_i \leq x \leq \max X_i\}$ implies that the threshold $x$ is bracketed by the sample points. This event fails to happen if and only if one of two mutually exclusive events occurs:</p>
+        <ol>
+            <li>All three variables are strictly less than $x$: $\max X_i < x$.</li>
+            <li>All three variables are strictly greater than $x$: $\min X_i > x$.</li>
+        </ol>
+        <p>Therefore, we can write $\psi(x)$ using the complement rule:</p>
+        <div class="math-display">
+            $$ \psi(x) = 1 - \big[ P(\max X_i < x) + P(\min X_i > x) \big] $$
+        </div>
+
+        <p><strong>Step 2: Evaluating the Component Probabilities</strong></p>
+        <p>Because the $X_i$ are independent and identically distributed:</p>
+        <div class="math-display">
+            $$ P(\max X_i < x) = P(X_1 < x, X_2 < x, X_3 < x) = P(X_1 < x)^3 = [F(x)]^3 $$
+        </div>
+        <div class="math-display">
+            $$ P(\min X_i > x) = P(X_1 > x, X_2 > x, X_3 > x) = P(X_1 > x)^3 = [1 - F(x)]^3 $$
+        </div>
+        <p>Substitute these back into the function. To simplify, let $u = F(x)$. Since $F$ is a CDF, $u \in (0, 1)$.</p>
+        <div class="math-display">
+            $$ h(u) = 1 - \big( u^3 + (1-u)^3 \big) $$
+        </div>
+
+        <p><strong>Step 3: Algebraic Optimization</strong></p>
+        <p>We expand the binomial term $(1-u)^3$ to simplify the function $h(u)$:</p>
+        <div class="math-display">
+            $$ h(u) = 1 - \big[ u^3 + (1 - 3u + 3u^2 - u^3) \big] $$
+        </div>
+        <div class="math-display">
+            $$ h(u) = 1 - (1 - 3u + 3u^2) = 3u - 3u^2 = 3u(1-u) $$
+        </div>
+        <p>The function $h(u) = -3u^2 + 3u$ is a downward-opening parabola. To find its maximum, we take the derivative and set it to zero:</p>
+        <div class="math-display">
+            $$ h'(u) = -6u + 3 = 0 \implies u = \frac{1}{2} $$
+        </div>
+        <p>Because the second derivative is negative ($-6$), this is indeed a global maximum on the interval $(0,1)$.</p>
+
+        <p><strong>Step 4: Mapping Back to the Original Space</strong></p>
+        <p>The maximum occurs when $u = 1/2$. Recalling our substitution $u = F(x)$:</p>
+        <div class="math-display">
+            $$ F(x) = \frac{1}{2} $$
+        </div>
+        <p>By the fundamental definition of quantiles, the point $x$ where the cumulative distribution function equals $0.5$ is strictly the <strong>median</strong> of the distribution. Because $F$ is strictly increasing, this point is unique.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By expressing the probability via its complement, we derived the quadratic function $3u(1-u)$ which is universally maximized at $u = 0.5$. This proves $\psi(x)$ is maximum exactly when $x$ is the median of the distribution.
+        </div>
+    </div>
+
+    <!-- ==================== Q8 ==================== -->
+    <div class="question-section" id="q8">
+        <h2>📌 Q8 Design of Experiments and Variance Optimization (15 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> An experiment compares 5 drugs using $n$ patients. $y_{ij} = \mu + \tau_i + \epsilon_{ij}$ with homoscedastic errors. Let $n_i$ be the allocation to drug $i$. Minimize the average variance of the BLUEs of treatment contrasts $\tau_i - \tau_j$.<br>
+            (a) If $n=35$, find the optimal allocations.<br>
+            (b) If $n=36$, find the optimal allocations.<br>
+            (c) If $n=36$ and drug 1 is a control, minimize the average variance of $\tau_1 - \tau_j$ (for $j=2,3,4,5$) only. Find allocations.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem navigates constrained discrete optimization via <strong>Cauchy-Schwarz / AM-HM Inequalities</strong> and <strong>Lagrange Multipliers</strong>. 
+        <ul>
+            <li>For an unbalanced one-way ANOVA, the variance of the contrast estimate $\hat{\tau}_i - \hat{\tau}_j$ is exactly $\sigma^2(1/n_i + 1/n_j)$.</li>
+            <li><strong>For parts (a) and (b):</strong> We sum all 10 pairwise combinations. The overall average variance scales symmetrically with $\sum (1/n_i)$. Minimizing a sum of reciprocals subject to a fixed sum enforces balancing the allocations as evenly as mathematically possible.</li>
+            <li><strong>For part (c):</strong> We break symmetry. The objective function heavily weights the control group because it appears in every contrast. We will use continuous Lagrange multipliers to find the optimal ratio, then round to the exact integer solution.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Objective Function for (a) and (b)</strong></p>
+        <p>We want to minimize the average variance of all $\binom{5}{2} = 10$ contrasts. The sum of the variances is:</p>
+        <div class="math-display">
+            $$ \sum_{i < j} \text{Var}(\hat{\tau}_i - \hat{\tau}_j) = \sum_{i < j} \sigma^2 \left( \frac{1}{n_i} + \frac{1}{n_j} \right) = \sigma^2 \frac{1}{2} \sum_{i \neq j} \left( \frac{1}{n_i} + \frac{1}{n_j} \right) = \sigma^2 \frac{1}{2} \sum_{i=1}^5 \left( \frac{4}{n_i} + \sum_{j \neq i} \frac{1}{n_j} \right) $$
+        </div>
+        <p>Simplifying the summation counts shows that each $1/n_i$ term appears exactly 4 times (since each drug is compared against 4 others). Thus, the objective function to minimize is directly proportional to:</p>
+        <div class="math-display">
+            $$ f(\mathbf{n}) = \sum_{i=1}^5 \frac{1}{n_i} \quad \text{subject to } \sum_{i=1}^5 n_i = n $$
+        </div>
+        
+        <p><strong>Step 2: Solving Part (a) with $n=35$</strong></p>
+        <p>By the AM-HM inequality (or Cauchy-Schwarz), the sum of reciprocals is globally minimized when all variables are exactly equal. Since $35$ is perfectly divisible by $5$, we can achieve perfect equality:</p>
+        <div class="math-display">
+            $$ n_1 = n_2 = n_3 = n_4 = n_5 = \frac{35}{5} = 7 $$
+        </div>
+
+        <p><strong>Step 3: Solving Part (b) with $n=36$</strong></p>
+        <p>We cannot divide $36$ into 5 equal integers. We must make the allocations as equal as possible to minimize the convexity penalty of $1/x$. Since $36 = (4 \times 7) + 8$, the optimal near-uniform integer allocation is to assign 8 patients to one drug and 7 to the rest.</p>
+        <div class="math-display">
+            $$ \{n_1, n_2, n_3, n_4, n_5\} = \{8, 7, 7, 7, 7\} \quad \text{(in any permutation)} $$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 4: Formulating the Control Objective for Part (c)</strong></p>
+        <p>We now only care about the 4 contrasts involving the control drug ($i=1$). The sum of variances is:</p>
+        <div class="math-display">
+            $$ \sum_{j=2}^5 \text{Var}(\hat{\tau}_1 - \hat{\tau}_j) = \sigma^2 \sum_{j=2}^5 \left( \frac{1}{n_1} + \frac{1}{n_j} \right) = \sigma^2 \left( \frac{4}{n_1} + \sum_{j=2}^5 \frac{1}{n_j} \right) $$
+        </div>
+        <p>To minimize this, by symmetry amongst the test drugs, we must allocate equally to the 4 test drugs. Let $n_j = k$ for $j=2,3,4,5$. Thus, the constraint is $n_1 + 4k = 36$. Our continuous objective function is:</p>
+        <div class="math-display">
+            $$ g(n_1, k) = \frac{4}{n_1} + \frac{4}{k} $$
+        </div>
+
+        <p><strong>Step 5: Lagrange Multiplier Optimization</strong></p>
+        <p>We minimize $g(n_1, k)$ subject to $n_1 + 4k = 36$. Taking partial derivatives and equating ratios (or substituting $n_1 = 36 - 4k$):</p>
+        <div class="math-display">
+            $$ \frac{\partial}{\partial n_1} \implies -\frac{4}{n_1^2} = \lambda \quad \text{and} \quad \frac{\partial}{\partial k} \implies -\frac{4}{k^2} = 4\lambda $$
+        </div>
+        <p>Dividing the equations eliminates $\lambda$:</p>
+        <div class="math-display">
+            $$ \frac{-4/k^2}{-4/n_1^2} = 4 \implies \frac{n_1^2}{k^2} = 4 \implies n_1 = 2k $$
+        </div>
+        <p>This reveals the optimal allocation rule: the control group should be exactly twice the size of a test group. Substituting this back into the constraint:</p>
+        <div class="math-display">
+            $$ 2k + 4k = 36 \implies 6k = 36 \implies k = 6 $$
+        </div>
+        <p>Therefore, $n_1 = 2(6) = 12$. Since these are exact integers, no rounding is required.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) For $n=35$, the optimal allocations are $n_i = 7$ for all $i=1, 2, \dots, 5$.<br>
+            (b) For $n=36$, the optimal allocations are four groups of $7$ and one group of $8$.<br>
+            (c) To minimize control-test variance, the control group should be twice the size of test groups. Thus, $n_1 = 12$ (Control) and $n_2 = n_3 = n_4 = n_5 = 6$ (Test Drugs).
+        </div>
+    </div>
+
+    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+    <div class="question-section" id="summary-stb" style="border-bottom: none;">
+        <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
+        
+        <h3>🎯 Core Concepts Tested in This Paper</h3>
+        <ul>
+            <li><strong>Stochastic Processes (Q1):</strong> Understanding the structural limitations of <strong>Joint Markov Chains</strong>. Highlighting the trap that individual irreducibility does not guarantee joint irreducibility if periodicity causes phase-locking.</li>
+            <li><strong>Asymptotic Theory (Q2, Q5):</strong> Utilizing the <strong>Continuous Mapping Theorem</strong> alongside the WLLN. Applying the <strong>Delta Method</strong> to rigorously compare asymptotic variances and determine estimator efficiency. Recognizing the supremacy of the <strong>Glivenko-Cantelli Theorem</strong> for uniform empirical CDF convergence.</li>
+            <li><strong>Multivariate Distributions &amp; Quadratic Forms (Q3, Q4):</strong> Employing the <strong>Rayleigh Quotient</strong> to maximize variance constrained to a sphere. Utilizing idempotent matrices and <strong>Craig's Theorem</strong> to prove the exact distributions and independence of quadratic forms in $N_4(0, I)$.</li>
+            <li><strong>Exact Inference &amp; Probability Theory (Q6, Q7):</strong> Developing Conditional Exact Binomial tests when continuous data is hidden inside quadrant counts. Employing the <strong>Probability Integral Transform</strong> and complement rules to convert order-statistic thresholds into simple optimization parabolas.</li>
+            <li><strong>Design of Experiments (Q8):</strong> Converting variance minimization into reciprocal sum optimization. Applying AM-HM inequality bounds to achieve symmetric balance, and <strong>Lagrange Multipliers</strong> to break symmetry precisely when weighting control vs. test treatments.</li>
+        </ul>
+
+        <div class="hint-box">
+            <strong>💡 ISI Examiner Insight:</strong><br>
+            In the STB paper, examiners look for the ability to bridge different theoretical domains seamlessly.<br>
+            1. In Q4, you must transition from algebraic polynomial expansion into rigid <strong>Matrix Linear Algebra</strong> to utilize Craig's theorem and idempotent ranks.<br>
+            2. In Q6, realizing that the absence of exact continuous coordinates renders standard likelihood ratios useless immediately pivots the approach to a non-parametric <strong>Conditional Exact Test</strong>.<br>
+            3. In Q8(c), proving $n_1 = 2k$ mathematically via derivatives (or Lagrange) is strictly required to get full marks; guessing the $12$ and $6$ split without derivation will lose points.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
