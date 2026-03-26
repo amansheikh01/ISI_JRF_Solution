@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI JRF (STA) 2026 Model Solutions</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        pre { border-radius: 8px; margin: 20px 0 !important; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="#">⬅️ View Other ISI Papers</a>
+    </div>
+    
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>JRF (STA) — Model Solutions (2026)</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Statistics_&_Mathematics-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-JRF_Advanced-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous, step-by-step descriptive proofs for the Indian Statistical Institute Junior Research Fellowship.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Analysis of Recursive Sequences (12 Marks)</h2>
+        
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>To determine the convergence of a sequence defined by a recurrence relation, we use the <strong>Monotone Convergence Theorem</strong>, which states that any sequence that is both monotonic and bounded is convergent. The strategy involves:</p>
+        <ul>
+            <li>Proving the sequence is bounded below using the <strong>Arithmetic Mean-Geometric Mean (AM-GM) Inequality</strong>.</li>
+            <li>Proving the sequence is monotonically decreasing for $n \geq 2$.</li>
+            <li>Solving the fixed-point equation $L = f(L)$ to find the limit.</li>
+        </ul>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Establishing Positivity and Lower Bound</strong></p>
+        <p>Given $x_1 = 1$ and $x_{n+1} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right)$. Since $x_1 > 0$, by induction, if $x_n > 0$, then $x_{n+1} > 0$ for all $n \in \mathbb{N}$. Applying the <strong>AM-GM Inequality</strong> for $n \geq 1$:</p>
+        <div class="math-display">
+            $$ x_{n+1} = \frac{x_n + \frac{2}{x_n}}{2} \geq \sqrt{x_n \cdot \frac{2}{x_n}} = \sqrt{2} $$
+        </div>
+        <p>This shows that for all $n \geq 2$, the sequence is bounded below by $\sqrt{2}$.</p>
+
+        <p><strong>Step 2: Proving Monotonicity</strong></p>
+        <p>We examine the difference between successive terms $x_{n+1}$ and $x_n$ for $n \geq 2$. Since we established $x_n \geq \sqrt{2}$ for $n \geq 2$, it follows that $x_n^2 \geq 2$.</p>
+        <div class="math-display">
+            $$ x_{n+1} - x_n = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right) - x_n = \frac{2 - x_n^2}{2x_n} $$
+        </div>
+        <p>Because $x_n^2 \geq 2$ and $x_n > 0$, the numerator $2 - x_n^2 \leq 0$. Thus, $x_{n+1} \leq x_n$ for all $n \geq 2$, proving the sequence is <strong>monotonically decreasing</strong>.</p>
+
+        <p><strong>Step 3: Applying the Monotone Convergence Theorem</strong></p>
+        <p>Since the sequence $\{x_n\}$ is monotonically decreasing (for $n \geq 2$) and bounded below by $\sqrt{2}$, by the <strong>Monotone Convergence Theorem</strong>, the sequence converges to a finite limit $L$.</p>
+        <div class="math-display">
+            $$ \lim_{n \to \infty} x_n = L $$
+        </div>
+
+        <p><strong>Step 4: Finding the Limit and Limit Inferior</strong></p>
+        <p>Taking the limit on both sides of the recurrence relation:</p>
+        <div class="math-display">
+            $$ L = \frac{1}{2}\left(L + \frac{2}{L}\right) \implies 2L^2 = L^2 + 2 \implies L^2 = 2 $$
+        </div>
+        <p>Since $x_n > 0$ for all $n$, we must have $L = \sqrt{2}$. For a convergent sequence, the limit inferior is equal to the limit.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The sequence $\{x_n\}$ is convergent, and $\liminf_{n \to \infty} x_n = \sqrt{2}$.
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Matrix Theory & Positive Semi-Definiteness (12 Marks)</h2>
+        
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem tests the understanding of quadratic forms and projection matrices. We will use the definition of a <strong>Positive Semi-Definite (PSD)</strong> matrix ($v^\top A v \geq 0$) combined with the <strong>Cauchy-Schwarz Inequality</strong>. For the rank, we will utilize the property that for an <strong>idempotent matrix</strong>, the rank is equal to its trace.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Verification of Positive Semi-Definiteness</strong></p>
+        <p>A symmetric matrix $\mathbf{A}$ is PSD if for any non-zero vector $\mathbf{v} \in \mathbb{R}^d$, the quadratic form is non-negative. We expand $\mathbf{v}^\top \mathbf{A} \mathbf{v}$:</p>
+        <div class="math-display">
+            $$ \mathbf{v}^\top \mathbf{A} \mathbf{v} = \mathbf{v}^\top (\mathbf{I}_d - \mathbf{u}\mathbf{u}^\top) \mathbf{v} = \mathbf{v}^\top \mathbf{v} - \mathbf{v}^\top \mathbf{u}\mathbf{u}^\top \mathbf{v} $$
+        </div>
+        <p>Using inner product notation, where $\mathbf{v}^\top \mathbf{v} = \|\mathbf{v}\|^2$ and $\mathbf{v}^\top \mathbf{u} = \mathbf{u}^\top \mathbf{v}$:</p>
+        <div class="math-display">
+            $$ \mathbf{v}^\top \mathbf{A} \mathbf{v} = \|\mathbf{v}\|^2 - (\mathbf{u}^\top \mathbf{v})^2 $$
+        </div>
+        
+        <p><strong>Step 2: Applying Cauchy-Schwarz Inequality</strong></p>
+        <p>The Cauchy-Schwarz inequality states that $(\mathbf{u}^\top \mathbf{v})^2 \leq \|\mathbf{u}\|^2 \|\mathbf{v}\|^2$. Since $\mathbf{u}$ is a unit vector, $\|\mathbf{u}\|^2 = 1$. Therefore:</p>
+        <div class="math-display">
+            $$ (\mathbf{u}^\top \mathbf{v})^2 \leq \|\mathbf{v}\|^2 \implies \|\mathbf{v}\|^2 - (\mathbf{u}^\top \mathbf{v})^2 \geq 0 $$
+        </div>
+        <p>Thus, $\mathbf{v}^\top \mathbf{A} \mathbf{v} \geq 0$ for all $\mathbf{v}$, meaning $\mathbf{A}$ is positive semi-definite.</p>
+
+        <p><strong>Step 3: Finding the Rank of A via Idempotency</strong></p>
+        <p>We first check if $\mathbf{A}$ is idempotent ($\mathbf{A}^2 = \mathbf{A}$).</p>
+        <div class="math-display">
+            $$ \mathbf{A}^2 = (\mathbf{I} - \mathbf{u}\mathbf{u}^\top)(\mathbf{I} - \mathbf{u}\mathbf{u}^\top) = \mathbf{I} - 2\mathbf{u}\mathbf{u}^\top + \mathbf{u}(\mathbf{u}^\top \mathbf{u})\mathbf{u}^\top $$
+        </div>
+        <p>Since $\mathbf{u}$ is a unit vector, $\mathbf{u}^\top \mathbf{u} = 1$, reducing the equation to $\mathbf{A}^2 = \mathbf{I} - \mathbf{u}\mathbf{u}^\top = \mathbf{A}$. For idempotent matrices, $\text{rank}(\mathbf{A}) = \text{tr}(\mathbf{A})$.</p>
+        <div class="math-display">
+            $$ \text{rank}(\mathbf{A}) = \text{tr}(\mathbf{I}_d) - \text{tr}(\mathbf{u}\mathbf{u}^\top) = d - \text{tr}(\mathbf{u}^\top \mathbf{u}) = d - 1 $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Matrix $\mathbf{A}$ is Positive Semi-Definite, and its rank is $d - 1$.
+        </div>
+    </div>
+
+    <!-- ==================== Q4 ==================== -->
+    <div class="question-section" id="q4">
+        <h2>📌 Q4 Combinatorial Probability on Graphs (12 Marks)</h2>
+        
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a conditional probability problem modeled as a graph coloring problem. The four pillars form a <strong>Cycle Graph ($C_4$)</strong>. We need to find the probability of using exactly 4 colors given that it is a proper graph coloring (adjacent nodes have different colors). We will use the <strong>Chromatic Polynomial</strong> for the sample space and permutations for the favorable events.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Define the Sample Space ($S$)</strong></p>
+        <p>The total number of ways to color a cycle graph $C_n$ with $k$ colors such that adjacent vertices are distinct is given by the chromatic polynomial $P(C_n, k) = (k-1)^n + (-1)^n(k-1)$. For $n=4$ pillars and $k=4$ colors:</p>
+        <div class="math-display">
+            $$ |S| = (4-1)^4 + (-1)^4(4-1) = 3^4 + 3 = 81 + 3 = 84 $$
+        </div>
+
+        <p><strong>Step 2: Define the Favorable Event ($E$)</strong></p>
+        <p>The event is that "all 4 colors are used." This implies every pillar gets a unique color, which is a simple permutation of 4 colors over 4 spots:</p>
+        <div class="math-display">
+            $$ |E| = 4! = 24 $$
+        </div>
+        <p>We must ensure these 24 permutations satisfy the adjacency condition. Since all colors are mutually distinct, no two adjacent pillars can share a color. Thus, all 24 ways are valid.</p>
+        
+        <p><strong>Step 3: Calculate the Conditional Probability</strong></p>
+        <p>Since the colors are chosen uniformly at random, the probability is the ratio of favorable outcomes to the valid sample space:</p>
+        <div class="math-display">
+            $$ P(E) = \frac{|E|}{|S|} = \frac{24}{84} = \frac{2}{7} $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The probability that all four colors are used, given the adjacency constraint, is $2/7$.
+        </div>
+    </div>
+
+    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+    <div class="question-section" id="summary-2026" style="border-bottom: none;">
+        <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
+        
+        <h3>🎯 Core Concepts Tested in This Paper</h3>
+        <ul>
+            <li><strong>Real Analysis:</strong> Mastery of the Monotone Convergence Theorem and recognizing fixed-point limits via limit inferior/superior properties.</li>
+            <li><strong>Linear Algebra:</strong> Exploiting structural properties like idempotency and trace-rank equivalence for projection matrices.</li>
+            <li><strong>Combinatorics & Probability:</strong> Identifying structural isomorphisms (like mapping pillars to a $C_4$ graph) and applying Chromatic Polynomials to avoid manual counting errors.</li>
+        </ul>
+
+        <div class="hint-box">
+            <strong>💡 ISI Examiner Insight:</strong><br>
+            In ISI subjective papers, explicitly stating the theorems you use (e.g., Cauchy-Schwarz, Monotone Convergence Theorem) is just as important as the final answer. Marks are heavily weighted towards the logical flow and rigor of the intermediate steps.
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 40px 0;">
+    <div style="text-align: center; color: #718096; font-size: 0.9em;">
+        <i>Created for ISI JRF Aspirants and Mathematics Enthusiasts.</i>
+    </div>
+
+</div>
+
+</body>
+</html>
