@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STA 2025 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+        <a href="STB.html">View STB Solutions ➡️</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STA (Statistics A) 2025 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Real_Analysis_%26_Linear_Algebra-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STA-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Uniform Convergence of Sequences of Functions (12 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $g : [0, 1] \to \mathbb{R}$ be a continuous function such that $g(1) = 0$. Show that $\sup_{x \in [0,1]} |x^n g(x)| \to 0$ as $n \to \infty$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem tests your understanding of <strong>Real Analysis</strong>, specifically continuity and uniform convergence. Because $x^n$ approaches $0$ everywhere except at $x=1$, the behavior of the sequence is entirely governed by what happens near $x=1$. We are given that $g(1) = 0$, which suppresses the "spike" at the boundary. The proof strategy utilizes the <strong>$\epsilon-\delta$ definition of continuity</strong> to split the domain $[0,1]$ into two parts: a region close to $1$ where $g(x)$ is arbitrarily small, and a region away from $1$ where $x^n$ decays exponentially to zero.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Utilizing the Continuity at $x=1$</strong></p>
+        <p>Let $\epsilon > 0$ be given. Since $g$ is continuous at $x=1$ and $g(1) = 0$, by the definition of continuity, there exists a $\delta > 0$ (where $\delta < 1$) such that for all $x \in (1 - \delta, 1]$:</p>
+        <div class="math-display">
+            $$ |g(x) - g(1)| < \epsilon \implies |g(x)| < \epsilon $$
+        </div>
+
+        <p><strong>Step 2: Utilizing the Boundedness of Continuous Functions</strong></p>
+        <p>Because $g$ is a continuous function on a closed and bounded interval $[0,1]$, by the <strong>Extreme Value Theorem</strong>, $g$ is bounded. Let $M$ be the supremum of $|g(x)|$ on $[0,1]$:</p>
+        <div class="math-display">
+            $$ M = \sup_{x \in [0,1]} |g(x)| < \infty $$
+        </div>
+
+        <p><strong>Step 3: Partitioning the Domain to Bound the Supremum</strong></p>
+        <p>We now evaluate the term $|x^n g(x)|$ by splitting the interval $[0,1]$ into two sub-intervals: $[0, 1-\delta]$ and $(1-\delta, 1]$.</p>
+        
+        <p><strong>Case A: On the interval $(1-\delta, 1]$</strong></p>
+        <p>For any $x$ in this range, we know $|g(x)| < \epsilon$. Furthermore, since $x \in [0,1]$, we have $x^n \leq 1$. Therefore:</p>
+        <div class="math-display">
+            $$ |x^n g(x)| = |x|^n |g(x)| \leq 1 \cdot |g(x)| < \epsilon $$
+        </div>
+
+        <p><strong>Case B: On the interval $[0, 1-\delta]$</strong></p>
+        <p>For any $x$ in this range, the maximum value $x$ can take is $1-\delta$. Thus, $|x^n| \leq (1-\delta)^n$. Using the global bound $M$ for $g(x)$, we have:</p>
+        <div class="math-display">
+            $$ |x^n g(x)| \leq (1-\delta)^n M $$
+        </div>
+        <p>Since $0 < 1-\delta < 1$, the sequence $(1-\delta)^n$ converges to $0$ as $n \to \infty$. Therefore, there exists an integer $N$ such that for all $n > N$:</p>
+        <div class="math-display">
+            $$ (1-\delta)^n M < \epsilon $$
+        </div>
+        <p>Consequently, for all $n > N$ and $x \in [0, 1-\delta]$, $|x^n g(x)| < \epsilon$.</p>
+
+        <p><strong>Step 4: Conclusion</strong></p>
+        <p>Combining Case A and Case B, we see that for any given $\epsilon > 0$, there exists an $N$ such that for all $n > N$, $|x^n g(x)| < \epsilon$ for <em>every</em> $x \in [0,1]$. This implies:</p>
+        <div class="math-display">
+            $$ \sup_{x \in [0,1]} |x^n g(x)| \leq \epsilon \quad \text{for all } n > N $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Since $\epsilon$ was chosen arbitrarily, it strictly follows that $\lim_{n \to \infty} \sup_{x \in [0,1]} |x^n g(x)| = 0$.
+        </div>
+    </div>
+
+    <!-- ==================== Q2 ==================== -->
+    <div class="question-section" id="q2">
+        <h2>📌 Q2 Monotonicity of Averaged Integral Functions (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $f : [0, \infty) \to [0, \infty)$ be an increasing function. For all $t > 0$, define $g(t) = \left(\int_0^t f(x)dx\right) / t$. Check whether $g$ is an increasing function.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem examines the behavior of the <strong>running average</strong> of an increasing function. Intuitively, if a function is always increasing, its current value will always be greater than or equal to its historical average. Therefore, adding a new, larger value to the average will pull the average up. We can rigorously prove this without assuming $f$ is differentiable by directly comparing $g(t_2) - g(t_1)$ for $t_2 > t_1 > 0$ using bounding properties of the integral.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Setting up the Inequality</strong></p>
+        <p>Let $0 < t_1 < t_2$. We wish to determine the sign of $g(t_2) - g(t_1)$.</p>
+        <div class="math-display">
+            $$ g(t_2) - g(t_1) = \frac{1}{t_2} \int_0^{t_2} f(x)dx - \frac{1}{t_1} \int_0^{t_1} f(x)dx $$
+        </div>
+        <p>We split the integral from $0$ to $t_2$ at the point $t_1$:</p>
+        <div class="math-display">
+            $$ = \frac{1}{t_2} \left( \int_0^{t_1} f(x)dx + \int_{t_1}^{t_2} f(x)dx \right) - \frac{1}{t_1} \int_0^{t_1} f(x)dx $$
+        </div>
+        <p>Group the integrals from $0$ to $t_1$ together:</p>
+        <div class="math-display">
+            $$ = \left( \frac{1}{t_2} - \frac{1}{t_1} \right) \int_0^{t_1} f(x)dx + \frac{1}{t_2} \int_{t_1}^{t_2} f(x)dx $$
+        </div>
+        <div class="math-display">
+            $$ = \frac{1}{t_2} \int_{t_1}^{t_2} f(x)dx - \frac{t_2 - t_1}{t_1 t_2} \int_0^{t_1} f(x)dx $$
+        </div>
+
+        <p><strong>Step 2: Bounding the Integrals using Monotonicity</strong></p>
+        <p>We are given that $f(x)$ is an increasing function. This allows us to strictly bound both integrals using the boundary value $f(t_1)$.</p>
+        <p><strong>Bound 1 (The lower integral):</strong> For all $x \in [0, t_1]$, $f(x) \leq f(t_1)$. Thus:</p>
+        <div class="math-display">
+            $$ \int_0^{t_1} f(x)dx \leq \int_0^{t_1} f(t_1) dx = t_1 f(t_1) $$
+        </div>
+        <p><strong>Bound 2 (The upper integral):</strong> For all $x \in [t_1, t_2]$, $f(x) \geq f(t_1)$. Thus:</p>
+        <div class="math-display">
+            $$ \int_{t_1}^{t_2} f(x)dx \geq \int_{t_1}^{t_2} f(t_1) dx = (t_2 - t_1) f(t_1) $$
+        </div>
+
+        <p><strong>Step 3: Evaluating the Difference</strong></p>
+        <p>Substitute these bounds back into our equation for the difference. Because we are subtracting the first integral, its upper bound becomes a lower bound for the overall expression:</p>
+        <div class="math-display">
+            $$ g(t_2) - g(t_1) \geq \frac{1}{t_2} \Big( (t_2 - t_1)f(t_1) \Big) - \frac{t_2 - t_1}{t_1 t_2} \Big( t_1 f(t_1) \Big) $$
+        </div>
+        <p>Cancel out $t_1$ in the second term:</p>
+        <div class="math-display">
+            $$ g(t_2) - g(t_1) \geq \frac{t_2 - t_1}{t_2} f(t_1) - \frac{t_2 - t_1}{t_2} f(t_1) = 0 $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Since $g(t_2) - g(t_1) \geq 0$ for all $t_2 > t_1$, we conclude that $g(t)$ is indeed an <strong>increasing function</strong>.
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Linear Algebra & Subspace Intersections (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Suppose $\mathbf{A}$ and $\mathbf{B}$ are two $n \times n$ matrices with real entries such that the sum of their ranks is strictly less than $n$. Show that there exists a nonzero column vector $\mathbf{x} \in \mathbb{R}^n$ such that $\mathbf{A}\mathbf{x} = \mathbf{B}\mathbf{x} = \mathbf{0}$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a pure <strong>Linear Algebra</strong> problem centering on the <strong>Rank-Nullity Theorem</strong> and the dimensionality of subspace intersections. We are asked to prove that the intersection of the null space of $\mathbf{A}$ and the null space of $\mathbf{B}$ contains at least one non-zero vector. We will use the dimension formula for the sum of vector subspaces: $\dim(U \cap V) = \dim(U) + \dim(V) - \dim(U + V)$.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Applying the Rank-Nullity Theorem</strong></p>
+        <p>Let $N(\mathbf{A}) = \{\mathbf{x} \in \mathbb{R}^n : \mathbf{A}\mathbf{x} = \mathbf{0}\}$ be the null space of matrix $\mathbf{A}$. Similarly, let $N(\mathbf{B}) = \{\mathbf{x} \in \mathbb{R}^n : \mathbf{B}\mathbf{x} = \mathbf{0}\}$ be the null space of matrix $\mathbf{B}$. By the Rank-Nullity Theorem for $n \times n$ matrices:</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A})) = n - \text{rank}(\mathbf{A}) $$
+            $$ \dim(N(\mathbf{B})) = n - \text{rank}(\mathbf{B}) $$
+        </div>
+
+        <p><strong>Step 2: Using the Dimension Theorem for Subspaces</strong></p>
+        <p>We are interested in the intersection $N(\mathbf{A}) \cap N(\mathbf{B})$, which represents the set of vectors annihilated by both matrices. According to the standard dimension formula for subspaces:</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) = \dim(N(\mathbf{A})) + \dim(N(\mathbf{B})) - \dim(N(\mathbf{A}) + N(\mathbf{B})) $$
+        </div>
+        <p>Substitute the rank-nullity expressions into this formula:</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) = (n - \text{rank}(\mathbf{A})) + (n - \text{rank}(\mathbf{B})) - \dim(N(\mathbf{A}) + N(\mathbf{B})) $$
+        </div>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) = 2n - (\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B})) - \dim(N(\mathbf{A}) + N(\mathbf{B})) $$
+        </div>
+
+        <p><strong>Step 3: Bounding the Sum Subspace</strong></p>
+        <p>The subspace $N(\mathbf{A}) + N(\mathbf{B})$ is a subspace of $\mathbb{R}^n$. Therefore, its maximum possible dimension is $n$.</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) + N(\mathbf{B})) \leq n \implies -\dim(N(\mathbf{A}) + N(\mathbf{B})) \geq -n $$
+        </div>
+        <p>Substitute this bound back into our equation:</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) \geq 2n - (\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B})) - n $$
+        </div>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) \geq n - (\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B})) $$
+        </div>
+
+        <p><strong>Step 4: Utilizing the Problem Hypothesis</strong></p>
+        <p>We are given that $\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B}) < n$. Since ranks are integers, this implies:</p>
+        <div class="math-display">
+            $$ n - (\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B})) \geq 1 $$
+        </div>
+        <p>Therefore, combining this with Step 3, we get:</p>
+        <div class="math-display">
+            $$ \dim(N(\mathbf{A}) \cap N(\mathbf{B})) \geq 1 $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Because the dimension of the intersection space $N(\mathbf{A}) \cap N(\mathbf{B})$ is strictly greater than $0$, the subspace must contain at least one non-trivial element. Thus, there exists a nonzero vector $\mathbf{x} \in \mathbb{R}^n$ such that $\mathbf{A}\mathbf{x} = \mathbf{0}$ and $\mathbf{B}\mathbf{x} = \mathbf{0}$, which completes the proof.
+        </div>
+    </div>
+
+    <!-- ==================== Q4 ==================== -->
+    <div class="question-section" id="q4">
+        <h2>📌 Q4 Conditional Probability in a Best-of-Five Match (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> In a best-of-five tennis match, Bikas wins a set with probability 0.6. The match stops when a player wins 3 sets. Outcomes are independent.<br>
+            (a) If the match lasts for 5 sets, what is the probability that Bikas wins?<br>
+            (b) If Bimal wins the match, what is the probability it lasts for 5 sets?
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a <strong>Discrete Probability &amp; Combinatorics</strong> problem involving the Negative Binomial framework, though restricted to a finite maximum of 5 trials.
+        <ul>
+            <li><strong>For part (a):</strong> We evaluate the condition "match lasts 5 sets." This strictly happens if and only if the score is tied 2-2 after 4 sets. Because the sets are independent, the winner of the match is simply the winner of the 5th set.</li>
+            <li><strong>For part (b):</strong> We use <strong>Bayes' Theorem / Conditional Probability</strong> formula: $P(A|B) = P(A \cap B) / P(B)$. We must explicitly map out the sample space for Bimal winning in exactly 3, 4, or 5 sets.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Defining the Probabilities</strong></p>
+        <p>Let $p = 0.6$ be the probability Bikas wins a set. Let $q = 0.4$ be the probability Bimal wins a set.</p>
+
+        <p><strong>Step 2: Solving Part (a)</strong></p>
+        <p>We want to find $P(\text{Bikas wins} \mid \text{Match lasts 5 sets})$.</p>
+        <p>A match lasts exactly 5 sets if and only if neither player reaches 3 wins in the first 4 sets. This means the score must be exactly $2-2$ after the 4th set. Let $E_5$ be the event that the match reaches 5 sets. Let $W_A$ be the event Bikas wins.</p>
+        <div class="math-display">
+            $$ P(W_A \mid E_5) = \frac{P(W_A \cap E_5)}{P(E_5)} $$
+        </div>
+        <p>The event $W_A \cap E_5$ implies the score was $2-2$ after 4 sets, and Bikas won the 5th set. Because the 5th set is an independent event:</p>
+        <div class="math-display">
+            $$ P(W_A \cap E_5) = P(\text{Score is } 2-2) \times P(\text{Bikas wins 5th set}) $$
+        </div>
+        <p>Dividing by $P(E_5)$ which is exactly $P(\text{Score is } 2-2)$:</p>
+        <div class="math-display">
+            $$ P(W_A \mid E_5) = P(\text{Bikas wins 5th set}) = p = 0.6 $$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Calculating Sample Space for Part (b)</strong></p>
+        <p>We want to find $P(\text{Match lasts 5 sets} \mid \text{Bimal wins}) = \frac{P(\text{Bimal wins in 5 sets})}{P(\text{Bimal wins total})}$.</p>
+        <p>Let's calculate the disjoint probabilities of Bimal winning in exactly 3, 4, or 5 sets. Bimal wins the match if he wins his 3rd set on the $k$-th set played.</p>
+        
+        <p><strong>Case 1: Bimal wins in 3 sets</strong></p>
+        <p>He must win all 3 initial sets (WWW).</p>
+        <div class="math-display">
+            $$ P(B_3) = q^3 = (0.4)^3 = 0.064 $$
+        </div>
+        
+        <p><strong>Case 2: Bimal wins in 4 sets</strong></p>
+        <p>He must win exactly 2 out of the first 3 sets, AND win the 4th set.</p>
+        <div class="math-display">
+            $$ P(B_4) = \binom{3}{2} p^1 q^2 \times q = 3 \times (0.6) \times (0.4)^2 \times 0.4 = 3 \times 0.6 \times 0.16 \times 0.4 = 0.1152 $$
+        </div>
+        
+        <p><strong>Case 3: Bimal wins in 5 sets</strong></p>
+        <p>He must win exactly 2 out of the first 4 sets (making it 2-2), AND win the 5th set.</p>
+        <div class="math-display">
+            $$ P(B_5) = \binom{4}{2} p^2 q^2 \times q = 6 \times (0.6)^2 \times (0.4)^2 \times 0.4 = 6 \times 0.36 \times 0.16 \times 0.4 = 0.13824 $$
+        </div>
+
+        <p><strong>Step 4: Calculating Conditional Probability</strong></p>
+        <p>The total probability that Bimal wins the match is the sum of these three disjoint cases:</p>
+        <div class="math-display">
+            $$ P(\text{Bimal wins}) = P(B_3) + P(B_4) + P(B_5) = 0.064 + 0.1152 + 0.13824 = 0.31744 $$
+        </div>
+        <p>Now, apply the conditional probability formula:</p>
+        <div class="math-display">
+            $$ P(\text{Lasts 5} \mid \text{Bimal wins}) = \frac{0.13824}{0.31744} $$
+        </div>
+        <p>To simplify, multiply numerator and denominator by 100,000 to get integers, then divide by common factors (e.g., dividing both by 512):</p>
+        <div class="math-display">
+            $$ \frac{13824}{31744} = \frac{27}{62} $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The probability that Bikas wins given it goes to 5 sets is $0.6$.<br>
+            (b) The probability the match lasted 5 sets given Bimal won is $\frac{27}{62}$ (approximately $0.4355$).
+        </div>
+    </div>
+
+
+<!-- ==================== Q5 ==================== -->
+    <div class="question-section" id="q5">
+        <h2>📌 Q5 UMVUE for Discrete Uniform Distributions (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Suppose $X_1, X_2, \dots, X_n$ are independent and identically distributed discrete uniform random variables taking values $1, 2, 3, \dots, \theta$, where $\theta$ is an unknown positive integer.<br>
+            (a) Define $\Psi(x) = x e^x - (x-1)e^{x-1}$ for all $x \in \mathbb{R}$. Find $\mathbb{E}(\Psi(X_1))$.<br>
+            (b) Find the uniformly minimum variance unbiased estimator (UMVUE) of $e^\theta$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem deals with exact point estimation in discrete parameter spaces.
+        <ul>
+            <li><strong>For part (a):</strong> Evaluating the expectation of $\Psi(X_1)$ reduces to computing a finite sum. Because of the clever construction of $\Psi(x)$ as a forward difference, the sum <strong>telescopes</strong>, collapsing massively into a single term.</li>
+            <li><strong>For part (b):</strong> To find the UMVUE, we leverage the <strong>Lehmann-Scheffé Theorem</strong>. We first identify the complete and sufficient statistic for $\theta$, which is the maximum order statistic $X_{(n)}$. Then, we analytically solve for a function $h(X_{(n)})$ whose expectation is exactly $e^\theta$ by matching coefficients of the discrete probability mass function (PMF).</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Evaluating the Telescoping Sum for Part (a)</strong></p>
+        <p>The random variable $X_1$ follows a Discrete Uniform distribution on $\{1, 2, \dots, \theta\}$. Thus, its PMF is $P(X_1 = x) = \frac{1}{\theta}$ for $x \in \{1, 2, \dots, \theta\}$.</p>
+        <p>By the definition of expected value:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\Psi(X_1)] = \sum_{x=1}^{\theta} \Psi(x) P(X_1 = x) = \sum_{x=1}^{\theta} \big[ x e^x - (x-1)e^{x-1} \big] \frac{1}{\theta} $$
+        </div>
+        <p>We factor out the constant $\frac{1}{\theta}$ and expand the summation to observe the telescoping nature:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\Psi(X_1)] = \frac{1}{\theta} \Big[ (1e^1 - 0e^0) + (2e^2 - 1e^1) + (3e^3 - 2e^2) + \dots + (\theta e^\theta - (\theta-1)e^{\theta-1}) \Big] $$
+        </div>
+        <p>Every intermediate term perfectly cancels out, leaving only the final term and the zero term:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\Psi(X_1)] = \frac{1}{\theta} \Big[ \theta e^\theta - 0 \Big] = e^\theta $$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Finding the Complete Sufficient Statistic for Part (b)</strong></p>
+        <p>The joint PMF of the sample is:</p>
+        <div class="math-display">
+            $$ P(X_1=x_1, \dots, X_n=x_n) = \frac{1}{\theta^n} \prod_{i=1}^n \mathbb{I}(1 \leq x_i \leq \theta) = \frac{1}{\theta^n} \mathbb{I}(1 \leq X_{(1)}) \mathbb{I}(X_{(n)} \leq \theta) $$
+        </div>
+        <p>By the Neyman Factorization Theorem, $T = X_{(n)} = \max(X_1, \dots, X_n)$ is a sufficient statistic for $\theta$. Because it's a family of uniform distributions bounding the parameter space, $T$ is also a <strong>complete</strong> statistic.</p>
+
+        <p><strong>Step 3: Finding the Distribution of $X_{(n)}$</strong></p>
+        <p>To construct an unbiased estimator $h(T)$, we need the PMF of $T$. We start with the Cumulative Distribution Function (CDF):</p>
+        <div class="math-display">
+            $$ F_T(y) = P(X_{(n)} \leq y) = P(X_1 \leq y, \dots, X_n \leq y) = \left( \frac{y}{\theta} \right)^n $$
+        </div>
+        <p>The PMF is the difference between consecutive CDF values:</p>
+        <div class="math-display">
+            $$ P_T(y) = P(X_{(n)} \leq y) - P(X_{(n)} \leq y-1) = \frac{y^n - (y-1)^n}{\theta^n} \quad \text{for } y \in \{1, 2, \dots, \theta\} $$
+        </div>
+
+        <p><strong>Step 4: Constructing the Unbiased Estimator $h(T)$</strong></p>
+        <p>We want to find a function $h(T)$ such that $\mathbb{E}[h(T)] = e^\theta$ for all $\theta \in \mathbb{Z}^+$. Setting up the expectation equation:</p>
+        <div class="math-display">
+            $$ \sum_{y=1}^{\theta} h(y) \frac{y^n - (y-1)^n}{\theta^n} = e^\theta $$
+        </div>
+        <p>Multiply both sides by $\theta^n$ to isolate the summation:</p>
+        <div class="math-display">
+            $$ \sum_{y=1}^{\theta} h(y) \big[ y^n - (y-1)^n \big] = \theta^n e^\theta $$
+        </div>
+        <p>This equation must hold for any integer $\theta$. Therefore, it must also hold for $\theta - 1$:</p>
+        <div class="math-display">
+            $$ \sum_{y=1}^{\theta-1} h(y) \big[ y^n - (y-1)^n \big] = (\theta-1)^n e^{\theta-1} $$
+        </div>
+        <p>Subtracting the $\theta-1$ equation from the $\theta$ equation eliminates all terms in the summation except the $y = \theta$ term:</p>
+        <div class="math-display">
+            $$ h(\theta) \big[ \theta^n - (\theta-1)^n \big] = \theta^n e^\theta - (\theta-1)^n e^{\theta-1} $$
+        </div>
+        <p>Solving for the function $h$ at any generic value $y$:</p>
+        <div class="math-display">
+            $$ h(y) = \frac{y^n e^y - (y-1)^n e^{y-1}}{y^n - (y-1)^n} $$
+        </div>
+
+        <p>By the Lehmann-Scheffé Theorem, since $h(X_{(n)})$ is unbiased and a function of a complete sufficient statistic, it is the unique UMVUE.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The expected value is $\mathbb{E}(\Psi(X_1)) = e^\theta$.<br>
+            (b) The UMVUE of $e^\theta$ is exactly $\frac{X_{(n)}^n e^{X_{(n)}} - (X_{(n)}-1)^n e^{X_{(n)}-1}}{X_{(n)}^n - (X_{(n)}-1)^n}$.
+        </div>
+    </div>
+
+    <!-- ==================== Q6 ==================== -->
+    <div class="question-section" id="q6">
+        <h2>📌 Q6 Consistency of the Geometric Mean (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> If $X_1, X_2, \dots, X_n$ are independent and identically distributed $U(0, \theta)$ random variables, show that their geometric mean is a consistent estimator of $\theta/e$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem analyzes <strong>Asymptotic Consistency</strong> through log-transformations. The geometric mean of a product transforms into the arithmetic mean of a sum when we apply the natural logarithm. This allows us to invoke the <strong>Weak Law of Large Numbers (WLLN)</strong>. Finally, applying the <strong>Continuous Mapping Theorem (CMT)</strong> translates the convergence in probability back to the original scale.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Log-Transformation of the Geometric Mean</strong></p>
+        <p>Let $G_n$ be the geometric mean of the sample:</p>
+        <div class="math-display">
+            $$ G_n = \left( \prod_{i=1}^n X_i \right)^{\frac{1}{n}} $$
+        </div>
+        <p>Taking the natural logarithm of both sides converts the product into a sum:</p>
+        <div class="math-display">
+            $$ \ln(G_n) = \frac{1}{n} \sum_{i=1}^n \ln(X_i) $$
+        </div>
+
+        <p><strong>Step 2: Applying the Weak Law of Large Numbers (WLLN)</strong></p>
+        <p>Let $Y_i = \ln(X_i)$. Because the $X_i$ are i.i.d., the transformed variables $Y_i$ are also i.i.d. random variables. By the Weak Law of Large Numbers, the sample mean of $Y_i$ converges in probability to the expected value of $Y_1$:</p>
+        <div class="math-display">
+            $$ \frac{1}{n} \sum_{i=1}^n \ln(X_i) \xrightarrow{p} \mathbb{E}[\ln(X_1)] $$
+        </div>
+
+        <p><strong>Step 3: Evaluating the Expected Value</strong></p>
+        <p>We must compute $\mathbb{E}[\ln(X_1)]$ where $X_1 \sim U(0, \theta)$. The probability density function is $f(x) = \frac{1}{\theta}$ for $x \in (0, \theta)$.</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\ln(X_1)] = \int_0^\theta \ln(x) \left( \frac{1}{\theta} \right) dx = \frac{1}{\theta} \int_0^\theta \ln(x) dx $$
+        </div>
+        <p>We solve the integral using integration by parts ($\int \ln(x) dx = x\ln(x) - x$):</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\ln(X_1)] = \frac{1}{\theta} \Big[ x\ln(x) - x \Big]_0^\theta $$
+        </div>
+        <p>Evaluating at the limits (noting that $\lim_{x \to 0^+} x\ln(x) = 0$ by L'Hôpital's rule):</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\ln(X_1)] = \frac{1}{\theta} \Big[ (\theta\ln(\theta) - \theta) - 0 \Big] = \ln(\theta) - 1 $$
+        </div>
+        <p>Using logarithm properties, since $1 = \ln(e)$, we can rewrite this as:</p>
+        <div class="math-display">
+            $$ \mathbb{E}[\ln(X_1)] = \ln(\theta) - \ln(e) = \ln\left(\frac{\theta}{e}\right) $$
+        </div>
+        <p>Thus, we have established that $\ln(G_n) \xrightarrow{p} \ln(\theta/e)$.</p>
+
+        <p><strong>Step 4: Reversing the Transformation via CMT</strong></p>
+        <p>To find the probability limit of $G_n$ itself, we exponentiate. The exponential function $h(x) = e^x$ is a strictly continuous function everywhere on $\mathbb{R}$. By the <strong>Continuous Mapping Theorem</strong>, if $Z_n \xrightarrow{p} c$, then $h(Z_n) \xrightarrow{p} h(c)$.</p>
+        <div class="math-display">
+            $$ G_n = \exp(\ln(G_n)) \xrightarrow{p} \exp\left(\ln\left(\frac{\theta}{e}\right)\right) = \frac{\theta}{e} $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Because the geometric mean $G_n$ converges in probability to $\theta/e$, it strictly satisfies the definition of a <strong>consistent estimator</strong> for $\theta/e$.
+        </div>
+    </div>
+
+    <!-- ==================== Q7 ==================== -->
+    <div class="question-section" id="q7">
+        <h2>📌 Q7 Sufficiency and MLE for a Bivariate Uniform Region (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> A bivariate random vector $(X,Y)$ follows uniform distribution on the square region with four vertices $(\theta, 0), (0, \theta), (-\theta, 0)$ and $(0, -\theta)$, where $\theta > 0$. Suppose that $(X_1, Y_1), \dots, (X_n, Y_n)$ are $n$ independent copies of $(X,Y)$.<br>
+            (a) Find a real-valued sufficient statistic for $\theta$.<br>
+            (b) Find the maximum likelihood estimator of $\theta$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates 2D support boundaries in Maximum Likelihood Estimation.
+        <ul>
+            <li><strong>Geometric Support:</strong> The boundary of the given square region is mathematically defined by the absolute value inequality $|X| + |Y| \leq \theta$. We must calculate the area of this region to find the density constant.</li>
+            <li><strong>For part (a):</strong> The <strong>Neyman Factorization Theorem</strong> directly reveals the sufficient statistic by analyzing the indicator functions mapping the boundary condition across all $n$ sample points.</li>
+            <li><strong>For part (b):</strong> The MLE for a boundary parameter associated with a decreasing likelihood function is always the tightest bound supported by the observed data.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Formulating the Joint Density Function</strong></p>
+        <p>The specified vertices form a rhombus (a rotated square) centered at the origin. The geometric boundary of this region is $|x| + |y| \leq \theta$. The lengths of its diagonals are both $2\theta$. The area of a rhombus is $\frac{1}{2} d_1 d_2$:</p>
+        <div class="math-display">
+            $$ \text{Area} = \frac{1}{2} (2\theta)(2\theta) = 2\theta^2 $$
+        </div>
+        <p>Because the distribution is uniform over this region, the joint probability density function for a single observation $(x,y)$ is the reciprocal of the area, multiplied by an indicator function:</p>
+        <div class="math-display">
+            $$ f(x, y \mid \theta) = \frac{1}{2\theta^2} \mathbb{I}(|x| + |y| \leq \theta) $$
+        </div>
+
+        <p><strong>Step 2: Finding the Sufficient Statistic for Part (a)</strong></p>
+        <p>For $n$ independent and identically distributed copies, the joint likelihood function is the product of the individual densities:</p>
+        <div class="math-display">
+            $$ L(\theta \mid \mathbf{X}, \mathbf{Y}) = \prod_{i=1}^n \left[ \frac{1}{2\theta^2} \mathbb{I}(|x_i| + |y_i| \leq \theta) \right] = \left( \frac{1}{2\theta^2} \right)^n \prod_{i=1}^n \mathbb{I}(|x_i| + |y_i| \leq \theta) $$
+        </div>
+        <p>The product of the indicators is $1$ if and only if <em>every</em> observation satisfies the boundary condition. This is strictly equivalent to stating that the <em>maximum</em> observed sum of absolute coordinates must be less than or equal to $\theta$:</p>
+        <div class="math-display">
+            $$ L(\theta \mid \mathbf{X}, \mathbf{Y}) = \frac{1}{2^n \theta^{2n}} \mathbb{I} \left( \max_{1 \leq i \leq n} (|x_i| + |y_i|) \leq \theta \right) $$
+        </div>
+        <p>By the <strong>Neyman Factorization Theorem</strong>, we can decompose this likelihood into $g(T(\mathbf{X}, \mathbf{Y}) \mid \theta) \cdot h(\mathbf{X}, \mathbf{Y})$. Setting $h(\mathbf{X}, \mathbf{Y}) = 1$, the function strictly depends on the data only through the statistic $T$. Thus:</p>
+        <div class="math-display">
+            $$ T(\mathbf{X}, \mathbf{Y}) = \max_{1 \leq i \leq n} (|X_i| + |Y_i|) $$
+        </div>
+        <p>is a real-valued sufficient statistic for $\theta$.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Finding the MLE for Part (b)</strong></p>
+        <p>We analyze the behavior of the likelihood function $L(\theta)$ derived in Step 2. </p>
+        <div class="math-display">
+            $$ L(\theta) = \begin{cases} \frac{1}{2^n \theta^{2n}} & \text{for } \theta \geq T(\mathbf{X}, \mathbf{Y}) \\ 0 & \text{for } \theta < T(\mathbf{X}, \mathbf{Y}) \end{cases} $$
+        </div>
+        <p>For $\theta \geq T$, the function $1/\theta^{2n}$ is a strictly decreasing function of $\theta$. To maximize $L(\theta)$, we must choose the smallest possible value for $\theta$ that does not violate the support boundary (which would cause the likelihood to drop to zero).</p>
+        <p>The smallest permissible value is exactly the boundary condition itself.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) A real-valued sufficient statistic is $T = \max_{1 \leq i \leq n} (|X_i| + |Y_i|)$.<br>
+            (b) The maximum likelihood estimator (MLE) of $\theta$ is $\hat{\theta} = \max_{1 \leq i \leq n} (|X_i| + |Y_i|)$.
+        </div>
+    </div>
+
+
+<!-- ==================== Q8 ==================== -->
+    <div class="question-section" id="q8">
+        <h2>📌 Q8 Finite Population Sampling and Variance Bounds (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider a population $\{X_1, X_2, \dots, X_{25}\}$ consisting of 25 observations, where each $X_i \in \{0, 1, \dots, 9\}$. The population mean is $\mu = 5.4$. A simple random sample $\{x_1, x_2, \dots, x_5\}$ of size 5 is drawn without replacement. Define $\bar{x} = (x_1 + \dots + x_5)/5$.<br>
+            (a) Show that $\text{Var}(\bar{x}) = \sigma^2 / 6$, where $\sigma^2$ is the population variance.<br>
+            (b) Show that $\text{Var}(\bar{x})$ lies between $0.04$ and $3.24$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem tests <strong>Survey Sampling theory</strong> alongside <strong>discrete optimization</strong>. 
+        <ul>
+            <li><strong>For part (a):</strong> We simply apply the standard formula for the variance of a sample mean under Simple Random Sampling Without Replacement (SRSWOR), which incorporates the finite population correction (FPC) factor.</li>
+            <li><strong>For part (b):</strong> We must find the absolute minimum and maximum possible values for the population variance $\sigma^2$, given the strict constraints that the values must be integers between 0 and 9, and their sum is fixed. Variance is minimized when the data points are as clustered around the mean as possible, and maximized when they are pushed to the extreme boundaries.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Applying the SRSWOR Variance Formula for Part (a)</strong></p>
+        <p>Under SRSWOR, the variance of the sample mean is given by the formula:</p>
+        <div class="math-display">
+            $$ \text{Var}(\bar{x}) = \frac{N - n}{N - 1} \frac{\sigma^2}{n} $$
+        </div>
+        <p>Here, the population size is $N = 25$ and the sample size is $n = 5$. We plug these values in:</p>
+        <div class="math-display">
+            $$ \text{Var}(\bar{x}) = \frac{25 - 5}{25 - 1} \frac{\sigma^2}{5} = \frac{20}{24} \frac{\sigma^2}{5} = \left(\frac{5}{6}\right) \frac{\sigma^2}{5} = \frac{\sigma^2}{6} $$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Establishing Constraints for Part (b)</strong></p>
+        <p>We are given $\mu = 5.4$ and $N = 25$. Therefore, the strict sum of all elements in the population is:</p>
+        <div class="math-display">
+            $$ \sum_{i=1}^{25} X_i = N\mu = 25 \times 5.4 = 135 $$
+        </div>
+        <p>We want to bound $\sigma^2 = \frac{1}{N} \sum_{i=1}^{25} X_i^2 - \mu^2$. Since $\mu^2 = 5.4^2 = 29.16$ is fixed, bounding the variance is strictly equivalent to bounding the sum of squares $\sum X_i^2$ subject to $\sum X_i = 135$ and $X_i \in \{0, 1, \dots, 9\}$.</p>
+
+        <p><strong>Step 3: Finding the Minimum Variance Bound</strong></p>
+        <p>To minimize the sum of squares, the integer values must be as concentrated around the mean ($5.4$) as mathematically possible. The closest available integers are $5$ and $6$. Assume the population consists of $a$ fives and $b$ sixes.</p>
+        <div class="math-display">
+            $$ a + b = 25 \quad \text{(Total count constraint)} $$
+            $$ 5a + 6b = 135 \quad \text{(Total sum constraint)} $$
+        </div>
+        <p>Substituting $a = 25 - b$ into the sum constraint: $5(25 - b) + 6b = 135 \implies 125 - 5b + 6b = 135 \implies b = 10$. Thus, $a = 15$. The population has fifteen $5$s and ten $6$s.</p>
+        <div class="math-display">
+            $$ \sum X_i^2 = 15(5^2) + 10(6^2) = 15(25) + 10(36) = 375 + 360 = 735 $$
+        </div>
+        <div class="math-display">
+            $$ \sigma^2_{\min} = \frac{735}{25} - 29.16 = 29.4 - 29.16 = 0.24 $$
+        </div>
+        <p>Using the relationship from part (a), the minimum variance of the sample mean is:</p>
+        <div class="math-display">
+            $$ \text{Var}(\bar{x})_{\min} = \frac{0.24}{6} = 0.04 $$
+        </div>
+
+        <p><strong>Step 4: Finding the Maximum Variance Bound</strong></p>
+        <p>To maximize the sum of squares, the values must be pushed to the absolute extremes of the permissible interval, which are $0$ and $9$. Assume the population consists of $c$ nines and $d$ zeros.</p>
+        <div class="math-display">
+            $$ c + d = 25 \quad \text{(Total count constraint)} $$
+            $$ 9c + 0d = 135 \quad \text{(Total sum constraint)} $$
+        </div>
+        <p>Solving the second equation gives $9c = 135 \implies c = 15$. Thus, $d = 10$. The population has fifteen $9$s and ten $0$s. This perfectly satisfies the constraints.</p>
+        <div class="math-display">
+            $$ \sum X_i^2 = 15(9^2) + 10(0^2) = 15(81) = 1215 $$
+        </div>
+        <div class="math-display">
+            $$ \sigma^2_{\max} = \frac{1215}{25} - 29.16 = 48.6 - 29.16 = 19.44 $$
+        </div>
+        <p>Using the relationship from part (a), the maximum variance of the sample mean is:</p>
+        <div class="math-display">
+            $$ \text{Var}(\bar{x})_{\max} = \frac{19.44}{6} = 3.24 $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) By applying the SRSWOR variance formula with FPC, $\text{Var}(\bar{x}) = \frac{25-5}{24}\frac{\sigma^2}{5} = \sigma^2/6$.<br>
+            (b) By minimizing and maximizing the discrete sum of squares under fixed mean constraints, the population variance is strictly bounded $\sigma^2 \in [0.24, 19.44]$. Consequently, $\text{Var}(\bar{x}) = \sigma^2/6$ lies perfectly between $0.04$ and $3.24$.
+        </div>
+    </div>
+
+    <!-- ==================== Q9 ==================== -->
+    <div class="question-section" id="q9">
+        <h2>📌 Q9 Minimizing Expected Risk / Likelihood Ratios (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Construct a test for $H_0: \mu = 0$ against $H_1: \mu = 1$ based on a single observation from $N(\mu, 1)$ such that $\mathbb{P}(\text{Type I error}) + 2\mathbb{P}(\text{Type II error})$ is minimized. Justify your answer.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem moves away from fixed-size tests (Neyman-Pearson) and instead asks to minimize an arbitrary linear combination of errors. This translates perfectly into a <strong>Bayesian Decision Theory</strong> framework, where we minimize the expected risk $R = L_0 \alpha + L_1 \beta$. To minimize this integral over the rejection region, we place any point $x$ into the rejection region if and only if its contribution to the integral is negative. This directly yields a <strong>Likelihood Ratio threshold</strong>.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Setting up the Objective Function</strong></p>
+        <p>Let $W$ be the critical region where we reject $H_0$.</p>
+        <ul>
+            <li>$\mathbb{P}(\text{Type I error}) = \mathbb{P}(X \in W \mid H_0) = \int_W f_0(x)dx$</li>
+            <li>$\mathbb{P}(\text{Type II error}) = \mathbb{P}(X \notin W \mid H_1) = 1 - \mathbb{P}(X \in W \mid H_1) = 1 - \int_W f_1(x)dx$</li>
+        </ul>
+        <p>We want to minimize the objective function $L(W)$:</p>
+        <div class="math-display">
+            $$ L(W) = \int_W f_0(x)dx + 2 \left( 1 - \int_W f_1(x)dx \right) = 2 + \int_W \big( f_0(x) - 2f_1(x) \big) dx $$
+        </div>
+
+        <p><strong>Step 2: Identifying the Optimal Rejection Region</strong></p>
+        <p>To make $L(W)$ as small as possible, the integral component must be as negative as possible. Therefore, we should include a point $x$ in the rejection region $W$ if and only if the integrand evaluated at $x$ is strictly negative:</p>
+        <div class="math-display">
+            $$ f_0(x) - 2f_1(x) < 0 \implies \frac{f_1(x)}{f_0(x)} > \frac{1}{2} $$
+        </div>
+        <p>This reveals that the optimal test is a likelihood ratio test with threshold $1/2$.</p>
+
+        <p><strong>Step 3: Calculating the Likelihood Ratio for Normal Densities</strong></p>
+        <p>The densities for $N(0, 1)$ and $N(1, 1)$ are $f_0(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ and $f_1(x) = \frac{1}{\sqrt{2\pi}} e^{-(x-1)^2/2}$. We form the ratio:</p>
+        <div class="math-display">
+            $$ \frac{f_1(x)}{f_0(x)} = \frac{\exp\left(-\frac{1}{2}(x^2 - 2x + 1)\right)}{\exp\left(-\frac{1}{2}x^2\right)} = \exp\left(x - \frac{1}{2}\right) $$
+        </div>
+
+        <p><strong>Step 4: Solving for the Critical Value</strong></p>
+        <p>Substitute the ratio back into the optimal test inequality:</p>
+        <div class="math-display">
+            $$ \exp\left(x - \frac{1}{2}\right) > \frac{1}{2} $$
+        </div>
+        <p>Take the natural logarithm of both sides:</p>
+        <div class="math-display">
+            $$ x - \frac{1}{2} > \ln\left(\frac{1}{2}\right) = -\ln(2) $$
+        </div>
+        <div class="math-display">
+            $$ x > \frac{1}{2} - \ln(2) $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> To minimize $\mathbb{P}(\text{Type I}) + 2\mathbb{P}(\text{Type II})$, the optimal critical region is to reject $H_0$ if $X > 0.5 - \ln(2)$.
+        </div>
+    </div>
+
+    <!-- ==================== Q10 ==================== -->
+    <div class="question-section" id="q10">
+        <h2>📌 Q10 Multiple Regression, Correlation, and Rayleigh Quotients (12 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider $Y_i = \beta_1 X_{1i} + \beta_2 X_{2i} + \epsilon_i$ where $\epsilon_i \sim N(0, \sigma^2)$. The data are standardized: $\sum Y_i = \sum X_{1i} = \sum X_{2i} = 0$, and $\sum X_{1i}^2 = \sum X_{2i}^2 = 1$. The cross-product is $\sum X_{1i}X_{2i} = \alpha \in (-1, 1)$. Given the least squares estimates $\hat{\beta}_1 > \hat{\beta}_2 > 0$:<br>
+            (a) Show that the sample correlation between $Y$ and $X_1$ is larger than that between $Y$ and $X_2$.<br>
+            (b) For any $\ell_1^2 + \ell_2^2 = 1$, show that $\text{Var}(\ell_1 \hat{\beta}_1 + \ell_2 \hat{\beta}_2)$ cannot be smaller than $\sigma^2 / (1 + |\alpha|)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem leverages linear algebra within standardized OLS regression frameworks.
+        <ul>
+            <li><strong>For part (a):</strong> Because the variables are centered and standardized, the $\mathbf{X}^\top\mathbf{Y}$ vector directly represents the sample covariances (which are strictly proportional to the sample correlations). We invert the $\mathbf{X}^\top\mathbf{X}$ matrix to map the relationship between the $\hat{\beta}$ estimates and these correlations.</li>
+            <li><strong>For part (b):</strong> Finding the extreme bounds of a quadratic form $\mathbf{l}^\top \mathbf{A} \mathbf{l}$ subject to a unit length constraint $\mathbf{l}^\top\mathbf{l} = 1$ is an elegant application of the <strong>Rayleigh Quotient</strong>. The minimum variance is mathematically dictated by the smallest eigenvalue of the covariance matrix of the estimators.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: OLS Setup and Relationships for Part (a)</strong></p>
+        <p>The standard OLS estimator is $\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}$. Because the sums of squares are 1 and the cross-product is $\alpha$, the design matrix structure is:</p>
+        <div class="math-display">
+            $$ \mathbf{X}^\top\mathbf{X} = \begin{pmatrix} 1 & \alpha \\ \alpha & 1 \end{pmatrix} \implies (\mathbf{X}^\top\mathbf{X})^{-1} = \frac{1}{1-\alpha^2} \begin{pmatrix} 1 & -\alpha \\ -\alpha & 1 \end{pmatrix} $$
+        </div>
+        <p>Let $c_1 = \sum X_{1i}Y_i$ and $c_2 = \sum X_{2i}Y_i$. Since the variables are zero-mean, $c_1$ and $c_2$ are the sample covariances. The sample correlation $r_{y,x_j}$ is $c_j / \sqrt{S_{yy} S_{xx}} = c_j / \sqrt{S_{yy}}$. Therefore, comparing the correlations is strictly equivalent to comparing $c_1$ and $c_2$.</p>
+        <p>The OLS estimates are given by the multiplication:</p>
+        <div class="math-display">
+            $$ \hat{\beta}_1 = \frac{c_1 - \alpha c_2}{1-\alpha^2} \quad \text{and} \quad \hat{\beta}_2 = \frac{c_2 - \alpha c_1}{1-\alpha^2} $$
+        </div>
+
+        <p><strong>Step 2: Proving $r_{y,x_1} > r_{y,x_2}$</strong></p>
+        <p>We are given that $\hat{\beta}_1 > \hat{\beta}_2$. Substituting our equations from Step 1:</p>
+        <div class="math-display">
+            $$ \frac{c_1 - \alpha c_2}{1-\alpha^2} > \frac{c_2 - \alpha c_1}{1-\alpha^2} $$
+        </div>
+        <p>Because $\alpha \in (-1, 1)$, the denominator $(1-\alpha^2)$ is strictly positive. We multiply both sides to eliminate it:</p>
+        <div class="math-display">
+            $$ c_1 - \alpha c_2 > c_2 - \alpha c_1 \implies c_1 + \alpha c_1 > c_2 + \alpha c_2 \implies c_1(1+\alpha) > c_2(1+\alpha) $$
+        </div>
+        <p>Since $\alpha > -1$, the term $(1+\alpha)$ is strictly positive. Dividing both sides yields $c_1 > c_2$. Because the correlations are proportional to $c_1$ and $c_2$ by the exact same positive constant $1/\sqrt{S_{yy}}$, it follows that $r_{y,x_1} > r_{y,x_2}$.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Variance Formulation and Rayleigh Quotient for Part (b)</strong></p>
+        <p>Let $\mathbf{l} = (\ell_1, \ell_2)^\top$. We seek the variance of the linear combination $\mathbf{l}^\top \hat{\boldsymbol{\beta}}$. The covariance matrix of OLS estimators is $\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}$. Thus:</p>
+        <div class="math-display">
+            $$ \text{Var}(\mathbf{l}^\top \hat{\boldsymbol{\beta}}) = \mathbf{l}^\top \big[ \sigma^2(\mathbf{X}^\top\mathbf{X})^{-1} \big] \mathbf{l} = \sigma^2 \mathbf{l}^\top (\mathbf{X}^\top\mathbf{X})^{-1} \mathbf{l} $$
+        </div>
+        <p>We want to find the minimum of this quadratic form subject to the constraint $\mathbf{l}^\top\mathbf{l} = 1$. By the properties of the <strong>Rayleigh Quotient</strong>, the minimum value is identically the smallest eigenvalue of the matrix $\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}$.</p>
+
+        <p><strong>Step 4: Eigenvalue Decomposition</strong></p>
+        <p>Let's find the eigenvalues of $(\mathbf{X}^\top\mathbf{X})^{-1}$. The eigenvalues of an inverse matrix are the reciprocals of the original matrix's eigenvalues. We find the eigenvalues $\lambda$ of $\mathbf{X}^\top\mathbf{X} = \begin{pmatrix} 1 & \alpha \\ \alpha & 1 \end{pmatrix}$:</p>
+        <div class="math-display">
+            $$ \det\begin{pmatrix} 1-\lambda & \alpha \\ \alpha & 1-\lambda \end{pmatrix} = (1-\lambda)^2 - \alpha^2 = 0 \implies 1-\lambda = \pm\alpha \implies \lambda = 1 \pm \alpha $$
+        </div>
+        <p>The eigenvalues of $\mathbf{X}^\top\mathbf{X}$ are $(1+\alpha)$ and $(1-\alpha)$. Therefore, the eigenvalues of $(\mathbf{X}^\top\mathbf{X})^{-1}$ are $\frac{1}{1+\alpha}$ and $\frac{1}{1-\alpha}$.</p>
+        <p>To find the absolute minimum possible variance, we select the smallest of these two inverse eigenvalues. The smaller fraction occurs when the denominator is largest. Between $(1+\alpha)$ and $(1-\alpha)$, the maximum possible denominator is exactly $(1+|\alpha|)$.</p>
+        <p>Therefore, the minimum eigenvalue of $(\mathbf{X}^\top\mathbf{X})^{-1}$ is exactly $\frac{1}{1+|\alpha|}$.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The derived algebraic inequality $c_1 > c_2$ strictly implies the sample correlation between $Y$ and $X_1$ is larger.<br>
+            (b) By the Rayleigh Quotient theorem, the minimum variance of the constrained linear combination is $\sigma^2 \lambda_{\min}$, which perfectly equates to $\frac{\sigma^2}{1+|\alpha|}$.
+        </div>
+    </div>
+
+    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+    <div class="question-section" id="summary-sta" style="border-bottom: none;">
+        <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
+        
+        <h3>🎯 Core Concepts Tested in This Paper</h3>
+        <ul>
+            <li><strong>Real Analysis (Q1, Q2):</strong> Demonstrating uniform convergence over bounded domains utilizing $\epsilon-\delta$ continuity arguments. Proving monotonicity of integral averages without relying on strict differentiability constraints.</li>
+            <li><strong>Linear Algebra (Q3, Q10):</strong> Applying the <strong>Rank-Nullity Theorem</strong> and the Dimension formula for subspace intersections to prove the existence of shared null vectors. Formulating constrained variance optimization problems as <strong>Rayleigh Quotients</strong> to seamlessly extract bounds using eigenvalues.</li>
+            <li><strong>Discrete Probability &amp; Optimization (Q4, Q8):</strong> Parsing complex conditional sample spaces in boundary-constrained Negative Binomial setups (Best-of-Five series). Leveraging extreme-value constraints within finite integer domains to generate strict absolute bounds for population variances.</li>
+            <li><strong>Estimation &amp; Decision Theory (Q5, Q6, Q9):</strong> Utilizing the <strong>Continuous Mapping Theorem</strong> alongside WLLN to prove consistency under log transformations. Deriving UMVUEs for discrete parameter bounds via the Lehmann-Scheffé theorem and telescoping series. Translating non-standard risk functions (e.g. minimizing Type I + 2*Type II errors) directly into exact <strong>Likelihood Ratio threshold tests</strong> via Bayesian decision boundaries.</li>
+            <li><strong>Support Boundaries in MLE (Q7):</strong> Analyzing multi-dimensional boundary supports (e.g., rhombus shapes defined by $|x| + |y| \leq \theta$) to correctly construct joint indicators and apply the Neyman Factorization theorem.</li>
+        </ul>
+
+        <div class="hint-box">
+            <strong>💡 ISI Examiner Insight:</strong><br>
+            The STA paper heavily emphasizes identifying and applying core theorems correctly to shortcut tedious algebra. <br>
+            1. In Q3, utilizing the rank-nullity intersection formula takes a seemingly complex matrix problem and solves it in three lines. <br>
+            2. In Q9, recognizing that arbitrary risk coefficients ($L_0 \alpha + L_1 \beta$) construct an integrand that acts as a sign-indicator boundary for the likelihood ratio demonstrates a profound understanding of statistical decision theory.<br>
+            3. In Q10, circumventing tedious Lagrange multipliers by recognizing the Rayleigh Quotient and using simple $2\times 2$ eigenvalues ensures full marks with maximum elegance.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
