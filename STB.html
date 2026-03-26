@@ -312,24 +312,409 @@
         </div>
     </div>
 
-    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+
+
+
+<!-- ==================== Q4 ==================== -->
+<div class="question-section" id="q4">
+    <h2>📌 Q4 Loss Functions and Weighted Medians (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> 
+        <br>(a) Consider a frequency distribution of $x$ (values 1 to 10) and frequencies $f$. Find the value of $\theta$ that minimizes $\psi(\theta) = \sum_{i=1}^{10} f_i |x_i - \theta|$.
+        <br>(b) Consider a dataset containing $n$ bivariate observations $(x_1, y_1), \dots, (x_n, y_n)$. If $x_i = 2^i$ for $i = 1, 2, \dots, n$, show that $\Delta(\theta) = \sum_{i=1}^n |y_i - \theta x_i|$ is minimized at $\theta = y_n / x_n$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem tests the properties of $L_1$ loss functions (Absolute Deviations).
+    <ul>
+        <li><strong>For part (a):</strong> It is a standard statistical theorem that the sum of absolute deviations $\sum f_i |x_i - \theta|$ is minimized when $\theta$ is the <strong>median</strong> of the frequency distribution.</li>
+        <li><strong>For part (b):</strong> By factoring out $x_i$, the loss function transforms into a <strong>Weighted Median</strong> problem. Because the weights grow exponentially ($x_i = 2^i$), the final weight $x_n$ dominates the sum of all preceding weights. This structural dominance strictly anchors the minimum to the final data point.</li>
+    </ul></p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Minimizing Absolute Loss for Part (a)</strong></p>
+    <p>We need to minimize $\psi(\theta) = \sum_{i=1}^{10} f_i |x_i - \theta|$. The minimizer of the sum of absolute deviations is the median of the data. First, we compute the total number of observations, $N$:</p>
+    <div class="math-display">
+        $$ N = \sum_{i=1}^{10} f_i = 17 + 35 + 46 + 38 + 25 + 13 + 10 + 9 + 5 + 2 = 200 $$
+    </div>
+    <p>Since $N = 200$ (an even number), the median is the average of the 100th and 101st ordered observations. Let us calculate the cumulative frequencies to locate these positions:</p>
+    <ul>
+        <li>$x = 1$: $CF = 17$</li>
+        <li>$x = 2$: $CF = 17 + 35 = 52$</li>
+        <li>$x = 3$: $CF = 52 + 46 = 98$</li>
+        <li>$x = 4$: $CF = 98 + 38 = 136$</li>
+    </ul>
+    <p>Because the cumulative frequency reaches $98$ at $x=3$ and jumps to $136$ at $x=4$, both the 100th and 101st observations fall perfectly into the category where $x_i = 4$.</p>
+    <div class="math-display">
+        $$ \text{Median} = \frac{4 + 4}{2} = 4 \implies \theta = 4 $$
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Step 2: Formulating the Weighted Median for Part (b)</strong></p>
+    <p>We want to minimize $\Delta(\theta) = \sum_{i=1}^n |y_i - \theta x_i|$. Because $x_i = 2^i > 0$, we can factor $x_i$ out of the absolute value:</p>
+    <div class="math-display">
+        $$ \Delta(\theta) = \sum_{i=1}^n x_i \left| \frac{y_i}{x_i} - \theta \right| $$
+    </div>
+    <p>Let $w_i = x_i = 2^i$ act as weights, and let $z_i = y_i / x_i$ act as the data points. The function $\Delta(\theta) = \sum_{i=1}^n w_i |z_i - \theta|$ is precisely minimized when $\theta$ is the <strong>weighted median</strong> of the sequence $z_i$ with corresponding weights $w_i$.</p>
+
+    <p><strong>Step 3: Analyzing the Exponential Weights</strong></p>
+    <p>The weighted median is the value $z_k$ at which the cumulative weight crosses $50\%$ of the total weight $W$. Let us compute the total weight:</p>
+    <div class="math-display">
+        $$ W = \sum_{i=1}^n 2^i = 2^{n+1} - 2 $$
+    </div>
+    <p>Now, let us examine the weight of the $n$-th observation, $w_n = 2^n$. We compare this single weight to the sum of <em>all</em> other weights combined:</p>
+    <div class="math-display">
+        $$ \sum_{i=1}^{n-1} w_i = \sum_{i=1}^{n-1} 2^i = 2^n - 2 $$
+    </div>
+    <p>Notice the strict inequality:</p>
+    <div class="math-display">
+        $$ w_n = 2^n > 2^n - 2 = \sum_{i=1}^{n-1} w_i $$
+    </div>
+
+    <p><strong>Step 4: Proving the Minimizer is at $z_n$</strong></p>
+    <p>Because the single weight $w_n$ is strictly greater than the sum of all other weights, $z_n$ carries more than $50\%$ of the total distribution's mass. Regardless of where $z_n$ falls in the sorted order of $z_i$, any movement of $\theta$ away from $z_n$ will incur a heavier penalty from the $w_n |z_n - \theta|$ term than it could possibly save from the remaining $\sum_{i=1}^{n-1} w_i |z_i - \theta|$ terms.</p>
+    <p>Therefore, the minimum of the loss function is strictly anchored at $z_n$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The value that minimizes the absolute deviation is the median, $\theta = 4$.<br>
+        (b) Because the weight of the $n$-th term ($2^n$) strictly exceeds the sum of all preceding weights ($2^n - 2$), the weighted median is locked at the $n$-th ratio. Thus, $\Delta(\theta)$ is minimized at $\theta = z_n = y_n / x_n$.
+    </div>
+</div>
+
+<!-- ==================== Q5 ==================== -->
+<div class="question-section" id="q5">
+    <h2>📌 Q5 SRSWR and Order Statistics (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Consider a population $\{X_1, X_2, \dots, X_{15}\}$ of size 15, where all $X_i$'s are distinct. A sample of size 5 is drawn using Simple Random Sampling With Replacement (SRSWR).<br><br>
+        (a) Show that the sample mean $\bar{x}$ can be written as $\sum_{i=1}^{15} W_i X_i$, where $(W_1, \dots, W_{15})$ follows a multinomial distribution. Derive $\mathbb{E}(\bar{x})$ and $\text{Var}(\bar{x})$ given $\sum X_i = 30$ and $\sum X_i^2 = 75$.<br>
+        (b) If $\tilde{x}$ and $\tilde{X}$ denote the sample median and population median, find $\mathbb{P}(\tilde{x} = \tilde{X})$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This question bridges Survey Sampling and Non-parametric order statistics.
+    <ul>
+        <li><strong>For part (a):</strong> In SRSWR, drawing samples is akin to distributing $n$ items into $N$ bins, which strictly follows a <strong>Multinomial Distribution</strong>. We will use the covariance structure of the multinomial to derive the variance of the linear combination.</li>
+        <li><strong>For part (b):</strong> We must calculate the probability that the 3rd order statistic of a sample of 5 aligns perfectly with the 8th order statistic of a population of 15. This transforms into a <strong>Binomial probability</strong> problem evaluating the counts of items drawn below and above the median.</li>
+    </ul></p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: The Multinomial Representation for Part (a)</strong></p>
+    <p>Let $C_i$ be the number of times the $i$-th population unit $X_i$ is drawn in the sample of size $n=5$. Since the sampling is with replacement from $N=15$ items, each draw is independent with probability $p_i = 1/15$. Therefore, the vector of counts follows a Multinomial distribution:</p>
+    <div class="math-display">
+        $$ (C_1, C_2, \dots, C_{15}) \sim \text{Multinom}\left(n=5; p_1=\frac{1}{15}, \dots, p_{15}=\frac{1}{15}\right) $$
+    </div>
+    <p>The sample mean $\bar{x}$ is the sum of the drawn values divided by $n=5$. This can be rewritten by grouping identical draws:</p>
+    <div class="math-display">
+        $$ \bar{x} = \frac{1}{5} \sum_{i=1}^{15} C_i X_i = \sum_{i=1}^{15} \left(\frac{C_i}{5}\right) X_i $$
+    </div>
+    <p>By defining $W_i = C_i / 5$ (the sample proportion), we get $\bar{x} = \sum_{i=1}^{15} W_i X_i$. Note that $W_i$ is a scaled multinomial variable.</p>
+
+    <p><strong>Step 2: Deriving Expectation and Variance of $\bar{x}$</strong></p>
+    <p>From the properties of the multinomial distribution:</p>
+    <ul>
+        <li>$\mathbb{E}[C_i] = n p_i = 5 \times \frac{1}{15} = \frac{1}{3}$</li>
+        <li>$\text{Var}(C_i) = n p_i (1 - p_i) = 5 \left(\frac{1}{15}\right) \left(\frac{14}{15}\right) = \frac{14}{45}$</li>
+        <li>$\text{Cov}(C_i, C_j) = -n p_i p_j = -5 \left(\frac{1}{15}\right) \left(\frac{1}{15}\right) = -\frac{1}{45}$ (for $i \neq j$)</li>
+    </ul>
+    <p>Using the linearity of expectation:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[\bar{x}] = \frac{1}{5} \sum_{i=1}^{15} \mathbb{E}[C_i] X_i = \frac{1}{5} \sum_{i=1}^{15} \left(\frac{1}{3}\right) X_i = \frac{1}{15} \sum_{i=1}^{15} X_i $$
+    </div>
+    <p>Given $\sum X_i = 30$, $\mathbb{E}[\bar{x}] = 30 / 15 = 2$.</p>
+    <p>For the variance, we expand the quadratic form $\text{Var}\left(\frac{1}{5} \sum C_i X_i\right)$:</p>
+    <div class="math-display">
+        $$ \text{Var}(\bar{x}) = \frac{1}{25} \left[ \sum_{i=1}^{15} \text{Var}(C_i) X_i^2 + \sum_{i \neq j} \text{Cov}(C_i, C_j) X_i X_j \right] $$
+    </div>
+    <p>We know $(\sum X_i)^2 = \sum X_i^2 + \sum_{i \neq j} X_i X_j$. Plugging in the known sums: $30^2 = 75 + \sum_{i \neq j} X_i X_j$, meaning $\sum_{i \neq j} X_i X_j = 900 - 75 = 825$.</p>
+    <div class="math-display">
+        $$ \text{Var}(\bar{x}) = \frac{1}{25} \left[ \frac{14}{45} (75) - \frac{1}{45} (825) \right] = \frac{1}{25} \left[ \frac{1050 - 825}{45} \right] = \frac{1}{25} \left[ \frac{225}{45} \right] = \frac{1}{25} \times 5 = \frac{1}{5} = 0.2 $$
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Step 3: Calculating $P(\tilde{x} = \tilde{X})$ for Part (b)</strong></p>
+    <p>Since the population has 15 distinct items, the population median $\tilde{X}$ is the 8th order statistic, $X_{(8)}$. Exactly $7$ items are smaller than $\tilde{X}$, and $7$ are larger. On any single draw:</p>
+    <ul>
+        <li>$p_< = \mathbb{P}(X_i < \tilde{X}) = 7/15$</li>
+        <li>$p_= = \mathbb{P}(X_i = \tilde{X}) = 1/15$</li>
+        <li>$p_> = \mathbb{P}(X_i > \tilde{X}) = 7/15$</li>
+    </ul>
+    <p>The sample has size $n=5$, so the sample median $\tilde{x}$ is the 3rd order statistic $x_{(3)}$. For the sample median to exactly equal the population median ($x_{(3)} = \tilde{X}$), the number of draws strictly less than $\tilde{X}$ (let's call this $N_1$) must be $\leq 2$, AND the number of draws strictly greater than $\tilde{X}$ (let's call this $N_3$) must be $\leq 2$.</p>
+    <p>Since $N_1 + N_2 + N_3 = 5$ (where $N_2$ is the number of times $\tilde{X}$ is drawn), the condition $N_3 \leq 2$ is mathematically equivalent to $N_1 + N_2 \geq 3$.</p>
+    <div class="math-display">
+        $$ \mathbb{P}(\tilde{x} = \tilde{X}) = \mathbb{P}(N_1 \leq 2 \text{ and } N_1 + N_2 \geq 3) = \mathbb{P}(N_1 \leq 2) - \mathbb{P}(N_1 + N_2 \leq 2) $$
+    </div>
+    
+    <p><strong>Step 4: Binomial Computations</strong></p>
+    <p>Notice that $N_1 \sim \text{Bin}(5, 7/15)$ and $(N_1 + N_2) \sim \text{Bin}(5, 8/15)$. Let $p = 7/15$ and $q = 8/15$. The probability becomes:</p>
+    <div class="math-display">
+        $$ \mathbb{P} = \sum_{k=0}^{2} \binom{5}{k} p^k (1-p)^{5-k} - \sum_{k=0}^{2} \binom{5}{k} q^k (1-q)^{5-k} $$
+    </div>
+    <p>Since $1-p = q$ and $1-q = p$, we group the binomial terms:</p>
+    <div class="math-display">
+        $$ \mathbb{P} = \binom{5}{0} [q^5 - p^5] + \binom{5}{1} [pq^4 - qp^4] + \binom{5}{2} [p^2q^3 - q^2p^3] $$
+    </div>
+    <p>Computing each term exactly:</p>
+    <ul>
+        <li>$k=0$: $(8/15)^5 - (7/15)^5 = (32768 - 16807) / 15^5 = 15961 / 15^5$</li>
+        <li>$k=1$: $5pq(q^3 - p^3) = 5\left(\frac{56}{225}\right) \left(\frac{512 - 343}{3375}\right) = \frac{280 \times 169}{15^5} = \frac{47320}{15^5}$</li>
+        <li>$k=2$: $10p^2q^2(q - p) = 10\left(\frac{3136}{50625}\right) \left(\frac{1}{15}\right) = \frac{31360}{15^5}$</li>
+    </ul>
+    <p>Adding them together:</p>
+    <div class="math-display">
+        $$ \mathbb{P} = \frac{15961 + 47320 + 31360}{759375} = \frac{94641}{759375} $$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The expected value $\mathbb{E}(\bar{x}) = 2$ and the variance $\text{Var}(\bar{x}) = 0.2$.<br>
+        (b) The exact probability that the sample median equals the population median is $\frac{94641}{759375}$ (which simplifies to $\frac{31547}{253125} \approx 0.1246$).
+    </div>
+</div>
+
+
+<!-- ==================== Q6 ==================== -->
+<div class="question-section" id="q6">
+    <h2>📌 Q6 Linear Models and Estimability in Block Designs (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> A researcher studies the effect of 3 diets (Keto, Low-carb, Plant-based) on body fat percentage across 3 age groups using the additive model $y_{ijk} = \mu + \tau_i + \delta_j + \epsilon_{ijk}$. 
+        <br>(a) Are all the parameters of the model estimable? Justify.
+        <br>(b) Are $\tau_i - \tau_j$ estimable for all $i \neq j$? Justify. If so, find the best linear unbiased estimators (BLUEs) of these contrasts.
+        <br>(c) Find the F-statistic for testing equality of diet effects, its distribution, and critical region.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem analyzes an <strong>Unbalanced Two-Way ANOVA without interaction</strong> (an incomplete block design).
+    <ul>
+        <li><strong>For part (a):</strong> We evaluate the absolute estimability of individual parameters in an overparameterized linear model.</li>
+        <li><strong>For part (b):</strong> Estimability of treatment contrasts depends entirely on the <strong>connectedness</strong> of the design's incidence graph. If there is a path between any two diets through shared age groups, the contrast is estimable.</li>
+        <li><strong>For part (c):</strong> We construct the standard F-test using the Adjusted Treatment Sum of Squares (obtained via the $C$-matrix from intra-block analysis) and the Error Sum of Squares.</li>
+    </ul></p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Assessing Absolute Estimability for Part (a)</strong></p>
+    <p>The specified model is $y_{ijk} = \mu + \tau_i + \delta_j + \epsilon_{ijk}$. This is a classic overparameterized linear model. Let the design matrix be $\mathbf{X}$. The expected value is $\mathbb{E}[\mathbf{Y}] = \mathbf{X}\boldsymbol{\beta}$, where $\boldsymbol{\beta} = (\mu, \tau_1, \tau_2, \tau_3, \delta_1, \delta_2, \delta_3)^\top$.</p>
+    <p>A parameter vector $\mathbf{c}^\top \boldsymbol{\beta}$ is estimable if and only if $\mathbf{c}^\top$ lies in the row space of $\mathbf{X}$. However, the sum of the columns corresponding to the diet effects ($\tau_i$) equals the column for $\mu$, and the sum of the columns for the age effects ($\delta_j$) also equals the column for $\mu$.</p>
+    <p>Because of these linear dependencies, the design matrix $\mathbf{X}$ is not of full column rank. Therefore, the individual absolute parameters ($\mu, \tau_1, \dots, \delta_3$) are <strong>not estimable</strong> unless artificial constraints (like $\sum \tau_i = 0$ and $\sum \delta_j = 0$) are imposed.</p>
+
+    <p><strong>Step 2: Checking Connectedness for Part (b)</strong></p>
+    <p>A treatment contrast $\tau_i - \tau_j$ is estimable if the design is connected. We define a graph where vertices are diets and age groups, and edges exist if there is an observation in that diet-age cell. Let's trace the connections from the incidence table:</p>
+    <ul>
+        <li>Diet 1 connects to Age 1.</li>
+        <li>Age 1 connects to Diet 2 and Diet 3.</li>
+        <li>Diet 2 connects to Age 2.</li>
+        <li>Age 2 connects to Diet 3.</li>
+        <li>Diet 3 connects to Age 3.</li>
+    </ul>
+    <p>Since we can trace a path from any diet to any other diet (e.g., Diet 1 $\to$ Age 1 $\to$ Diet 2), the design is <strong>connected</strong>. Therefore, all elementary contrasts $\tau_i - \tau_j$ are <strong>estimable</strong>.</p>
+
+    <p><strong>Step 3: Deriving the BLUEs of the Contrasts</strong></p>
+    <p>By the Gauss-Markov Theorem, the BLUEs of estimable functions are obtained by substituting the solutions of the normal equations $\mathbf{X}^\top \mathbf{X} \hat{\boldsymbol{\beta}} = \mathbf{X}^\top \mathbf{Y}$. For an incomplete block design, we use the intra-block equations:</p>
+    <div class="math-display">
+        $$ \mathbf{C} \hat{\boldsymbol{\tau}} = \mathbf{Q} $$
+    </div>
+    <p>where $\mathbf{Q}_i = T_i - \sum_j \frac{n_{ij}}{n_{.j}} B_j$ (adjusted diet totals), and $\mathbf{C} = \text{diag}(n_{i.}) - \mathbf{N} \text{diag}(1/n_{.j}) \mathbf{N}^\top$. Here, $\mathbf{N}$ is the $3 \times 3$ incidence matrix $n_{ij}$.</p>
+    <p>Solving this reduced system yields the estimates $\hat{\tau}_i$. Since the $\mathbf{C}$ matrix has rank $v-1 = 2$, we impose $\sum \hat{\tau}_i = 0$ to get a unique generalized inverse $\mathbf{C}^-$. The BLUE for the contrast is:</p>
+    <div class="math-display">
+        $$ \widehat{\tau_i - \tau_j} = \hat{\tau}_i - \hat{\tau}_j $$
+    </div>
+
+    <p><strong>Step 4: Constructing the F-Statistic for Part (c)</strong></p>
+    <p>We are testing $H_0: \tau_1 = \tau_2 = \tau_3$. The test statistic compares the Adjusted Treatment Sum of Squares ($SST_{adj}$) to the Error Sum of Squares ($SSE$).</p>
+    <div class="math-display">
+        $$ SST_{adj} = \hat{\boldsymbol{\tau}}^\top \mathbf{Q} $$
+    </div>
+    <p>The total degrees of freedom is $N - 1 = 49$. The regression model has $1 (\mu) + 2 (\text{diets}) + 2 (\text{ages}) = 5$ independent parameters. Thus, the error degrees of freedom is $\nu_E = 50 - 5 = 45$. The numerator degrees of freedom is $v - 1 = 2$.</p>
+    <div class="math-display">
+        $$ F = \frac{SST_{adj} / 2}{SSE / 45} $$
+    </div>
+    <p>Under the null hypothesis $H_0$, this statistic follows an $F$-distribution with $2$ and $45$ degrees of freedom. The critical region for a test of level $\alpha$ is to reject $H_0$ if:</p>
+    <div class="math-display">
+        $$ F > F_{2, 45}(\alpha) $$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) No, individual parameters are not estimable due to linear dependencies in the design matrix.<br>
+        (b) Yes, all contrasts $\tau_i - \tau_j$ are estimable because the design is connected. Their BLUEs are $\hat{\tau}_i - \hat{\tau}_j$ derived from the intra-block equations $\mathbf{C}\hat{\boldsymbol{\tau}} = \mathbf{Q}$.<br>
+        (c) The test statistic is $F = \frac{45 \cdot SST_{adj}}{2 \cdot SSE} \sim F_{2, 45}$. Reject $H_0$ if $F > F_{2, 45}(\alpha)$.
+    </div>
+</div>
+
+<!-- ==================== Q7 ==================== -->
+<div class="question-section" id="q7">
+    <h2>📌 Q7 UMVUE and the Rao-Blackwell Theorem (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_n$ be independent observations from $U(0, \theta)$ and $X_{(n)} = \max\{X_1, \dots, X_n\}$. Let $r$ be a known positive integer.<br>
+        (a) Find an unbiased estimator of $\theta^r$ based on a single observation.<br>
+        (b) Find an unbiased estimator of $\theta^r$ based on a statistic that is complete and sufficient for $\theta$.<br>
+        (c) Show that $\mathbb{E}[X_1^r | X_{(n)}] = \frac{n+r}{n(r+1)} X_{(n)}^r$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This is a classic application of the <strong>Lehmann-Scheffé Theorem</strong>. 
+    <ul>
+        <li><strong>For part (a):</strong> We use the simple raw moments of the uniform distribution.</li>
+        <li><strong>For part (b):</strong> We find the expectation of a function of the maximum order statistic $X_{(n)}$, which is known to be the complete and sufficient statistic for $\theta$. We then scale it to achieve unbiasedness, yielding the <strong>Uniformly Minimum Variance Unbiased Estimator (UMVUE)</strong>.</li>
+        <li><strong>For part (c):</strong> Rather than calculating the complex conditional density $f(x_1 | x_{(n)})$, we invoke the <strong>Rao-Blackwell Theorem</strong> combined with uniqueness to prove the identity elegantly.</li>
+    </ul></p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Unbiased Estimator from a Single Observation for Part (a)</strong></p>
+    <p>For a single observation $X_1 \sim U(0, \theta)$, the probability density function is $f(x) = 1/\theta$ for $0 < x < \theta$. The $r$-th raw moment is:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[X_1^r] = \int_{0}^{\theta} x^r \left(\frac{1}{\theta}\right) dx = \frac{1}{\theta} \left[ \frac{x^{r+1}}{r+1} \right]_0^\theta = \frac{\theta^{r+1}}{\theta(r+1)} = \frac{\theta^r}{r+1} $$
+    </div>
+    <p>To make this an unbiased estimator of $\theta^r$, we multiply both sides by $(r+1)$:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[(r+1)X_1^r] = \theta^r $$
+    </div>
+    <p>Thus, $T_1 = (r+1)X_1^r$ is an unbiased estimator of $\theta^r$.</p>
+
+    <p><strong>Step 2: Finding the UMVUE using $X_{(n)}$ for Part (b)</strong></p>
+    <p>The maximum order statistic $X_{(n)}$ is the complete and sufficient statistic for $\theta$. Its probability density function is $g(y) = \frac{n y^{n-1}}{\theta^n}$ for $0 < y < \theta$. We find the expected value of $X_{(n)}^r$:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[X_{(n)}^r] = \int_{0}^{\theta} y^r \left( \frac{n y^{n-1}}{\theta^n} \right) dy = \frac{n}{\theta^n} \int_{0}^{\theta} y^{n+r-1} dy $$
+    </div>
+    <div class="math-display">
+        $$ \mathbb{E}[X_{(n)}^r] = \frac{n}{\theta^n} \left[ \frac{y^{n+r}}{n+r} \right]_0^\theta = \frac{n}{\theta^n} \frac{\theta^{n+r}}{n+r} = \frac{n}{n+r} \theta^r $$
+    </div>
+    <p>To construct an unbiased estimator, we multiply by the reciprocal of the constant term:</p>
+    <div class="math-display">
+        $$ \mathbb{E}\left[ \frac{n+r}{n} X_{(n)}^r \right] = \theta^r $$
+    </div>
+    <p>Since this estimator is a function of the complete sufficient statistic, by the Lehmann-Scheffé theorem, $T_2 = \frac{n+r}{n} X_{(n)}^r$ is the unique UMVUE for $\theta^r$.</p>
+
+    <p><strong>Step 3: Elegant Proof via Rao-Blackwell for Part (c)</strong></p>
+    <p>We are asked to evaluate the conditional expectation $\mathbb{E}[X_1^r | X_{(n)}]$. According to the <strong>Rao-Blackwell Theorem</strong>, if we condition an unbiased estimator on a sufficient statistic, the result is a new unbiased estimator that is a function of the sufficient statistic.</p>
+    <p>Let's condition our unbiased estimator from Part (a), $T_1 = (r+1)X_1^r$, on the sufficient statistic $X_{(n)}$:</p>
+    <div class="math-display">
+        $$ \phi(X_{(n)}) = \mathbb{E}[(r+1)X_1^r | X_{(n)}] $$
+    </div>
+    <p>By the properties of conditional expectation, $\mathbb{E}[\phi(X_{(n)})] = \mathbb{E}[(r+1)X_1^r] = \theta^r$. Thus, $\phi(X_{(n)})$ is an unbiased estimator of $\theta^r$ based strictly on the complete sufficient statistic $X_{(n)}$.</p>
+    <p>Because $X_{(n)}$ is complete, the unbiased estimator based on it is <strong>strictly unique</strong> (Lehmann-Scheffé uniqueness). Therefore, $\phi(X_{(n)})$ must perfectly equal the UMVUE we derived in Part (b):</p>
+    <div class="math-display">
+        $$ \mathbb{E}[(r+1)X_1^r | X_{(n)}] = \frac{n+r}{n} X_{(n)}^r $$
+    </div>
+    <p>By linearity of conditional expectation, we factor out the constant $(r+1)$ and divide:</p>
+    <div class="math-display">
+        $$ (r+1)\mathbb{E}[X_1^r | X_{(n)}] = \frac{n+r}{n} X_{(n)}^r \implies \mathbb{E}[X_1^r | X_{(n)}] = \frac{n+r}{n(r+1)} X_{(n)}^r $$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) Unbiased estimator based on $X_1$: $(r+1)X_1^r$<br>
+        (b) UMVUE based on complete sufficient statistic $X_{(n)}$: $\frac{n+r}{n} X_{(n)}^r$<br>
+        (c) Using Rao-Blackwellization and uniqueness, the conditional expectation is successfully proven to be $\frac{n+r}{n(r+1)} X_{(n)}^r$.
+    </div>
+</div>
+
+<!-- ==================== Q8 ==================== -->
+<div class="question-section" id="q8">
+    <h2>📌 Q8 Asymptotic Rank Statistics and Correlations (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> $M$ observations from a continuous distribution $F$ are randomly labeled $A_1, A_2, A_3$ with probabilities $p_1, p_2, p_3$. $R_i$ is the sum of the ranks of observations labeled $A_i$. <br>
+        (a) Find the limiting value of $R_1 / R_2$ as $M \to \infty$.<br>
+        (b) Find the correlation coefficient between $R_1$ and $R_2$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem evaluates non-parametric rank sums via <strong>Indicator Variables</strong>. Since the labeling is random and independent of the continuous values, the rank $k$ of an observation is independent of its label.
+    <ul>
+        <li><strong>For part (a):</strong> We define indicator variables for the labels, sum them up, and apply the <strong>Weak Law of Large Numbers (WLLN)</strong> to find the asymptotic ratio of their expected values.</li>
+        <li><strong>For part (b):</strong> We compute the variance and covariance of the rank sums. Because the total number of labels is a multinomial process across ranks, the covariance will be negative. We extract the dominant terms $O(M^3)$ as $M \to \infty$.</li>
+    </ul></p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Defining the Indicator Variables for Part (a)</strong></p>
+    <p>Let $I_k^{(i)}$ be an indicator variable that equals $1$ if the observation with rank $k$ (where $k = 1, \dots, M$) receives label $A_i$, and $0$ otherwise. Since the labeling is completely random and independent of the actual values, the probability is simply $p_i$:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[I_k^{(i)}] = \mathbb{P}(I_k^{(i)} = 1) = p_i $$
+    </div>
+    <p>The sum of the ranks for group $A_i$ is $R_i = \sum_{k=1}^M k I_k^{(i)}$. By linearity of expectation:</p>
+    <div class="math-display">
+        $$ \mathbb{E}[R_i] = \sum_{k=1}^M k \mathbb{E}[I_k^{(i)}] = p_i \sum_{k=1}^M k = p_i \frac{M(M+1)}{2} $$
+    </div>
+    <p>By the Law of Large Numbers, as $M \to \infty$, $R_i$ converges in probability to its expected value. Therefore, the ratio converges to the ratio of their expectations:</p>
+    <div class="math-display">
+        $$ \lim_{M \to \infty} \frac{R_1}{R_2} = \lim_{M \to \infty} \frac{p_1 \frac{M(M+1)}{2}}{p_2 \frac{M(M+1)}{2}} = \frac{p_1}{p_2} $$
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Step 2: Variances and Covariances for Part (b)</strong></p>
+    <p>Because the labels are assigned independently to each observation, $I_k^{(i)}$ and $I_j^{(i)}$ are independent for $k \neq j$. Therefore, the variance of the sum is the sum of the variances:</p>
+    <div class="math-display">
+        $$ \text{Var}(R_i) = \sum_{k=1}^M \text{Var}(k I_k^{(i)}) = \sum_{k=1}^M k^2 \text{Var}(I_k^{(i)}) $$
+    </div>
+    <p>The variance of the Bernoulli indicator is $p_i(1 - p_i)$. Thus:</p>
+    <div class="math-display">
+        $$ \text{Var}(R_i) = p_i(1 - p_i) \sum_{k=1}^M k^2 = p_i(1 - p_i) \frac{M(M+1)(2M+1)}{6} $$
+    </div>
+    <p>To find the covariance between $R_1$ and $R_2$, we note that $\text{Cov}(I_k^{(1)}, I_j^{(2)}) = 0$ for $k \neq j$. However, for the same rank $k$, the indicators are negatively correlated because an observation cannot simultaneously be labeled $A_1$ and $A_2$:</p>
+    <div class="math-display">
+        $$ \text{Cov}(I_k^{(1)}, I_k^{(2)}) = \mathbb{E}[I_k^{(1)} I_k^{(2)}] - \mathbb{E}[I_k^{(1)}]\mathbb{E}[I_k^{(2)}] = 0 - p_1 p_2 = -p_1 p_2 $$
+    </div>
+    <p>Thus, the covariance of the rank sums is:</p>
+    <div class="math-display">
+        $$ \text{Cov}(R_1, R_2) = \sum_{k=1}^M k^2 \text{Cov}(I_k^{(1)}, I_k^{(2)}) = -p_1 p_2 \frac{M(M+1)(2M+1)}{6} $$
+    </div>
+
+    <p><strong>Step 3: Calculating the Correlation Coefficient</strong></p>
+    <p>The correlation coefficient $\rho(R_1, R_2)$ is defined as the covariance divided by the product of the standard deviations:</p>
+    <div class="math-display">
+        $$ \rho(R_1, R_2) = \frac{\text{Cov}(R_1, R_2)}{\sqrt{\text{Var}(R_1) \text{Var}(R_2)}} $$
+    </div>
+    <p>Notice that the massive sum term $\frac{M(M+1)(2M+1)}{6}$ appears linearly in the covariance, and as a square root product in the denominator $\sqrt{\left(\frac{M(M+1)(2M+1)}{6}\right)^2}$. Therefore, this structural term perfectly cancels out!</p>
+    <div class="math-display">
+        $$ \rho(R_1, R_2) = \frac{-p_1 p_2}{\sqrt{p_1(1-p_1) \cdot p_2(1-p_2)}} $$
+    </div>
+    <p>Simplifying the denominator:</p>
+    <div class="math-display">
+        $$ \rho(R_1, R_2) = -\sqrt{\frac{p_1^2 p_2^2}{p_1 p_2 (1-p_1)(1-p_2)}} = -\sqrt{\frac{p_1 p_2}{(1-p_1)(1-p_2)}} $$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The limiting value of $R_1 / R_2$ as $M \to \infty$ is $\frac{p_1}{p_2}$.<br>
+        (b) The correlation coefficient between $R_1$ and $R_2$ is exactly $-\sqrt{\frac{p_1 p_2}{(1-p_1)(1-p_2)}}$, which is independent of the sample size $M$.
+    </div>
+</div>
+
+<!-- ==================== SUMMARY & PRACTICE ==================== -->
     <div class="question-section" id="summary-stb" style="border-bottom: none;">
         <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
         
         <h3>🎯 Core Concepts Tested in This Paper</h3>
         <ul>
             <li><strong>Stochastic Processes (Q1):</strong> Utilizing the <strong>Spectral Theorem</strong> for circulant transition matrices over combinatorial brute-force methods. Understanding how the <strong>Periodicity</strong> of bipartite graph topologies prevents point-wise convergence to a stationary distribution.</li>
-            <li><strong>Asymptotic Theory &amp; Inference (Q2):</strong> Handling edge-cases in Maximum Likelihood Estimation where the parameter space is restricted to integers ($\mathbb{N}$). Using the CDF of extreme order statistics to prove convergence in probability to a <strong>degenerate distribution</strong>.</li>
-            <li><strong>Mixture Models &amp; Inequalities (Q3):</strong> Breaking down variance using the <strong>Law of Total Variance (EVE's law)</strong>. Applying <strong>Popoviciu's Inequality on Variances</strong> to rigorously prove that maximum variance of bounded variables occurs at extreme point masses.</li>
+            <li><strong>Asymptotic Theory &amp; Inference (Q2, Q8):</strong> Handling boundary conditions in MLE where the parameter space is restricted to integers ($\mathbb{N}$), and proving convergence to a degenerate distribution. Utilizing indicator variables and the <strong>Weak Law of Large Numbers (WLLN)</strong> to find asymptotic limits and correlations of non-parametric rank sums.</li>
+            <li><strong>Mixture Models &amp; Inequalities (Q3, Q4):</strong> Breaking down variance using the <strong>Law of Total Variance</strong>. Applying <strong>Popoviciu's Inequality</strong> to rigorously prove maximum variance bounds. Proving that $L_1$ loss functions are minimized by medians and extending this to exponentially dominating <strong>weighted medians</strong>.</li>
+            <li><strong>Sampling &amp; Order Statistics (Q5):</strong> Translating Simple Random Sampling with Replacement (SRSWR) into a <strong>Multinomial Distribution</strong> framework to compute variances. Calculating exact alignment probabilities between sample and population medians using Binomial structures.</li>
+            <li><strong>Linear Models &amp; Design of Experiments (Q6):</strong> Evaluating absolute versus contrast <strong>Estimability</strong> in overparameterized ANOVA models. Checking graph connectedness in incomplete block designs before deriving BLUEs and F-statistics via intra-block analysis.</li>
+            <li><strong>Advanced Point Estimation (Q7):</strong> Applying the <strong>Lehmann-Scheffé Theorem</strong> to find UMVUEs using complete sufficient statistics ($X_{(n)}$). Elegantly bypassing complex conditional integrations by invoking the <strong>Rao-Blackwell Theorem</strong>.</li>
         </ul>
 
         <div class="hint-box">
             <strong>💡 ISI Examiner Insight:</strong><br>
-            In the ISI STB paper, elegance matters just as much as correctness. For example, in Q1, while setting up a binomial expansion works, using discrete Fourier roots (eigenvalues of circulant matrices) demonstrates a deeper mathematical maturity. In Q3, explicitly proving the variance bound via the $(i-1)(n-i) \ge 0$ quadratic trick secures full subjective marks over simply stating "variance is maximized at extremes."
+            In the ISI STB paper, mathematical elegance is rewarded just as highly as getting the correct numerical answer. For example:<br>
+            1. In Q1, using discrete Fourier roots (eigenvalues of circulant matrices) demonstrates a deeper mathematical maturity than setting up a standard binomial expansion.<br>
+            2. In Q6, verifying the connectedness of the design matrix graph is a mandatory theoretical prerequisite before blindly calculating BLUEs.<br>
+            3. In Q7, explicitly invoking the <strong>Rao-Blackwell Theorem</strong> to evaluate a conditional expectation bypasses pages of tedious integration and secures full subjective marks instantly.
         </div>
     </div>
-
-</div>
 
 </body>
 </html>
