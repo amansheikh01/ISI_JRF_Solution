@@ -24,15 +24,15 @@ In advanced subjective examinations (especially UPSC ISS and ISI), arriving at t
 I am actively updating this space. Currently, I have uploaded comprehensive solutions for the following subjective papers:
 
 ### 1. 📘 ISI JRF STB 2026 (Statistics B)
-🔗 **[Click here to view the ISI JRF STB 2026 Solutions](https://amansheikh01.github.io/UPSC_C_R_Soutions/STB.html)**
+🔗 **[Click here to view the ISI JRF STB 2026 Solutions](https://amansheikh01.github.io/ISI_JRF_Solution/STB.html)**
 * **Key Topics Covered:** Real Analysis (Monotone Convergence, limit inferiors), Matrix Theory (idempotency, trace-rank equivalence), Combinatorics (Chromatic Polynomials), and Advanced Inference (Lehmann-Scheffé, Neyman-Pearson Randomized Tests).
 
 ### 2. 📗 ISI STA 2025 (Statistics A)
-🔗 **[Click here to view the ISI STA 2025 Solutions](https://amansheikh01.github.io/UPSC_C_R_Soutions/STA_2025.html)**
+🔗 **[Click here to view the ISI STA 2025 Solutions](https://amansheikh01.github.io/ISI_JRF_Solution/STA_2025.html)**
 * **Key Topics Covered:** Uniform convergence ($\epsilon-\delta$ proofs), Linear Algebra (Rank-Nullity intersections, Rayleigh Quotients), Discrete Probability (Negative Binomial frameworks), and Maximum Likelihood Estimation with bounded multidimensional supports.
 
 ### 3. 📙 ISI STB 2025 (Statistics B)
-🔗 **[Click here to view the ISI STB 2025 Solutions](https://amansheikh01.github.io/UPSC_C_R_Soutions/STB_2025.html)**
+🔗 **[Click here to view the ISI STB 2025 Solutions](https://amansheikh01.github.io/ISI_JRF_Solution/STB_2025.html)**
 * **Key Topics Covered:** Stochastic Processes (Joint Markov Chains & Periodicity), Asymptotic Theory (Delta Method, Weak Law of Large Numbers), Multivariate Normal distributions (Craig's Theorem for quadratic forms), Exact Conditional Hypothesis Testing, and Design of Experiments (Lagrange Multiplier allocations).
 
 ---
