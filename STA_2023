@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STA 2023 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STA (Statistics A) 2023 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Real_Analysis_%26_Probability-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STA-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Convergence of Transformed Infinite Series (10 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider $a_n > 0$, for $n = 1, 2, \dots$, such that $\sum_{n=1}^\infty a_n = \infty$. Check whether $\sum_{n=1}^\infty \frac{a_n}{1 + n a_n}$ is convergent if $\liminf_{n \to \infty} n a_n > 0$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem tests the application of the <strong>Direct Comparison Test</strong> for infinite series. The condition $\liminf n a_n > 0$ provides a strict lower bound on the growth rate of $a_n$ relative to $1/n$ for sufficiently large $n$. We can use this lower bound, combined with the algebraic monotonicity of the transformation function $f(x) = \frac{x}{1+nx}$, to strictly bound the target series below by the harmonic series, which is known to diverge.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Translating the Limit Inferior Condition</strong></p>
+        <p>We are given that $\liminf_{n \to \infty} n a_n = L > 0$. By the formal definition of the limit inferior, for any $\epsilon > 0$ (specifically choosing $\epsilon = L/2$), there exists an integer $N$ such that for all $n \geq N$:</p>
+        <div class="math-display">
+            $$n a_n > L - \frac{L}{2} = \frac{L}{2}$$
+        </div>
+        <p>Dividing both sides by $n$, we obtain a strict lower bound for the terms of the sequence:</p>
+        <div class="math-display">
+            $$a_n > \frac{L}{2n} \quad \text{for all } n \geq N$$
+        </div>
+
+        <p><strong>Step 2: Analyzing the Monotonicity of the Transformation</strong></p>
+        <p>Consider the function $f(x) = \frac{x}{1+nx}$ for $x > 0$. Let us determine if it is increasing or decreasing by finding its derivative:</p>
+        <div class="math-display">
+            $$f'(x) = \frac{(1)(1+nx) - x(n)}{(1+nx)^2} = \frac{1}{(1+nx)^2}$$
+        </div>
+        <p>Since $f'(x) > 0$ for all $x > 0$, the function $f(x)$ is strictly increasing on $(0, \infty)$. Therefore, if $x_1 > x_2$, then $f(x_1) > f(x_2)$.</p>
+
+        <p><strong>Step 3: Bounding the Target Series</strong></p>
+        <p>Since $a_n > \frac{L}{2n}$ for all $n \geq N$, and the function $f(x) = \frac{x}{1+nx}$ is strictly increasing, we can apply the function to both sides of the inequality:</p>
+        <div class="math-display">
+            $$\frac{a_n}{1 + n a_n} > \frac{\frac{L}{2n}}{1 + n\left(\frac{L}{2n}\right)}$$
+        </div>
+        <p>Simplify the right side of the inequality:</p>
+        <div class="math-display">
+            $$\frac{a_n}{1 + n a_n} > \frac{\frac{L}{2n}}{1 + \frac{L}{2}} = \frac{L}{2n(1 + L/2)} = \left( \frac{L}{2 + L} \right) \frac{1}{n}$$
+        </div>
+
+        <p><strong>Step 4: Applying the Comparison Test</strong></p>
+        <p>We have established that for all $n \geq N$:</p>
+        <div class="math-display">
+            $$\frac{a_n}{1 + n a_n} > K \cdot \frac{1}{n}$$
+        </div>
+        <p>where $K = \frac{L}{2+L}$ is a strictly positive constant. We know that the harmonic series $\sum_{n=1}^\infty \frac{1}{n}$ strictly diverges. By the Direct Comparison Test, since our series is bounded below by a positive constant multiple of a divergent series, our series must also diverge.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Because the terms of the series are strictly bounded below by a multiple of the divergent harmonic series $\frac{1}{n}$ for all sufficiently large $n$, the series $\sum_{n=1}^\infty \frac{a_n}{1 + n a_n}$ is <strong>divergent</strong>.
+        </div>
+    </div>
+
+    <!-- ==================== Q2 ==================== -->
+    <div class="question-section" id="q2">
+        <h2>📌 Q2 Conditional Probability with Order Statistics (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1$ and $X_2$ be independent and identically distributed random variables with pdf $f(x) = nx^{n-1}$, for $0 < x < 1$, for fixed $n > 1$. Show that $P(X_1 < X_2 \mid X_1 < nX_2) = \frac{1}{2 - 1/n^n}$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates joint probabilities over restricted 2D domains. We use the fundamental conditional probability formula: $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$. 
+        <ul>
+            <li>Because $n > 1$, the event $X_1 < X_2$ strictly implies $X_1 < nX_2$. This simplifies the intersection $A \cap B$ to just $A$.</li>
+            <li>We find the numerator by exploiting the symmetric i.i.d. nature of the variables.</li>
+            <li>We find the denominator by setting up a double integral over the joint probability density function on the region bounded by $x_1 = nx_2$.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Setting up the Conditional Probability</strong></p>
+        <p>We need to find $P(X_1 < X_2 \mid X_1 < nX_2)$. By definition:</p>
+        <div class="math-display">
+            $$P(X_1 < X_2 \mid X_1 < nX_2) = \frac{P(X_1 < X_2 \text{ and } X_1 < nX_2)}{P(X_1 < nX_2)}$$
+        </div>
+        <p>Since $n > 1$ and $X_2$ is strictly positive (domain $(0,1)$), it is mathematically guaranteed that if $X_1 < X_2$, then $X_1$ is also strictly less than $nX_2$. Therefore, the intersection of the two events is simply the tighter condition:</p>
+        <div class="math-display">
+            $$P(X_1 < X_2 \text{ and } X_1 < nX_2) = P(X_1 < X_2)$$
+        </div>
+
+        <p><strong>Step 2: Calculating the Numerator $P(X_1 < X_2)$</strong></p>
+        <p>Because $X_1$ and $X_2$ are independent and identically distributed (i.i.d.) continuous random variables, the probability that one is strictly less than the other is symmetric and identical:</p>
+        <div class="math-display">
+            $$P(X_1 < X_2) = \frac{1}{2}$$
+        </div>
+
+        <p><strong>Step 3: Calculating the Denominator $P(X_1 < nX_2)$</strong></p>
+        <p>The joint probability density function is the product of their individual pdfs (since they are independent):</p>
+        <div class="math-display">
+            $$f_{X_1, X_2}(x_1, x_2) = (nx_1^{n-1})(nx_2^{n-1}) = n^2 x_1^{n-1} x_2^{n-1}$$
+        </div>
+        <p>We must integrate this over the region $0 < x_1 < 1$, $0 < x_2 < 1$, subject to the condition $x_1 < nx_2$. This constraint means $x_2$ must be greater than $x_1/n$. Setting up the bounds with $dx_2$ on the inner integral:</p>
+        <div class="math-display">
+            $$P(X_1 < nX_2) = \int_0^1 \left( \int_{x_1/n}^1 n^2 x_1^{n-1} x_2^{n-1} dx_2 \right) dx_1$$
+        </div>
+        <p>Evaluate the inner integral with respect to $x_2$:</p>
+        <div class="math-display">
+            $$\int_{x_1/n}^1 n^2 x_1^{n-1} x_2^{n-1} dx_2 = n x_1^{n-1} \left[ x_2^n \right]_{x_1/n}^1 = n x_1^{n-1} \left( 1 - \left(\frac{x_1}{n}\right)^n \right)$$
+        </div>
+        <p>Now, evaluate the outer integral with respect to $x_1$:</p>
+        <div class="math-display">
+            $$\int_0^1 n x_1^{n-1} \left( 1 - \frac{x_1^n}{n^n} \right) dx_1 = \int_0^1 n x_1^{n-1} dx_1 - \int_0^1 \frac{n}{n^n} x_1^{2n-1} dx_1$$
+        </div>
+        <p>Computing both definite integrals:</p>
+        <div class="math-display">
+            $$= \left[ x_1^n \right]_0^1 - \frac{n}{n^n} \left[ \frac{x_1^{2n}}{2n} \right]_0^1 = 1 - \left( \frac{n}{n^n} \cdot \frac{1}{2n} \right) = 1 - \frac{1}{2n^n}$$
+        </div>
+
+        <p><strong>Step 4: Final Substitution</strong></p>
+        <p>Substitute the numerator and denominator back into the conditional probability equation:</p>
+        <div class="math-display">
+            $$P(X_1 < X_2 \mid X_1 < nX_2) = \frac{1/2}{1 - \frac{1}{2n^n}}$$
+        </div>
+        <p>Multiply the top and bottom by 2 to clear the fraction in the numerator:</p>
+        <div class="math-display">
+            $$= \frac{1}{2 - \frac{2}{2n^n}} = \frac{1}{2 - \frac{1}{n^n}}$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By rigorously evaluating the joint density bounds and leveraging i.i.d. symmetry, we have shown that $P(X_1 < X_2 \mid X_1 < nX_2)$ strictly evaluates to $\frac{1}{2 - 1/n^n}$.
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Markov Chain Classification and Transience (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Define the matrix $P$:<br>
+            $P = \begin{bmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & a & b \\ 0 & 1 & 0 & 0 \\ c & d & 0 & 0 \end{bmatrix}$<br>
+            (a) For what values of $(a, b, c, d)$ is $P$ the transition probability matrix (TPM) of a 4-state Markov Chain?<br>
+            (b) For different values, find all disjoint, closed, irreducible, recurrent classes.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem analyzes <strong>State Communication Classes</strong> within discrete-time Markov chains.
+        <ul>
+            <li><strong>For part (a):</strong> A valid TPM must have non-negative entries and each row must strictly sum to $1$.</li>
+            <li><strong>For part (b):</strong> We treat the states $\{1,2,3,4\}$ as nodes in a directed graph. The parameters $a,b$ and $c,d$ act as topological switches that either sever or connect the graph. We map out reachability: State 1 goes to 4, 3 goes to 2. The bifurcations happen at states 2 and 4. We break this down exhaustively based on the boundary values of $a$ and $c$.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Establishing the Valid TPM conditions for Part (a)</strong></p>
+        <p>For $P$ to be a valid Transition Probability Matrix, all elements must be $\geq 0$, and the sum of probabilities across each row must equal 1.</p>
+        <ul>
+            <li>Row 1: $0 + 0 + 0 + 1 = 1$ (Valid)</li>
+            <li>Row 2: $0 + 0 + a + b = 1 \implies b = 1 - a$</li>
+            <li>Row 3: $0 + 1 + 0 + 0 = 1$ (Valid)</li>
+            <li>Row 4: $c + d + 0 + 0 = 1 \implies d = 1 - c$</li>
+        </ul>
+        <p>Therefore, $P$ is a valid TPM for any $a, b, c, d$ such that $a, c \in [0, 1]$ and $b = 1-a$, $d = 1-c$.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Mapping the Topology for Part (b)</strong></p>
+        <p>Let's map the guaranteed transitions and the conditional transitions:<br>
+        $1 \to 4$ (w.p. 1)<br>
+        $3 \to 2$ (w.p. 1)<br>
+        $2 \to 3$ (w.p. $a$) and $2 \to 4$ (w.p. $1-a$)<br>
+        $4 \to 1$ (w.p. $c$) and $4 \to 2$ (w.p. $1-c$)</p>
+        <p>We analyze the communicating classes by testing the extreme binary switches of $a$ and $c$.</p>
+
+        <p><strong>Case 1: $c = 1 \implies d = 0$ (State 4 only goes to 1)</strong></p>
+        <p>State 1 goes to 4, and 4 goes to 1. They form a closed loop. Thus, **$\{1, 4\}$ is a closed, irreducible, recurrent class.**<br>
+        What happens to states 2 and 3? State 3 goes to 2. State 2 goes to 3 (w.p $a$) and to 4 (w.p $1-a$).<br>
+        - Subcase 1A ($a < 1$): State 2 can escape to state 4. Since $\{1,4\}$ is closed, 2 can never return. $\{2, 3\}$ are transient states. The only recurrent class is $\{1, 4\}$.<br>
+        - Subcase 1B ($a = 1$): State 2 only goes to 3, and 3 only goes to 2. They form a closed loop. Thus, there are two separate recurrent classes: **$\{1, 4\}$ and $\{2, 3\}$**.</p>
+
+        <p><strong>Case 2: $c < 1 \implies d > 0$ (State 4 can go to 2)</strong></p>
+        <p>Because $d > 0$, the path $1 \to 4 \to 2$ exists. Thus, states $\{1,4\}$ can reach state 2. To determine if they form one big class, we must check if 2 can reach $\{1,4\}$. State 2 goes to 4 directly (w.p $1-a$).<br>
+        - Subcase 2A ($a < 1$): State 2 can reach 4. Since 4 can reach 1, 2, and 2 can reach 3, all states communicate with each other. Thus, **$\{1, 2, 3, 4\}$ forms a single closed, irreducible, recurrent class.**<br>
+        - Subcase 2B ($a = 1$): State 2 ONLY goes to 3. State 3 ONLY goes to 2. They form an inescapable trap. Thus, **$\{2, 3\}$ is a closed, irreducible, recurrent class.** Because states $\{1, 4\}$ will eventually hit this trap (via $4 \to 2$) and can never return, $\{1, 4\}$ are transient states.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) Valid when $a, c \in [0, 1]$, with $b = 1-a$ and $d = 1-c$.<br>
+            (b) The closed, irreducible, recurrent classes are categorized as follows:
+            <ul style="margin: 5px 0 0 0;">
+                <li>If $c=1, a<1$: <strong>{1, 4}</strong> (States 2,3 are transient).</li>
+                <li>If $c=1, a=1$: <strong>{1, 4}</strong> and <strong>{2, 3}</strong>.</li>
+                <li>If $c<1, a<1$: <strong>{1, 2, 3, 4}</strong> (The whole chain is irreducible).</li>
+                <li>If $c<1, a=1$: <strong>{2, 3}</strong> (States 1,4 are transient).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== Q4 ==================== -->
+    <div class="question-section" id="q4">
+        <h2>📌 Q4 Random Walks on a Square Graph (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> A particle located at a vertex of a square ABCD moves to one of the neighboring vertices with equal probability. Suppose that the particle starts moving from vertex A. Find the probability that it will visit each of the other three vertices at least once before returning to A.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem models a <strong>Symmetric Random Walk on a Cycle Graph ($C_4$)</strong>. We must find the probability of a specific sequential path condition. 
+        <ul>
+            <li>Starting at A, the first step dictates the initial direction (either B or D). By symmetry, the problem splits into two identical, independent branches.</li>
+            <li>Once at the first adjacent node (say, B), the particle <em>must</em> proceed to the far diagonal node (C) before it ever hits A. If it steps back to A, the condition fails immediately.</li>
+            <li>Once it successfully reaches C, it is now playing a "Gambler's Ruin" sub-game: it must reach D before it hits A. We solve this by setting up a linear system of absorption probabilities $h(x)$.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Analyzing the First Step</strong></p>
+        <p>The vertices are arranged cyclically: A-B-C-D-A. Starting at A, the particle has two equally likely choices for step 1: go to B (w.p. $1/2$) or go to D (w.p. $1/2$).</p>
+        <p>Let $E$ be the event that the particle visits all other vertices before returning to A. By the Law of Total Probability and symmetry of the square:</p>
+        <div class="math-display">
+            $$P(E) = P(\text{Step 1 is B}) \times P(E \mid \text{Step 1 is B}) + P(\text{Step 1 is D}) \times P(E \mid \text{Step 1 is D})$$
+        </div>
+        <div class="math-display">
+            $$P(E) = \frac{1}{2} P(E \mid B) + \frac{1}{2} P(E \mid D) = P(E \mid B)$$
+        </div>
+
+        <p><strong>Step 2: Necessary Condition from the First Neighbor</strong></p>
+        <p>Assume the particle is now at B. To satisfy event $E$, the particle MUST visit C and D before returning to A. Because D is adjacent only to C and A, the only way to reach D from B without passing through A is to pass through C.</p>
+        <p>Therefore, the very first sub-goal from B is to reach C without hitting A. From B, the neighbors are A and C. Since the walk is symmetric, the probability of stepping to C on the very next step is $1/2$. If it steps to A, it fails. Thus, the probability of reaching C before A starting from B is strictly $1/2$.</p>
+
+        <p><strong>Step 3: Calculating Absorption Probabilities from the Diagonal</strong></p>
+        <p>Given that the particle successfully traversed B $\to$ C, it is now at vertex C. It has visited B and C. Now, it must reach D before returning to A.</p>
+        <p>Let $h(x)$ denote the probability of reaching D before reaching A, starting from vertex $x$. We define the boundary conditions based on the game's termination points:</p>
+        <div class="math-display">
+            $$h(D) = 1 \quad \text{(Success)}$$
+            $$h(A) = 0 \quad \text{(Failure)}$$
+        </div>
+        <p>For the intermediate nodes B and C, the probability is the average of their neighbors:</p>
+        <div class="math-display">
+            $$h(C) = \frac{1}{2}h(B) + \frac{1}{2}h(D) = \frac{1}{2}h(B) + \frac{1}{2}$$
+        </div>
+        <div class="math-display">
+            $$h(B) = \frac{1}{2}h(A) + \frac{1}{2}h(C) = \frac{1}{2}(0) + \frac{1}{2}h(C) = \frac{1}{2}h(C)$$
+        </div>
+        <p>We substitute the expression for $h(B)$ back into the equation for $h(C)$:</p>
+        <div class="math-display">
+            $$h(C) = \frac{1}{2} \left( \frac{1}{2}h(C) \right) + \frac{1}{2}$$
+        </div>
+        <div class="math-display">
+            $$h(C) = \frac{1}{4}h(C) + \frac{1}{2} \implies \frac{3}{4}h(C) = \frac{1}{2} \implies h(C) = \frac{2}{3}$$
+        </div>
+
+        <p><strong>Step 4: Combining the Probabilities</strong></p>
+        <p>We can now calculate the total conditional probability $P(E \mid B)$. Because the random walk satisfies the strong Markov property, reaching C "resets" the process memory. The total probability is the product of the sequential necessary stages:</p>
+        <div class="math-display">
+            $$P(E \mid B) = P(\text{reach C before A from B}) \times P(\text{reach D before A from C})$$
+        </div>
+        <div class="math-display">
+            $$P(E \mid B) = \left(\frac{1}{2}\right) \times h(C) = \left(\frac{1}{2}\right) \times \left(\frac{2}{3}\right) = \frac{1}{3}$$
+        </div>
+        <p>Since we established in Step 1 that $P(E) = P(E \mid B)$:</p>
+        <div class="math-display">
+            $$P(E) = \frac{1}{3}$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The probability that the particle visits every other vertex before returning to A is exactly $\frac{1}{3}$.
+        </div>
+    </div>
+
+
+<!-- ==================== Q5 ==================== -->
+    <div class="question-section" id="q5">
+        <h2>📌 Q5 Dimension of the Vector Space of Magic-like Matrices (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Find the dimension of the vector space of all $4 \times 4$ matrices whose row sums and column sums are all equal. Justify your answer.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem asks for the dimension of a specific subspace of $M_{4 \times 4}(\mathbb{R})$. We can determine this by defining a linear transformation that maps a matrix to its row and column sums, and then applying the <strong>Rank-Nullity Theorem</strong>. The dimension of the overall space is 16. By counting the number of strictly <em>independent</em> linear constraints imposed by the row and column sum conditions, we can find the dimension of the resulting subspace.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Formulating the Linear Constraints</strong></p>
+        <p>Let $A = (a_{ij})$ be a $4 \times 4$ matrix. Let $R_i = \sum_{j=1}^4 a_{ij}$ be the sum of the $i$-th row, and $C_j = \sum_{i=1}^4 a_{ij}$ be the sum of the $j$-th column. We require all these 8 sums to be equal to some scalar $c$.</p>
+        <p>This generates the following equations:</p>
+        <div class="math-display">
+            $$R_1 = c, \quad R_2 = c, \quad R_3 = c, \quad R_4 = c$$
+            $$C_1 = c, \quad C_2 = c, \quad C_3 = c, \quad C_4 = c$$
+        </div>
+        <p>To eliminate $c$ and find the direct constraints on the matrix elements, we can set all sums equal to $R_4$ (as a reference point). This yields 7 equations:</p>
+        <div class="math-display">
+            $$R_1 = R_4, \quad R_2 = R_4, \quad R_3 = R_4$$
+            $$C_1 = R_4, \quad C_2 = R_4, \quad C_3 = R_4, \quad C_4 = R_4$$
+        </div>
+
+        <p><strong>Step 2: Identifying Linear Dependencies</strong></p>
+        <p>Are these 7 equations linearly independent? A fundamental property of any matrix is that the sum of all its elements can be calculated by either summing the row sums or summing the column sums. Thus:</p>
+        <div class="math-display">
+            $$\sum_{i=1}^4 R_i = \sum_{j=1}^4 C_j$$
+        </div>
+        <p>We can isolate $C_4$ in this identity:</p>
+        <div class="math-display">
+            $$C_4 = R_1 + R_2 + R_3 + R_4 - (C_1 + C_2 + C_3)$$
+        </div>
+        <p>If we assume the first 6 equations hold (i.e., $R_1=R_2=R_3=C_1=C_2=C_3=R_4$), substituting these into our isolated $C_4$ equation gives:</p>
+        <div class="math-display">
+            $$C_4 = R_4 + R_4 + R_4 + R_4 - (R_4 + R_4 + R_4) = 4R_4 - 3R_4 = R_4$$
+        </div>
+        <p>This perfectly demonstrates that the 7th equation ($C_4 = R_4$) is <em>automatically satisfied</em> if the other 6 hold. Thus, it is linearly dependent. The remaining 6 equations are linearly independent because each one introduces a unique row or column sum not present in the others.</p>
+
+        <p><strong>Step 3: Calculating the Dimension</strong></p>
+        <p>The vector space of all $4 \times 4$ matrices has a dimension of $4 \times 4 = 16$.</p>
+        <p>We have established that the condition of having all row and column sums equal imposes exactly $6$ linearly independent constraints on the 16 variables.</p>
+        <div class="math-display">
+            $$\text{Dimension} = \text{Total Variables} - \text{Independent Constraints} = 16 - 6 = 10$$
+        </div>
+
+        <div class="hint-box">
+            <strong>💡 Generalization Check:</strong> The dimension of an $n \times n$ matrix with equal row and column sums is $(n-1)^2 + 1$. For $n=4$, this evaluates to $(4-1)^2 + 1 = 3^2 + 1 = 10$.
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The dimension of the vector space of all $4 \times 4$ matrices whose row sums and column sums are equal is <strong>10</strong>.
+        </div>
+    </div>
+
+    <!-- ==================== Q6 ==================== -->
+    <div class="question-section" id="q6">
+        <h2>📌 Q6 Zero-Inflated Poisson Distribution (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Suppose $X \sim \text{Poisson}(\theta)$, and $Y$ is a random variable which equals $X$ with probability $0.5$, and equals $0$ with probability $0.5$.<br>
+            (a) Find the coefficient of variation of $Y$.<br>
+            (b) Show that $\text{Var}(Y) > E(Y)$.<br>
+            (c) How would you estimate $\theta$ if 64 out of 100 observations for $Y$ are 0?
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This describes a <strong>Mixture Distribution</strong> (specifically, a zero-inflated Poisson model). We can model $Y$ mathematically using an indicator variable: $Y = I \cdot X$, where $I \sim \text{Bernoulli}(0.5)$ and $I$ is independent of $X$. We will use the properties of expectations and variances to evaluate $Y$, comparing it directly against the baseline Poisson properties.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding Expectation and Variance for Part (a)</strong></p>
+        <p>For $X \sim \text{Poisson}(\theta)$, we know $\mathbb{E}(X) = \theta$ and $\text{Var}(X) = \theta$. Therefore, $\mathbb{E}(X^2) = \text{Var}(X) + [\mathbb{E}(X)]^2 = \theta + \theta^2$.</p>
+        <p>By the Law of Total Expectation, the moments of $Y$ are a 50/50 mixture of the moments of $X$ and the constant 0:</p>
+        <div class="math-display">
+            $$\mathbb{E}(Y) = 0.5\mathbb{E}(X) + 0.5(0) = 0.5\theta$$
+        </div>
+        <div class="math-display">
+            $$\mathbb{E}(Y^2) = 0.5\mathbb{E}(X^2) + 0.5(0) = 0.5(\theta + \theta^2)$$
+        </div>
+        <p>We compute the variance of $Y$:</p>
+        <div class="math-display">
+            $$\text{Var}(Y) = \mathbb{E}(Y^2) - [\mathbb{E}(Y)]^2 = 0.5(\theta + \theta^2) - (0.5\theta)^2 = 0.5\theta + 0.5\theta^2 - 0.25\theta^2 = 0.25\theta^2 + 0.5\theta$$
+        </div>
+        <p>The Coefficient of Variation (CV) is the standard deviation divided by the mean:</p>
+        <div class="math-display">
+            $$CV = \frac{\sqrt{\text{Var}(Y)}}{\mathbb{E}(Y)} = \frac{\sqrt{0.25\theta^2 + 0.5\theta}}{0.5\theta}$$
+        </div>
+        <p>We can factor out $0.5\theta$ from inside the square root to simplify:</p>
+        <div class="math-display">
+            $$CV = \frac{\sqrt{0.25\theta^2(1 + \frac{2}{\theta})}}{0.5\theta} = \frac{0.5\theta \sqrt{1 + \frac{2}{\theta}}}{0.5\theta} = \sqrt{1 + \frac{2}{\theta}}$$
+        </div>
+
+        <p><strong>Step 2: Proving Overdispersion for Part (b)</strong></p>
+        <p>We want to show that $\text{Var}(Y) > \mathbb{E}(Y)$. Using our derived expressions:</p>
+        <div class="math-display">
+            $$0.25\theta^2 + 0.5\theta > 0.5\theta$$
+        </div>
+        <p>Subtracting $0.5\theta$ from both sides leaves:</p>
+        <div class="math-display">
+            $$0.25\theta^2 > 0$$
+        </div>
+        <p>Since $\theta$ is the parameter of a strictly valid Poisson distribution, $\theta > 0$. Therefore, its square is strictly positive, making the inequality $0.25\theta^2 > 0$ strictly true. Thus, $\text{Var}(Y) > \mathbb{E}(Y)$.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Estimating $\theta$ for Part (c)</strong></p>
+        <p>We are given an empirical probability of 0, which is $\hat{p}_0 = 64/100 = 0.64$. We set up the theoretical probability $P(Y = 0)$ and equate it to this empirical finding (Method of Moments / MLE equivalent for mixtures).</p>
+        <p>$Y$ can be zero in two mutually exclusive ways: either the 0.5 probability event triggered the "equals 0" condition, or it triggered the $X$ condition AND the Poisson variable drew a zero.</p>
+        <div class="math-display">
+            $$P(Y = 0) = P(\text{Forced Zero}) + P(\text{Choose } X) \times P(X = 0)$$
+        </div>
+        <div class="math-display">
+            $$P(Y = 0) = 0.5 + 0.5(e^{-\theta})$$
+        </div>
+        <p>Equating this to our observed sample proportion:</p>
+        <div class="math-display">
+            $$0.5 + 0.5e^{-\hat{\theta}} = 0.64$$
+        </div>
+        <div class="math-display">
+            $$0.5e^{-\hat{\theta}} = 0.14 \implies e^{-\hat{\theta}} = 0.28$$
+        </div>
+        <p>Taking the natural logarithm of both sides:</p>
+        <div class="math-display">
+            $$-\hat{\theta} = \ln(0.28) \implies \hat{\theta} = -\ln(0.28) = \ln\left(\frac{1}{0.28}\right) \approx 1.273$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The Coefficient of Variation is $\sqrt{1 + 2/\theta}$.<br>
+            (b) Because $\theta > 0$, the quadratic term strictly guarantees $\text{Var}(Y) = 0.25\theta^2 + \mathbb{E}(Y) > \mathbb{E}(Y)$.<br>
+            (c) The estimate for $\theta$ is exactly $-\ln(0.28)$.
+        </div>
+    </div>
+
+    <!-- ==================== Q7 ==================== -->
+    <div class="question-section" id="q7">
+        <h2>📌 Q7 Limits of Sequences via Uniform Continuity (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider a function $f : (0, 1) \to \mathbb{R}$ which is differentiable on $(0, 1)$. It is also known that $|f'(x)| < M$, for all $x \in (0, 1)$, for some $M > 0$. Define $a_n = f\left(\frac{1}{n+1}\right)$, for $n \geq 1$. Does $\lim_{n \to \infty} a_n$ exist? Justify your answer.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates the preservation of sequence convergence under a function mapping. Because the sequence inside the function $x_n = 1/(n+1)$ converges (it tends to 0), it is a <strong>Cauchy Sequence</strong>. We are given a bounded derivative, which, by the <strong>Mean Value Theorem</strong>, strictly implies a <strong>Lipschitz condition</strong>. Lipschitz continuous functions are uniformly continuous, and a fundamental property of uniform continuity is that it rigorously maps Cauchy sequences to Cauchy sequences.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Establishing the Lipschitz Condition</strong></p>
+        <p>We are given that $f$ is differentiable on $(0,1)$ and its derivative is bounded: $|f'(x)| < M$ for all $x \in (0,1)$.</p>
+        <p>Let $x, y \in (0,1)$ with $x \neq y$. By the <strong>Mean Value Theorem</strong>, there exists some $c$ strictly between $x$ and $y$ such that:</p>
+        <div class="math-display">
+            $$\frac{f(x) - f(y)}{x - y} = f'(c)$$
+        </div>
+        <p>Taking the absolute value of both sides and applying the bound on the derivative:</p>
+        <div class="math-display">
+            $$|f(x) - f(y)| = |f'(c)| |x - y| < M |x - y|$$
+        </div>
+        <p>This demonstrates that $f(x)$ is Lipschitz continuous on $(0,1)$. Any Lipschitz continuous function is strictly <strong>uniformly continuous</strong>.</p>
+
+        <p><strong>Step 2: Identifying the Cauchy Sequence</strong></p>
+        <p>Let $x_n = \frac{1}{n+1}$. As $n \to \infty$, $x_n \to 0$. Because the sequence $(x_n)$ converges in $\mathbb{R}$, it is a Cauchy sequence. By the formal definition of a Cauchy sequence, for any given $\delta > 0$, there exists an $N$ such that for all $m, n > N$:</p>
+        <div class="math-display">
+            $$|x_n - x_m| < \delta$$
+        </div>
+
+        <p><strong>Step 3: Proving $a_n$ is a Cauchy Sequence</strong></p>
+        <p>We want to show that $a_n = f(x_n)$ is also a Cauchy sequence. Given any $\epsilon > 0$, we choose $\delta = \epsilon / M$. Because $(x_n)$ is Cauchy, there is an $N$ such that for all $m, n > N$, $|x_n - x_m| < \epsilon / M$.</p>
+        <p>Applying the Lipschitz condition derived in Step 1 to our sequence terms:</p>
+        <div class="math-display">
+            $$|a_n - a_m| = |f(x_n) - f(x_m)| \leq M |x_n - x_m| < M \left(\frac{\epsilon}{M}\right) = \epsilon$$
+        </div>
+        <p>This proves that the sequence $(a_n)$ is a Cauchy sequence.</p>
+
+        <p><strong>Step 4: Convergence in $\mathbb{R}$</strong></p>
+        <p>The sequence $(a_n)$ is a Cauchy sequence of real numbers. The real number line $\mathbb{R}$ is a complete metric space. A defining property of complete metric spaces is that <em>every Cauchy sequence converges</em> to a limit within that space.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> Yes, the limit $\lim_{n \to \infty} a_n$ strictly <strong>exists</strong>. The bounded derivative ensures $f$ is uniformly continuous, guaranteeing it maps the Cauchy sequence $\frac{1}{n+1}$ to a resulting sequence that is also Cauchy, which must converge in $\mathbb{R}$.
+        </div>
+    </div>
+
+    <!-- ==================== Q8 ==================== -->
+    <div class="question-section" id="q8">
+        <h2>📌 Q8 Expected Number of Runs in a Discrete Uniform Sample (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider a sequence of $n$ observations where each is an independent realization of a Uniform$\{0, 1, \dots, 9\}$ random variable. A "run" is a subsequence of the same integer preceded and followed by a different integer. Let $R_n$ be the number of runs. Find $\mathbb{E}(R_n)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem analyzes sequential combinatorial patterns. The most elegant way to solve expected value problems involving sequences (like "runs") is using <strong>Indicator Random Variables</strong>. A new run strictly begins at the very first observation, and subsequently, a new run begins any time an observation differs from the one immediately preceding it. By calculating the expected value of these "run-start" indicators and summing them via the <strong>Linearity of Expectation</strong>, we bypass complex combinatorial counting.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Defining the Indicator Variables</strong></p>
+        <p>Let $X_1, X_2, \dots, X_n$ be the sequence of independent Uniform$\{0, 1, \dots, 9\}$ random variables.</p>
+        <p>We define indicator variables $I_k$ to flag the start of a new run:</p>
+        <ul>
+            <li>$I_1 = 1$ unconditionally, because the very first observation always constitutes the start of the first run.</li>
+            <li>For $k \in \{2, 3, \dots, n\}$, define $I_k = 1$ if $X_k \neq X_{k-1}$ (a new run starts), and $I_k = 0$ if $X_k = X_{k-1}$ (the current run continues).</li>
+        </ul>
+        <p>The total number of runs $R_n$ is simply the sum of all these indicator variables:</p>
+        <div class="math-display">
+            $$R_n = I_1 + \sum_{k=2}^n I_k = 1 + \sum_{k=2}^n I_k$$
+        </div>
+
+        <p><strong>Step 2: Calculating the Expected Value of an Indicator</strong></p>
+        <p>Because the expectation of an indicator variable is simply the probability of the event it flags, we need to find $P(X_k \neq X_{k-1})$.</p>
+        <p>The random variables are uniformly drawn from the 10 integers $\{0, 1, \dots, 9\}$. Whatever specific integer value $X_{k-1}$ happens to be, there are exactly 9 out of 10 choices for $X_k$ that will be different. Because the draws are independent:</p>
+        <div class="math-display">
+            $$\mathbb{E}(I_k) = P(X_k \neq X_{k-1}) = \frac{9}{10} = 0.9$$
+        </div>
+
+        <p><strong>Step 3: Applying the Linearity of Expectation</strong></p>
+        <p>We take the expected value of the total runs equation. The linearity of expectation holds regardless of any dependencies (though in this case, sequential transitions only depend on the immediate prior step anyway).</p>
+        <div class="math-display">
+            $$\mathbb{E}(R_n) = \mathbb{E}\left( 1 + \sum_{k=2}^n I_k \right) = 1 + \sum_{k=2}^n \mathbb{E}(I_k)$$
+        </div>
+        <p>Since there are $(n-1)$ terms in the summation from $k=2$ to $n$, and each term has an expected value of $0.9$:</p>
+        <div class="math-display">
+            $$\mathbb{E}(R_n) = 1 + (n - 1) \left(\frac{9}{10}\right)$$
+        </div>
+
+        <p><strong>Step 4: Simplifying the Expression</strong></p>
+        <p>Distribute the $0.9$ through the parentheses:</p>
+        <div class="math-display">
+            $$\mathbb{E}(R_n) = 1 + 0.9n - 0.9 = 0.1 + 0.9n$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By decomposing the sequence into independent run-start indicators, we easily find the expected number of runs in $n$ observations to be strictly $\mathbb{E}(R_n) = 0.9n + 0.1$.
+        </div>
+    </div>
+
+<!-- ==================== Q9 ==================== -->
+    <div class="question-section" id="q9">
+        <h2>📌 Q9 The Broken Stick Problem and Triangle Areas (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Two points are chosen independently from Uniform(0,1) distribution to divide a line of unit length into three smaller line segments.<br>
+            (a) Find the probability that a triangle can be formed using the segments.<br>
+            (b) If they form a triangle, find the probability that the area of the triangle will be bigger than 1/8 square unit.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a classic geometric probability problem. 
+        <ul>
+            <li><strong>For part (a):</strong> Three segments of a fixed total length $L=1$ can form a triangle if and only if they strictly satisfy the Triangle Inequality. This implies no single segment can be longer than half the total length ($1/2$). We evaluate the geometric area of this success region in the joint uniform sample space.</li>
+            <li><strong>For part (b):</strong> We evaluate the maximum possible area of a triangle with a fixed perimeter of $1$ using <strong>Heron's Formula</strong>. If the theoretical maximum area is less than $1/8$, the probability is strictly zero.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Probability of Forming a Triangle for Part (a)</strong></p>
+        <p>Let the two random cut points be $X, Y \sim U(0,1)$. To avoid symmetry issues, let's assume $X < Y$. The three segments formed have lengths $L_1 = X$, $L_2 = Y - X$, and $L_3 = 1 - Y$.</p>
+        <p>By the triangle inequality, the sum of any two sides must be strictly greater than the third. Since $L_1 + L_2 + L_3 = 1$, this condition is mathematically equivalent to stating that every individual segment must be strictly less than $1/2$:</p>
+        <div class="math-display">
+            $$L_1 < 1/2 \implies X < 1/2$$
+            $$L_2 < 1/2 \implies Y - X < 1/2 \implies Y < X + 1/2$$
+            $$L_3 < 1/2 \implies 1 - Y < 1/2 \implies Y > 1/2$$
+        </div>
+        <p>The sample space for $(X,Y)$ given $X < Y$ is a triangle with vertices $(0,0), (1,1), (0,1)$ which has an area of $1/2$. The success region satisfying the inequalities above is the triangle with vertices $(0, 1/2), (1/2, 1), (1/2, 1/2)$, which has an area of $1/8$.</p>
+        <p>The probability is the ratio of the success area to the total area:</p>
+        <div class="math-display">
+            $$P(\text{Triangle}) = \frac{1/8}{1/2} = \frac{1}{4}$$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Evaluating the Maximum Triangle Area for Part (b)</strong></p>
+        <p>We are given that the three segments form a triangle. The perimeter is fixed at $2s = L_1 + L_2 + L_3 = 1$, so the semi-perimeter is $s = 1/2$.</p>
+        <p>By Heron's formula, the area $A$ of the triangle is:</p>
+        <div class="math-display">
+            $$A = \sqrt{s(s-L_1)(s-L_2)(s-L_3)} = \sqrt{\frac{1}{2}\left(\frac{1}{2}-L_1\right)\left(\frac{1}{2}-L_2\right)\left(\frac{1}{2}-L_3\right)}$$
+        </div>
+        <p>To maximize this product subject to the sum constraint $(1/2-L_1) + (1/2-L_2) + (1/2-L_3) = 3/2 - 1 = 1/2$, we apply the AM-GM inequality. The product is maximized when all factors are equal, which corresponds to an equilateral triangle ($L_1 = L_2 = L_3 = 1/3$).</p>
+        <p>The maximum possible area is:</p>
+        <div class="math-display">
+            $$A_{max} = \sqrt{\frac{1}{2} \left(\frac{1}{2} - \frac{1}{3}\right)^3} = \sqrt{\frac{1}{2} \left(\frac{1}{6}\right)^3} = \sqrt{\frac{1}{432}} = \frac{\sqrt{3}}{36}$$
+        </div>
+        <p>Let's evaluate this maximum value. Since $\sqrt{3} \approx 1.732$, $A_{max} \approx 1.732 / 36 \approx 0.0481$ square units.</p>
+
+        <p><strong>Step 3: Comparing to the Threshold</strong></p>
+        <p>The problem asks for the probability that the area is strictly greater than $1/8$. Note that $1/8 = 0.125$.</p>
+        <div class="math-display">
+            $$0.0481 \ll 0.125 \implies A_{max} < \frac{1}{8}$$
+        </div>
+        <p>Since the absolute mathematical maximum area of any such triangle is strictly less than $1/8$, it is physically impossible to form a triangle with an area greater than $1/8$ under these constraints.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The probability that a triangle can be formed is $\frac{1}{4}$.<br>
+            (b) Because the maximum possible area of a triangle with perimeter 1 is $\frac{\sqrt{3}}{36}$ (which is less than $1/8$), the probability that the area is greater than 1/8 is exactly $0$.
+        </div>
+    </div>
+
+    <!-- ==================== Q10 ==================== -->
+    <div class="question-section" id="q10">
+        <h2>📌 Q10 Weak Law of Large Numbers for Trigonometric Transformations (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $\theta_i$ be independent and identically distributed Uniform$(0, 2\pi)$, and define $Y_i = |\sin \theta_i|$. Find the limit to which $\frac{1}{n} \sum_{i=1}^n Y_i$ converges in probability.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem is a direct application of the <strong>Weak Law of Large Numbers (WLLN)</strong>. Because the $\theta_i$ are i.i.d., the transformed variables $Y_i = g(\theta_i)$ are also i.i.d. The sample mean of $Y_i$ will converge in probability to the population expectation $\mathbb{E}(Y_1)$, provided the expectation is finite. We calculate this expectation using standard trigonometric integration.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Applying the WLLN</strong></p>
+        <p>By the Weak Law of Large Numbers, for a sequence of i.i.d random variables with finite expectation, the sample mean converges in probability to the true expected value:</p>
+        <div class="math-display">
+            $$\frac{1}{n} \sum_{i=1}^n Y_i \xrightarrow{p} \mathbb{E}(Y_1)$$
+        </div>
+
+        <p><strong>Step 2: Formulating the Expected Value</strong></p>
+        <p>The variable $\theta_1$ follows a Uniform distribution on $(0, 2\pi)$. Its probability density function is $f(\theta) = \frac{1}{2\pi}$ for $0 < \theta < 2\pi$.</p>
+        <p>The expected value of $Y_1 = |\sin \theta_1|$ is:</p>
+        <div class="math-display">
+            $$\mathbb{E}(|\sin \theta_1|) = \int_0^{2\pi} |\sin \theta| \frac{1}{2\pi} d\theta$$
+        </div>
+
+        <p><strong>Step 3: Evaluating the Integral utilizing Symmetry</strong></p>
+        <p>The function $|\sin \theta|$ is highly symmetric. It repeats its shape identically in four quadrants over the interval $[0, 2\pi]$ (from $0$ to $\pi/2$, $\pi/2$ to $\pi$, etc.). In the first quadrant $[0, \pi/2]$, $\sin \theta \geq 0$, so $|\sin \theta| = \sin \theta$.</p>
+        <p>We can exploit this symmetry to simplify the integral by evaluating it over just the first quadrant and multiplying by 4:</p>
+        <div class="math-display">
+            $$\mathbb{E}(Y_1) = \frac{4}{2\pi} \int_0^{\pi/2} \sin \theta d\theta = \frac{2}{\pi} \int_0^{\pi/2} \sin \theta d\theta$$
+        </div>
+        <p>Compute the definite integral:</p>
+        <div class="math-display">
+            $$\int_0^{\pi/2} \sin \theta d\theta = \Big[ -\cos \theta \Big]_0^{\pi/2} = (-\cos(\pi/2)) - (-\cos(0)) = 0 - (-1) = 1$$
+        </div>
+
+        <p><strong>Step 4: Final Substitution</strong></p>
+        <p>Substitute the evaluated integral back into the expectation formula:</p>
+        <div class="math-display">
+            $$\mathbb{E}(Y_1) = \frac{2}{\pi} \times 1 = \frac{2}{\pi}$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By the Weak Law of Large Numbers, the sample mean converges in probability to the population expectation. Therefore, $\frac{1}{n} \sum_{i=1}^n Y_i \xrightarrow{p} \frac{2}{\pi}$.
+        </div>
+    </div>
+
+    <!-- ==================== Q11 ==================== -->
+    <div class="question-section" id="q11">
+        <h2>📌 Q11 Warner's Randomized Response Model (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> To estimate the probability of smoking, 300 students draw one of 40 cards with replacement. 25 cards say 'I smoke', 15 say 'I do not smoke'. Students answer 'yes' or 'no' without disclosing the card. Let $A$ be answering 'yes', $S$ be the event a student smokes.<br>
+            (a) Establish a relationship between $P(A)$ and $P(S)$.<br>
+            (b) If 130 say 'yes', find an estimate for $P(S)$ and check if it is unbiased.<br>
+            (c) Find the variance of the estimator of $P(S)$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem deals with the <strong>Randomized Response Technique</strong>, used in surveys for sensitive questions. By introducing controlled random noise (the cards), respondents feel secure. We use the <strong>Law of Total Probability</strong> to link the observed "yes" answers to the true underlying parameter $P(S)$. By inverting this relationship, we construct the Method of Moments estimator and calculate its variance using basic properties of the Binomial proportion.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Law of Total Probability for Part (a)</strong></p>
+        <p>A student answers 'yes' ($A$) under exactly two mutually exclusive scenarios:</p>
+        <ol>
+            <li>They draw the 'I smoke' card AND they actually smoke.</li>
+            <li>They draw the 'I do not smoke' card AND they do NOT smoke.</li>
+        </ol>
+        <p>Let $p_1 = 25/40 = 5/8$ be the probability of drawing the 'I smoke' card. Let $p_2 = 15/40 = 3/8$ be the probability of drawing the 'I do not smoke' card. Assuming card drawing is independent of smoking status:</p>
+        <div class="math-display">
+            $$P(A) = P(\text{Card 1})P(S) + P(\text{Card 2})P(S^c)$$
+        </div>
+        <div class="math-display">
+            $$P(A) = \frac{5}{8}P(S) + \frac{3}{8}(1 - P(S)) = \frac{5}{8}P(S) + \frac{3}{8} - \frac{3}{8}P(S)$$
+        </div>
+        <div class="math-display">
+            $$P(A) = \frac{1}{4}P(S) + \frac{3}{8}$$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Estimator and Unbiasedness for Part (b)</strong></p>
+        <p>We are given that 130 out of 300 students said 'yes'. This gives us an unbiased estimator for $P(A)$, which is the sample proportion: $\hat{P}(A) = 130 / 300 = 13/30$.</p>
+        <p>We invert the relationship from part (a) to solve for $\hat{P}(S)$:</p>
+        <div class="math-display">
+            $$\hat{P}(A) = \frac{1}{4}\hat{P}(S) + \frac{3}{8} \implies \frac{1}{4}\hat{P}(S) = \hat{P}(A) - \frac{3}{8}$$
+        </div>
+        <div class="math-display">
+            $$\hat{P}(S) = 4\hat{P}(A) - \frac{3}{2}$$
+        </div>
+        <p>Plugging in our sample proportion:</p>
+        <div class="math-display">
+            $$\hat{P}(S) = 4\left(\frac{13}{30}\right) - \frac{3}{2} = \frac{52}{30} - \frac{45}{30} = \frac{7}{30}$$
+        </div>
+        <p>To check for unbiasedness, we take the expectation of the estimator:</p>
+        <div class="math-display">
+            $$\mathbb{E}[\hat{P}(S)] = \mathbb{E}\left[ 4\hat{P}(A) - \frac{3}{2} \right] = 4\mathbb{E}[\hat{P}(A)] - \frac{3}{2}$$
+        </div>
+        <p>Since $\hat{P}(A)$ is a sample proportion from a Binomial distribution, it is unbiased: $\mathbb{E}[\hat{P}(A)] = P(A)$. Substituting the relationship from part (a):</p>
+        <div class="math-display">
+            $$\mathbb{E}[\hat{P}(S)] = 4\left(\frac{1}{4}P(S) + \frac{3}{8}\right) - \frac{3}{2} = P(S) + \frac{3}{2} - \frac{3}{2} = P(S)$$
+        </div>
+        <p>The estimator is strictly unbiased.</p>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 3: Calculating Variance for Part (c)</strong></p>
+        <p>We apply the variance operator to our estimator equation $\hat{P}(S) = 4\hat{P}(A) - 1.5$. Constants drop out, and the scalar is squared:</p>
+        <div class="math-display">
+            $$\text{Var}(\hat{P}(S)) = 16 \cdot \text{Var}(\hat{P}(A))$$
+        </div>
+        <p>The variance of a sample proportion for a sample of size $n$ is $\frac{P(A)(1-P(A))}{n}$. Here $n = 300$.</p>
+        <div class="math-display">
+            $$\text{Var}(\hat{P}(S)) = 16 \frac{P(A)(1-P(A))}{300} = \frac{4}{75} P(A)(1-P(A))$$
+        </div>
+        <p>To provide a numerical estimate of this variance based on our sample, we plug in $\hat{P}(A) = 13/30$:</p>
+        <div class="math-display">
+            $$\widehat{\text{Var}}(\hat{P}(S)) = \frac{4}{75} \left(\frac{13}{30}\right)\left(\frac{17}{30}\right) = \frac{4 \times 221}{75 \times 900} = \frac{884}{67500} \approx 0.0131$$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The relationship is $P(A) = \frac{1}{4}P(S) + \frac{3}{8}$.<br>
+            (b) The estimate is $\hat{P}(S) = \frac{7}{30}$ (approx 23.33%). It is strictly an unbiased estimator.<br>
+            (c) The theoretical variance is $\frac{16 P(A)(1-P(A))}{300}$, which evaluates to an estimated variance of $\approx 0.0131$.
+        </div>
+    </div>
+
+    <!-- ==================== Q12 ==================== -->
+    <div class="question-section" id="q12">
+        <h2>📌 Q12 Maximum Likelihood Estimation of Shooter Probabilities (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> A novice shooter hits a target with probability $\theta$ ($\theta > 0.5$) at 10m, and probability $1-\theta$ at 25m. In a practice session, they shoot from both distances. Total hits per pair are recorded over 100 trials: 0 hits (freq 23), 1 hit (freq 58), 2 hits (freq 19). Find the Maximum Likelihood Estimate (MLE) of $\theta$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a <strong>Multinomial Likelihood</strong> problem. A single trial consists of a pair of independent shots (one at 10m, one at 25m). The number of hits in a pair $Z \in \{0, 1, 2\}$ is the sum of two non-identical Bernoulli variables. We must derive the probability mass function for $Z$ in terms of $\theta$, construct the log-likelihood function for the grouped data, and optimize it using standard calculus, being careful to enforce the bounds $\theta > 0.5$.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Deriving the Probabilities for $Z$</strong></p>
+        <p>Let $X_{10} \sim \text{Bernoulli}(\theta)$ and $X_{25} \sim \text{Bernoulli}(1-\theta)$. Total hits $Z = X_{10} + X_{25}$.</p>
+        <ul>
+            <li><strong>0 Hits:</strong> Both miss. $P(Z=0) = P(X_{10}=0)P(X_{25}=0) = (1-\theta)(\theta) = \theta(1-\theta)$.</li>
+            <li><strong>2 Hits:</strong> Both hit. $P(Z=2) = P(X_{10}=1)P(X_{25}=1) = (\theta)(1-\theta) = \theta(1-\theta)$.</li>
+            <li><strong>1 Hit:</strong> One hits, one misses. $P(Z=1) = P(X_{10}=1, X_{25}=0) + P(X_{10}=0, X_{25}=1)$<br>
+            $= \theta(\theta) + (1-\theta)(1-\theta) = \theta^2 + (1-\theta)^2 = 2\theta^2 - 2\theta + 1$.</li>
+        </ul>
+
+        <p><strong>Step 2: Constructing the Likelihood Function</strong></p>
+        <p>Let $n_0 = 23$, $n_1 = 58$, and $n_2 = 19$. The likelihood function is proportional to:</p>
+        <div class="math-display">
+            $$L(\theta) \propto [P(Z=0)]^{n_0} [P(Z=1)]^{n_1} [P(Z=2)]^{n_2}$$
+        </div>
+        <p>Substitute the derived probabilities:</p>
+        <div class="math-display">
+            $$L(\theta) \propto [\theta(1-\theta)]^{23} [2\theta^2 - 2\theta + 1]^{58} [\theta(1-\theta)]^{19}$$
+        </div>
+        <p>Combine the exponents for the identical $Z=0$ and $Z=2$ terms ($23 + 19 = 42$):</p>
+        <div class="math-display">
+            $$L(\theta) \propto [\theta(1-\theta)]^{42} [1 - 2\theta(1-\theta)]^{58}$$
+        </div>
+
+        <p><strong>Step 3: Reparameterization and Optimization</strong></p>
+        <p>Notice that the entire likelihood function depends entirely on the block term $p = \theta(1-\theta)$. We can rewrite the likelihood in terms of $p$ to simplify the calculus:</p>
+        <div class="math-display">
+            $$L(p) \propto p^{42} (1 - 2p)^{58}$$
+        </div>
+        <p>Take the natural logarithm to form the log-likelihood:</p>
+        <div class="math-display">
+            $$\ln L(p) = 42 \ln(p) + 58 \ln(1 - 2p)$$
+        </div>
+        <p>Take the derivative with respect to $p$ and set it to 0 to find the maximum:</p>
+        <div class="math-display">
+            $$\frac{d}{dp} \ln L(p) = \frac{42}{p} - \frac{116}{1 - 2p} = 0$$
+        </div>
+        <p>Cross-multiply to solve for $p$:</p>
+        <div class="math-display">
+            $$42(1 - 2p) = 116p \implies 42 - 84p = 116p \implies 200p = 42 \implies p = 0.21$$
+        </div>
+
+        <p><strong>Step 4: Solving for $\theta$</strong></p>
+        <p>We substitute $p = 0.21$ back into our reparameterization identity:</p>
+        <div class="math-display">
+            $$\theta(1-\theta) = 0.21 \implies \theta^2 - \theta + 0.21 = 0$$
+        </div>
+        <p>This is a standard quadratic equation. Factoring it:</p>
+        <div class="math-display">
+            $$(\theta - 0.7)(\theta - 0.3) = 0$$
+        </div>
+        <p>The roots are $\theta = 0.7$ and $\theta = 0.3$. The problem strictly stipulates that $\theta > 0.5$. Therefore, we reject the lower root.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By framing the likelihood around the symmetric product parameter $\theta(1-\theta)$ and rejecting the invalid root, the exact Maximum Likelihood Estimate is $\hat{\theta} = 0.7$.
+        </div>
+    </div>
+
+    <!-- ==================== SUMMARY & PRACTICE ==================== -->
+    <div class="question-section" id="summary-sta-2023" style="border-bottom: none;">
+        <h2>📚 Paper Summary &amp; Key Focus Areas</h2>
+        
+        <h3>🎯 Core Concepts Tested in This Paper</h3>
+        <ul>
+            <li><strong>Real Analysis (Q1, Q2, Q7):</strong> Testing series convergence via limits inferiors and direct comparison bounds. Proving monotonicity of integral running averages algebraically. Using bounded derivatives via the <strong>Mean Value Theorem</strong> to prove Lipschitz conditions and uniform continuity, which preserve Cauchy sequences.</li>
+            <li><strong>Linear Algebra (Q3, Q5):</strong> Deep application of the <strong>Rank-Nullity Theorem</strong> and Subspace Dimensions. Using constraints on row and column sums to isolate independent equations and find exact dimensionality of constrained vector spaces.</li>
+            <li><strong>Probability & Combinatorics (Q4, Q8, Q9):</strong> Utilizing Indicator Random variables (and Linearity of Expectation) to bypass complicated run-counting combinatorics. Setting up symmetric Random Walk systems and absorption probabilities (Gambler's Ruin variants) on discrete cyclic graphs. Analyzing the classic "Broken Stick" Triangle Inequality boundaries alongside Heron's formula limits.</li>
+            <li><strong>Estimation & Inference (Q11, Q12):</strong> Setting up randomized response algorithms via the Law of Total Probability to ensure unbiased survey estimation. Reparameterizing block variables inside multinomial likelihood functions to simplify MLE derivatives and handle symmetric quadratic roots.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
