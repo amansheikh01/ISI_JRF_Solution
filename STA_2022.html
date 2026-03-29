@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STA 2022 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STA (Statistics A) 2022 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Real_Analysis_%26_Linear_Algebra-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STA-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+    <!-- ==================== Q1 ==================== -->
+    <div class="question-section" id="q1">
+        <h2>📌 Q1 Convergence of Real Sequences (10 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Consider the sequence of real numbers:<br>
+            $$x_n = \frac{(\alpha + 1)^n + \alpha^n + (\alpha - 1)^n}{(2\alpha)^n}, \quad n = 1, 2, \dots$$<br>
+            Find the real values of $\alpha$ for which $\lim_{n \to \infty} x_n$ exists.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates the convergence of sequences formed by sums of exponential terms. By algebraically splitting the fraction, we convert the expression into a sum of three geometric sequences: $r_1^n + r_2^n + r_3^n$. A sequence of the form $r^n$ converges if and only if $r \in (-1, 1]$. We will extract the three common ratios, set up simultaneous inequalities for their convergence, and find the intersection of their valid domains.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Algebraic Decomposition</strong></p>
+        <p>First, note that for the sequence to be defined, the denominator cannot be zero, hence $\alpha \neq 0$. We split the fraction into three separate terms:</p>
+        <div class="math-display">
+            $$x_n = \left(\frac{\alpha + 1}{2\alpha}\right)^n + \left(\frac{\alpha}{2\alpha}\right)^n + \left(\frac{\alpha - 1}{2\alpha}\right)^n$$
+        </div>
+        <div class="math-display">
+            $$x_n = \left(\frac{\alpha + 1}{2\alpha}\right)^n + \left(\frac{1}{2}\right)^n + \left(\frac{\alpha - 1}{2\alpha}\right)^n$$
+        </div>
+        <p>Let $r_1 = \frac{\alpha+1}{2\alpha}$, $r_2 = \frac{1}{2}$, and $r_3 = \frac{\alpha-1}{2\alpha}$. The term $r_2^n = (1/2)^n$ strictly converges to 0. For the entire sequence to converge without oscillating or exploding to infinity, we must strictly have both $r_1 \in (-1, 1]$ and $r_3 \in (-1, 1]$.</p>
+
+        <p><strong>Step 2: Bounding $r_1$</strong></p>
+        <p>We need $-1 < \frac{\alpha + 1}{2\alpha} \leq 1$. Let's solve the two inequalities separately.</p>
+        <p><em>Inequality 1A (Upper Bound):</em></p>
+        <div class="math-display">
+            $$\frac{\alpha + 1}{2\alpha} \leq 1 \implies \frac{\alpha + 1}{2\alpha} - 1 \leq 0 \implies \frac{1 - \alpha}{2\alpha} \leq 0$$
+        </div>
+        <p>The critical points are $\alpha = 0$ and $\alpha = 1$. Testing intervals yields the solution: $\alpha \in (-\infty, 0) \cup [1, \infty)$.</p>
+        
+        <p><em>Inequality 1B (Lower Bound):</em></p>
+        <div class="math-display">
+            $$-1 < \frac{\alpha + 1}{2\alpha} \implies 0 < \frac{\alpha + 1}{2\alpha} + 1 \implies 0 < \frac{3\alpha + 1}{2\alpha}$$
+        </div>
+        <p>The critical points are $\alpha = -1/3$ and $\alpha = 0$. Testing intervals yields the solution: $\alpha \in (-\infty, -1/3) \cup (0, \infty)$.</p>
+        <p>Taking the intersection of 1A and 1B, the valid region for $r_1$ is: <strong>$S_1 = (-\infty, -1/3) \cup [1, \infty)$</strong>.</p>
+
+        <p><strong>Step 3: Bounding $r_3$</strong></p>
+        <p>We need $-1 < \frac{\alpha - 1}{2\alpha} \leq 1$.</p>
+        <p><em>Inequality 3A (Upper Bound):</em></p>
+        <div class="math-display">
+            $$\frac{\alpha - 1}{2\alpha} \leq 1 \implies \frac{\alpha - 1}{2\alpha} - 1 \leq 0 \implies \frac{-1 - \alpha}{2\alpha} \leq 0 \implies \frac{\alpha + 1}{2\alpha} \geq 0$$
+        </div>
+        <p>Critical points are $\alpha = -1, 0$. The solution is: $\alpha \in (-\infty, -1] \cup (0, \infty)$.</p>
+        
+        <p><em>Inequality 3B (Lower Bound):</em></p>
+        <div class="math-display">
+            $$-1 < \frac{\alpha - 1}{2\alpha} \implies 0 < \frac{\alpha - 1}{2\alpha} + 1 \implies 0 < \frac{3\alpha - 1}{2\alpha}$$
+        </div>
+        <p>Critical points are $\alpha = 0, 1/3$. The solution is: $\alpha \in (-\infty, 0) \cup (1/3, \infty)$.</p>
+        <p>Taking the intersection of 3A and 3B, the valid region for $r_3$ is: <strong>$S_3 = (-\infty, -1] \cup (1/3, \infty)$</strong>.</p>
+
+        <p><strong>Step 4: Final Intersection</strong></p>
+        <p>The sequence converges if and only if $\alpha$ is in both $S_1$ and $S_3$.</p>
+        <div class="math-display">
+            $$S_{final} = \Big( (-\infty, -1/3) \cup [1, \infty) \Big) \cap \Big( (-\infty, -1] \cup (1/3, \infty) \Big)$$
+        </div>
+        <ul>
+            <li>For the negative intervals: $(-\infty, -1/3) \cap (-\infty, -1] = (-\infty, -1]$.</li>
+            <li>For the positive intervals: $[1, \infty) \cap (1/3, \infty) = [1, \infty)$.</li>
+        </ul>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The limit exists for all real numbers $\alpha \in (-\infty, -1] \cup [1, \infty)$, which can also be written compactly as $|\alpha| \geq 1$.
+        </div>
+    </div>
+
+    <!-- ==================== Q2 ==================== -->
+    <div class="question-section" id="q2">
+        <h2>📌 Q2 Range and Extrema of a Trigonometric Function (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> For $x \geq 0$, define $f(x) = x - \sqrt{2}\sin(x)$, with $x$ in radians. Find the range of the function $f$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>To find the range of a continuous function on a semi-infinite interval $[0, \infty)$, we must determine its global minimum and examine its behavior as $x \to \infty$. We find the critical points by setting the derivative $f'(x) = 0$. Because the function comprises a linearly growing term ($x$) and a bounded oscillating term ($\sin(x)$), it will naturally tend toward infinity, meaning there is no upper bound. The challenge lies in proving which local minimum is the absolute global minimum.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding Critical Points</strong></p>
+        <p>We compute the first derivative of $f(x)$:</p>
+        <div class="math-display">
+            $$f'(x) = 1 - \sqrt{2}\cos(x)$$
+        </div>
+        <p>Set $f'(x) = 0$ to find the critical points:</p>
+        <div class="math-display">
+            $$1 - \sqrt{2}\cos(x) = 0 \implies \cos(x) = \frac{1}{\sqrt{2}}$$
+        </div>
+        <p>Since we are restricted to $x \geq 0$, the general solutions are:</p>
+        <div class="math-display">
+            $$x = \frac{\pi}{4} + 2k\pi \quad \text{and} \quad x = \frac{7\pi}{4} + 2k\pi \quad \text{for } k = 0, 1, 2, \dots$$
+        </div>
+
+        <p><strong>Step 2: Identifying Local Minima</strong></p>
+        <p>We use the second derivative test to classify these critical points:</p>
+        <div class="math-display">
+            $$f''(x) = \sqrt{2}\sin(x)$$
+        </div>
+        <ul>
+            <li>At $x_k = \frac{\pi}{4} + 2k\pi$, $f''(x_k) = \sqrt{2}\sin(\pi/4) = \sqrt{2}(1/\sqrt{2}) = 1 > 0$. These are <strong>local minima</strong>.</li>
+            <li>At $x_k = \frac{7\pi}{4} + 2k\pi$, $f''(x_k) = \sqrt{2}\sin(7\pi/4) = -1 < 0$. These are local maxima.</li>
+        </ul>
+
+        <p><strong>Step 3: Determining the Global Minimum</strong></p>
+        <p>We evaluate the function at the sequence of local minima:</p>
+        <div class="math-display">
+            $$f\left(\frac{\pi}{4} + 2k\pi\right) = \left(\frac{\pi}{4} + 2k\pi\right) - \sqrt{2}\sin\left(\frac{\pi}{4}\right) = \frac{\pi}{4} + 2k\pi - 1$$
+        </div>
+        <p>Notice that as $k$ increases, the value of the local minimum strictly increases by $2\pi$. Therefore, the lowest possible value among all local minima occurs at $k = 0$:</p>
+        <div class="math-display">
+            $$f\left(\frac{\pi}{4}\right) = \frac{\pi}{4} - 1$$
+        </div>
+        <p>We must also check the boundary point at $x = 0$:</p>
+        <div class="math-display">
+            $$f(0) = 0 - \sqrt{2}\sin(0) = 0$$
+        </div>
+        <p>Comparing the two, since $\pi \approx 3.14$, we have $\frac{\pi}{4} - 1 \approx 0.785 - 1 = -0.215 < 0$. Thus, $f(\pi/4)$ is strictly less than $f(0)$, making it the absolute global minimum.</p>
+
+        <p><strong>Step 4: Upper Bound Behavior</strong></p>
+        <p>As $x \to \infty$, the linear term $x$ grows without bound, while the $\sqrt{2}\sin(x)$ term remains strictly bounded between $[-\sqrt{2}, \sqrt{2}]$. Therefore:</p>
+        <div class="math-display">
+            $$\lim_{x \to \infty} f(x) = \infty$$
+        </div>
+        <p>Since $f$ is continuous on $[0, \infty)$, it must attain all values between its global minimum and infinity (by the Intermediate Value Theorem).</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> The global minimum is $\frac{\pi}{4} - 1$ and the function grows without bound. Therefore, the range of the function $f$ is exactly $\left[ \frac{\pi}{4} - 1, \infty \right)$.
+        </div>
+    </div>
+
+    <!-- ==================== Q3 ==================== -->
+    <div class="question-section" id="q3">
+        <h2>📌 Q3 Expectation of Symmetric Ratios (10 Marks)</h2>
+
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2$ and $X_3$ be iid random variables with a pdf symmetric about 0. Assuming that moments of all orders exist, find the value of:
+            $$E\left( \frac{X_1^3 - X_2^3 + X_3^3}{\sqrt{X_1^2 + X_2^2 + X_3^2}} \right)$$
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem evaluates your intuition regarding <strong>Symmetry in Probability Distributions</strong>. Trying to compute this expectation using integrals and joint density functions would be practically impossible. Instead, we define the entire expression as a single transformation $Y = g(X_1, X_2, X_3)$ and exploit the mathematical property that if a random variable $Y$ is symmetrically distributed about 0 (i.e., $Y \stackrel{d}{=} -Y$) and its expectation exists, its expectation must exactly equal zero.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Establishing the Symmetric Joint Distribution</strong></p>
+        <p>We are given that $X_1, X_2, X_3$ are independent and identically distributed (i.i.d.) with a pdf symmetric about 0. This symmetry means that for any individual variable, $X_i \stackrel{d}{=} -X_i$ (they have the exact same distribution).</p>
+        <p>Because they are independent, their joint distribution is also invariant under negation. That is, the random vector $(X_1, X_2, X_3)$ has the exact same joint distribution as $(-X_1, -X_2, -X_3)$:</p>
+        <div class="math-display">
+            $$(X_1, X_2, X_3) \stackrel{d}{=} (-X_1, -X_2, -X_3)$$
+        </div>
+
+        <p><strong>Step 2: Defining the Transformation</strong></p>
+        <p>Let the target random variable be $Y$:</p>
+        <div class="math-display">
+            $$Y = g(X_1, X_2, X_3) = \frac{X_1^3 - X_2^3 + X_3^3}{\sqrt{X_1^2 + X_2^2 + X_3^2}}$$
+        </div>
+        <p>We now evaluate how this function behaves when we plug in the negated vector $(-X_1, -X_2, -X_3)$:</p>
+        <div class="math-display">
+            $$g(-X_1, -X_2, -X_3) = \frac{(-X_1)^3 - (-X_2)^3 + (-X_3)^3}{\sqrt{(-X_1)^2 + (-X_2)^2 + (-X_3)^2}}$$
+        </div>
+        <p>Because the exponent in the numerator is odd (3), the negative sign factors out perfectly. Because the exponent in the denominator is even (2), the negative sign vanishes:</p>
+        <div class="math-display">
+            $$= \frac{-X_1^3 - (-X_2^3) - X_3^3}{\sqrt{X_1^2 + X_2^2 + X_3^2}} = \frac{-(X_1^3 - X_2^3 + X_3^3)}{\sqrt{X_1^2 + X_2^2 + X_3^2}} = -g(X_1, X_2, X_3) = -Y$$
+        </div>
+
+        <p><strong>Step 3: Drawing the Statistical Conclusion</strong></p>
+        <p>Because the input vectors are identically distributed, any deterministic function applied to them will yield identically distributed outputs. Thus:</p>
+        <div class="math-display">
+            $$g(X_1, X_2, X_3) \stackrel{d}{=} g(-X_1, -X_2, -X_3)$$
+        </div>
+        <p>Substituting our result from Step 2, we get:</p>
+        <div class="math-display">
+            $$Y \stackrel{d}{=} -Y$$
+        </div>
+        <p>This strictly proves that the random variable $Y$ itself is symmetrically distributed around 0. The problem guarantees that all moments exist, guaranteeing that $\mathbb{E}(Y)$ is well-defined and finite.</p>
+        <p>For any random variable where $Y \stackrel{d}{=} -Y$, we have $\mathbb{E}(Y) = \mathbb{E}(-Y) = -\mathbb{E}(Y)$. The only finite number that is its own negative is 0.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong> By proving that the transformation function is strictly odd, we established that $Y$ is symmetrically distributed about zero. Therefore, $E(Y) = 0$.
+        </div>
+    </div>
+
+   
