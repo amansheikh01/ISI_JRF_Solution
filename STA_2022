@@ -469,6 +469,90 @@
         <strong>Final Answer / Q.E.D:</strong> Under the assumption of a positive intercept $\alpha$ in the linear relation $y = \alpha + \beta x$, Jensen's Inequality ensures that $E[1/x] > 1/\bar{X}$, leading to a strictly positive bias.
     </div>
 </div>
+<div class="question-section" id="q11">
+    <h2>📌 Q11 Maximum Likelihood Estimation for the Uniform Distribution (10 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_n$ be a random sample from a population with probability density function:
+        $$f(x; \theta) = \frac{1}{\theta}, \quad 0 < x < \theta, \quad \theta > 0$$
+        Find the Maximum Likelihood Estimator (MLE) of $\theta$ and show whether it is unbiased.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem deals with a <strong>non-regular</strong> estimation case where the range of the distribution depends on the parameter $\theta$. Unlike standard problems where we differentiate the log-likelihood, the likelihood function here is a step function. The MLE is found by maximizing the likelihood subject to the constraint that all observed $x_i$ must be less than $\theta$. This leads us to the <strong>$n$-th Order Statistic</strong>, $X_{(n)}$. To check for unbiasedness, we derive the sampling distribution of $X_{(n)}$ using the cumulative distribution function (CDF) method.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Construct the Likelihood Function</strong></p>
+    <p>The likelihood function $L(\theta)$ is the joint density of the sample:</p>
+    <div class="math-display">
+        $$L(\theta) = \prod_{i=1}^{n} f(x_i; \theta) = \begin{cases} \frac{1}{\theta^n} & \text{if } 0 < x_i < \theta \text{ for all } i \\ 0 & \text{otherwise} \end{cases}$$
+    </div>
+    <p>The condition $x_i < \theta$ for all $i$ is equivalent to $\max(x_1, \dots, x_n) < \theta$. Let $X_{(n)} = \max(x_i)$. Thus, $L(\theta) = \theta^{-n}$ for $\theta \ge X_{(n)}$.</p>
+    
+    <p><strong>Step 2: Maximize the Likelihood</strong></p>
+    <p>For $\theta \ge X_{(n)}$, the function $L(\theta) = \frac{1}{\theta^n}$ is a <strong>strictly decreasing</strong> function of $\theta$. To maximize a decreasing function, we must choose the smallest possible value for the argument. The smallest allowable value for $\theta$ is $X_{(n)}$.</p>
+    <div class="math-display">
+        $$\hat{\theta}_{MLE} = X_{(n)}$$
+    </div>
+
+    <p><strong>Step 3: Check for Unbiasedness</strong></p>
+    <p>First, we find the PDF of $X_{(n)}$. The CDF of a single $X_i$ is $F(x) = x/\theta$ for $0 < x < \theta$. The CDF of the maximum is:</p>
+    <div class="math-display">
+        $$F_{X_{(n)}}(x) = [P(X \le x)]^n = \left(\frac{x}{\theta}\right)^n$$
+    </div>
+    <p>The PDF is the derivative: $f_{X_{(n)}}(x) = \frac{nx^{n-1}}{\theta^n}$. Now, calculate the expectation:</p>
+    <div class="math-display">
+        $$E[X_{(n)}] = \int_{0}^{\theta} x \cdot \frac{nx^{n-1}}{\theta^n} dx = \frac{n}{\theta^n} \int_{0}^{\theta} x^n dx = \frac{n}{\theta^n} \left[ \frac{x^{n+1}}{n+1} \right]_0^\theta = \frac{n}{n+1}\theta$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The MLE of $\theta$ is $X_{(n)}$. Since $E[X_{(n)}] = \frac{n}{n+1}\theta \neq \theta$, the estimator is <strong>biased</strong>. It is asymptotically unbiased as $n \to \infty$.
+    </div>
+</div>
+
+<div class="question-section" id="q12">
+    <h2>📌 Q12 UMP Test for the Exponential Distribution (10 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X$ be a single observation from the density $f(x; \theta) = \theta e^{-\theta x}, x > 0$. We wish to test $H_0: \theta = 1$ against $H_1: \theta = 2$. Find the <strong>Uniformly Most Powerful (UMP)</strong> test of size $\alpha$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>According to the <strong>Neyman-Pearson Lemma</strong>, the most powerful test for simple hypotheses is based on the likelihood ratio $\Lambda = \frac{L(\theta_1)}{L(\theta_0)}$. If the ratio is a monotonic function of a statistic $T(X)$, the test is UMP for a range of alternative values. Here, we evaluate the ratio of the two exponential densities and determine the critical region $C$ such that $P(X \in C | \theta=1) = \alpha$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Set up the Likelihood Ratio</strong></p>
+    <p>The ratio of the densities under the alternative ($\theta_1 = 2$) and null ($\theta_0 = 1$) is:</p>
+    <div class="math-display">
+        $$\frac{f(x; 2)}{f(x; 1)} = \frac{2 e^{-2x}}{1 e^{-1x}} = 2 e^{-x}$$
+    </div>
+    
+    <p><strong>Step 2: Determine the Critical Region</strong></p>
+    <p>The Neyman-Pearson Lemma states we reject $H_0$ if the likelihood ratio is greater than some constant $k$:</p>
+    <div class="math-display">
+        $$2 e^{-x} > k \implies e^{-x} > \frac{k}{2} \implies -x > \ln(k/2) \implies x < c$$
+    </div>
+    <p>Thus, the critical region is of the form $X < c$. This makes intuitive sense: if $\theta$ is larger, the mean $1/\theta$ is smaller, so we expect smaller values of $X$ under $H_1$.</p>
+
+    <p><strong>Step 3: Solve for the Critical Value $c$ using Size $\alpha$</strong></p>
+    <p>Under $H_0$, $\theta = 1$, so $X \sim \text{Exponential}(1)$. We require:</p>
+    <div class="math-display">
+        $$P(X < c | \theta=1) = \alpha \implies \int_{0}^{c} e^{-x} dx = \alpha$$
+    </div>
+    <div class="math-display">
+        $$[-e^{-x}]_0^c = \alpha \implies 1 - e^{-c} = \alpha \implies e^{-c} = 1 - \alpha$$
+    </div>
+    <div class="math-display">
+        $$c = -\ln(1 - \alpha)$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The UMP test of size $\alpha$ rejects $H_0$ if $X < -\ln(1 - \alpha)$. 
+    </div>
+</div>
+
 
 
 </div>
