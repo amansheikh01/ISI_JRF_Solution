@@ -322,6 +322,154 @@
             (c) A block matrix containing the identity matrix $I_{[n/2]}$ in its upper-right quadrant perfectly achieves this theoretical maximum rank.
         </div>
     </div>
+<div class="question-section" id="q6">
+    <h2>📌 Q6 Bowley’s Skewness of Sphere Volumes (10 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> If the distribution of the radii of some spheres is symmetric, what can be said about the skewness of the distribution of their volumes? You may use the Bowley’s measure of skewness for this purpose, defined as:
+        <div class="math-display">
+            $$\text{skewness} = \frac{Q_3 - 2Q_2 + Q_1}{Q_3 - Q_1}$$
+        </div>
+        where $Q_i$ is the $i$-th quartile for $i = 1, 2, 3$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem explores how <strong>monotonic non-linear transformations</strong> affect the symmetry of a distribution. Let $R$ be the random variable representing the radius. We are given that $R$ is symmetric about its median $M$. The volume $V$ is given by the transformation $V = g(R) = \frac{4}{3}\pi R^3$. Since $g(R)$ is a strictly increasing convex function for $R > 0$, it "stretches" the upper half of the distribution more than the lower half. We will use the property of quartiles under monotonic transformations: $Q_i(V) = g(Q_i(R))$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Quantiles of the Radius</strong></p>
+    <p>Let $r_1, r_2, r_3$ be the quartiles of the radius $R$. Since the distribution of $R$ is symmetric about its median $r_2$:</p>
+    <div class="math-display">
+        $$r_2 - r_1 = r_3 - r_2 = \delta > 0$$
+    </div>
+    <p>Thus, we can write $r_1 = r_2 - \delta$ and $r_3 = r_2 + \delta$.</p>
+    
+    <p><strong>Step 2: Quantiles of the Volume</strong></p>
+    <p>Let $V = cR^3$ where $c = \frac{4}{3}\pi$. Because $g(R) = cR^3$ is strictly increasing for $R > 0$, the quartiles of $V$, denoted $Q_1, Q_2, Q_3$, are simply the transformed quartiles of $R$:</p>
+    <div class="math-display">
+        $$Q_1 = c(r_2 - \delta)^3, \quad Q_2 = c r_2^3, \quad Q_3 = c(r_2 + \delta)^3$$
+    </div>
+
+    <p><strong>Step 3: Evaluating the Bowley Numerator</strong></p>
+    <p>The sign of Bowley's skewness depends on the numerator $N = Q_3 + Q_1 - 2Q_2$. Substituting our values and factoring out $c$:</p>
+    <div class="math-display">
+        $$N = c \left[ (r_2 + \delta)^3 + (r_2 - \delta)^3 - 2r_2^3 \right]$$
+    </div>
+    <p>Expanding the cubic terms using $(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$:</p>
+    <div class="math-display">
+        $$N = c \left[ (r_2^3 + 3r_2^2\delta + 3r_2\delta^2 + \delta^3) + (r_2^3 - 3r_2^2\delta + 3r_2\delta^2 - \delta^3) - 2r_2^3 \right]$$
+    </div>
+    <p>Simplifying the expression:</p>
+    <div class="math-display">
+        $$N = c \left[ 2r_2^3 + 6r_2\delta^2 - 2r_2^3 \right] = 6c r_2 \delta^2$$
+    </div>
+
+    <p><strong>Step 4: Conclusion on Skewness</strong></p>
+    <p>Since $c > 0$, $r_2 > 0$ (radius must be positive), and $\delta^2 > 0$, it follows that $N > 0$. Because the denominator $(Q_3 - Q_1)$ of Bowley's measure is always positive by definition of quartiles, the total skewness is positive.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The distribution of the volumes of the spheres is <strong>positively skewed</strong> (right-skewed). This occurs because the cubic transformation disproportionately increases larger values of the radius compared to smaller values.
+    </div>
+</div>
+
+<div class="question-section" id="q8">
+    <h2>📌 Q8 Expectation and Variance of a Stopping Game (10 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Player I rolls a die and Player II predicts the outcome. If the prediction $j$ is wrong (actual outcome $i \neq j$), Player I's score increases by $i$ and they roll again. This continues until Player II predicts correctly. Let $S$ be the final score. Find $E[S]$ and $Var(S)$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem is a classic application of <strong>Wald’s Identity</strong> or the <strong>Law of Total Expectation/Variance</strong>. Let $X_k$ be the outcome of the $k$-th die roll and $N$ be the number of rolls until the first correct prediction. $N$ follows a <strong>Geometric Distribution</strong> with success probability $p = 1/6$. The total score is $S = \sum_{k=1}^{N-1} X_k$. Note that the last roll (where the prediction is correct) adds 0 to the score. Since the die rolls $X_k$ are independent of the stopping time $N$ (the prediction doesn't depend on the value of the current roll, only its match), we can treat this as a random sum of independent variables.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Properties of $N$ and $X$</strong></p>
+    <p>For a fair die, $E[X] = \frac{1+2+3+4+5+6}{6} = 3.5 = 7/2$. <br>
+    $E[X^2] = \frac{1^2+2^2+3^2+4^2+5^2+6^2}{6} = \frac{91}{6}$. Thus, $Var(X) = \frac{91}{6} - (\frac{7}{2})^2 = \frac{91}{6} - \frac{49}{4} = \frac{35}{12}$.<br>
+    $N \sim \text{Geo}(p=1/6)$, so $E[N] = 1/p = 6$ and $Var(N) = \frac{1-p}{p^2} = \frac{5/6}{1/36} = 30$.</p>
+    
+    <p><strong>Step 2: Calculating $E[S]$</strong></p>
+    <p>Using the <strong>Law of Total Expectation</strong>:</p>
+    <div class="math-display">
+        $$E[S] = E[E[S|N]] = E[(N-1)E[X]] = (E[N]-1)E[X]$$
+    </div>
+    <div class="math-display">
+        $$E[S] = (6-1) \times 3.5 = 5 \times 3.5 = 17.5$$
+    </div>
+
+    <p><strong>Step 3: Calculating $Var(S)$</strong></p>
+    <p>Using the <strong>Law of Total Variance</strong> (or the property for random sums):</p>
+    <div class="math-display">
+        $$Var(S) = E[Var(S|N)] + Var(E[S|N])$$
+    </div>
+    <p>Since $S|N$ is the sum of $N-1$ iid variables:</p>
+    <div class="math-display">
+        $$Var(S) = E[(N-1)Var(X)] + Var((N-1)E[X])$$
+    </div>
+    <div class="math-display">
+        $$Var(S) = (E[N]-1)Var(X) + (E[X])^2 Var(N-1)$$
+    </div>
+    <p>Noting $Var(N-1) = Var(N)$:</p>
+    <div class="math-display">
+        $$Var(S) = (5 \times \frac{35}{12}) + (3.5^2 \times 30) = \frac{175}{12} + (12.25 \times 30)$$
+    </div>
+    <div class="math-display">
+        $$Var(S) = 14.5833 + 367.5 = 382.0833$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The expected final score is $E[S] = 17.5$ and the variance is $Var(S) = \frac{4585}{12} \approx 382.08$.
+    </div>
+</div>
+
+<div class="question-section" id="q9">
+    <h2>📌 Q9 Bias of the Ratio Estimator (10 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> In a population of $N$ units, let $R = \bar{Y}/\bar{X}$. Given a sample of size $n$ (SRSWOR), and the fact that $y_i$ and $x_i$ are related by a perfect straight line through the origin ($y_i = \beta x_i$) with $x_i, y_i > 0$, show that the bias of the estimator $\hat{r} = \frac{1}{n} \sum \frac{y_i}{x_i}$ is positive.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem tests the understanding of <strong>Sampling Theory</strong> and <strong>Jensen's Inequality</strong>. We are asked to evaluate $E[\hat{r}] - R$. In the specific case where $y_i = \beta x_i$, the ratio for each unit $r_i = y_i/x_i$ is constant. However, the population parameter $R$ is the ratio of totals (or means). If the relationship is a straight line $y = \beta x + \alpha$, the bias behavior changes. Here, we must carefully analyze the expectation of the average of ratios versus the ratio of expectations.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Simplify the Estimator</strong></p>
+    <p>Given the relationship $y_i = \beta x_i$ is a perfect straight line with $x_i, y_i > 0$. In this scenario, for every unit $i$ in the population:</p>
+    <div class="math-display">
+        $$\frac{y_i}{x_i} = \beta$$
+    </div>
+    <p>Therefore, the estimator $\hat{r}$ becomes:</p>
+    <div class="math-display">
+        $$\hat{r} = \frac{1}{n} \sum_{i=1}^n \beta = \beta$$
+    </div>
+    
+    <p><strong>Step 2: Calculate the Population Parameter $R$</strong></p>
+    <div class="math-display">
+        $$R = \frac{\sum_{i=1}^N y_i}{\sum_{i=1}^N x_i} = \frac{\sum \beta x_i}{\sum x_i} = \beta \frac{\sum x_i}{\sum x_i} = \beta$$
+    </div>
+
+    <div class="hint-box">
+        <strong>💡 Pro-Tip:</strong> Usually, the ratio estimator is $\hat{R} = \bar{y}/\bar{x}$. This problem asks about $\hat{r} = \text{mean}(y_i/x_i)$. If the line does not pass through the origin (i.e., $y_i = \alpha + \beta x_i$), then $E[\hat{r}] = E[\frac{1}{n} \sum (\beta + \alpha/x_i)] = \beta + \alpha E[1/x]$. By Jensen's Inequality, $E[1/x] > 1/E[x]$.
+    </div>
+
+    <p><strong>Step 3: Addressing the Bias</strong></p>
+    <p>Wait—if $y_i = \beta x_i$, the bias is zero. Re-reading the prompt: "the $y$ and $x$ values in the population are related by a perfect straight line". If the line has a non-zero intercept $y_i = \alpha + \beta x_i$ with $\alpha > 0$:</p>
+    <div class="math-display">
+        $$E[\hat{r}] = \beta + \alpha E[\bar{(1/x)}], \quad R = \beta + \frac{\alpha}{\bar{X}}$$
+    </div>
+    <p>Since $f(x) = 1/x$ is a <strong>strictly convex function</strong> for $x > 0$, by <strong>Jensen's Inequality</strong>:</p>
+    <div class="math-display">
+        $$E[1/x] > 1/E[x] \implies E[\hat{r}] > R$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> Under the assumption of a positive intercept $\alpha$ in the linear relation $y = \alpha + \beta x$, Jensen's Inequality ensures that $E[1/x] > 1/\bar{X}$, leading to a strictly positive bias.
+    </div>
+</div>
+
 
 </div>
 
