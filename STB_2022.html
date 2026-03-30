@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STA 2022 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STA (Statistics A) 2022 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Real_Analysis_%26_Linear_Algebra-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STA-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+ <div class="question-section" id="q1">
+    <h2>📌 Q1 Most Powerful and UMP Tests for Normal Distributions (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_m$ and $Y_1, Y_2, \dots, Y_n$ be independent random samples from $N(\mu, \sigma_0^2)$ and $N(2\mu, \sigma_0^2)$, respectively, where $\sigma_0 (>0)$ is known and $-\infty < \mu < \infty$ is unknown.<br>
+        (a) Find the Most Powerful level $\alpha$ test for testing $H_0: \mu = 0$ vs. $H_1: \mu = 1$.<br>
+        (b) Is the test in (a) also the Uniformly Most Powerful level $\alpha$ test for testing $H_0: \mu \leq 0$ versus $H_1: \mu > 0$?
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>Part (a) requires the application of the <strong>Neyman-Pearson Lemma</strong>, which states that the Most Powerful (MP) test for simple hypotheses is based on the likelihood ratio $\Lambda = L(\theta_1)/L(\theta_0)$. By expanding the joint likelihood function of both samples and simplifying the ratio, we can identify a sufficient test statistic $T$. For Part (b), we check if the joint density belongs to the one-parameter exponential family and exhibits a <strong>Monotone Likelihood Ratio (MLR)</strong>. If it does, the <strong>Karlin-Rubin Theorem</strong> guarantees that our threshold test is Uniformly Most Powerful (UMP) for the composite one-sided alternative.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Construct the Joint Likelihood Function</strong></p>
+    <p>Since the samples are independent, the joint likelihood function $L(\mu)$ is the product of their individual probability density functions:</p>
+    <div class="math-display">
+        $$L(\mu) = \prod_{i=1}^m \frac{1}{\sigma_0\sqrt{2\pi}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma_0^2}\right) \prod_{j=1}^n \frac{1}{\sigma_0\sqrt{2\pi}} \exp\left(-\frac{(y_j - 2\mu)^2}{2\sigma_0^2}\right)$$
+    </div>
+    <div class="math-display">
+        $$L(\mu) = (2\pi\sigma_0^2)^{-\frac{m+n}{2}} \exp\left( -\frac{1}{2\sigma_0^2} \left[ \sum_{i=1}^m (x_i - \mu)^2 + \sum_{j=1}^n (y_j - 2\mu)^2 \right] \right)$$
+    </div>
+    
+    <p><strong>Step 2: Apply the Neyman-Pearson Lemma</strong></p>
+    <p>We evaluate the likelihood ratio for $H_0: \mu=0$ against $H_1: \mu=1$. The MP test rejects $H_0$ if $L(1)/L(0) > k$ for some constant $k$.</p>
+    <div class="math-display">
+        $$\frac{L(1)}{L(0)} = \exp\left( -\frac{1}{2\sigma_0^2} \left[ \sum_{i=1}^m (x_i - 1)^2 + \sum_{j=1}^n (y_j - 2)^2 - \sum_{i=1}^m x_i^2 - \sum_{j=1}^n y_j^2 \right] \right)$$
+    </div>
+    <p>Expanding the squares and canceling the $x_i^2$ and $y_j^2$ terms:</p>
+    <div class="math-display">
+        $$\sum_{i=1}^m (x_i^2 - 2x_i + 1) - \sum_{i=1}^m x_i^2 = -2\sum_{i=1}^m x_i + m$$
+    </div>
+    <div class="math-display">
+        $$\sum_{j=1}^n (y_j^2 - 4y_j + 4) - \sum_{j=1}^n y_j^2 = -4\sum_{j=1}^n y_j + 4n$$
+    </div>
+    <p>Substituting this back into the likelihood ratio:</p>
+    <div class="math-display">
+        $$\frac{L(1)}{L(0)} = \exp\left( \frac{1}{2\sigma_0^2} \left[ 2\sum_{i=1}^m x_i + 4\sum_{j=1}^n y_j - (m + 4n) \right] \right)$$
+    </div>
+    <div class="math-display">
+        $$\frac{L(1)}{L(0)} = \exp\left( \frac{1}{\sigma_0^2} \left( \sum_{i=1}^m x_i + 2\sum_{j=1}^n y_j \right) - \frac{m+4n}{2\sigma_0^2} \right)$$
+    </div>
+    <p>Because the exponential function is strictly increasing, rejecting $H_0$ for large values of the likelihood ratio is mathematically equivalent to rejecting $H_0$ for large values of the statistic $T = \sum_{i=1}^m X_i + 2\sum_{j=1}^n Y_j$. Therefore, our critical region is $T > c$.</p>
+
+    <p><strong>Step 3: Determine the Null Distribution and Critical Value</strong></p>
+    <p>Under $H_0$ ($\mu = 0$), we have $X_i \sim N(0, \sigma_0^2)$ and $Y_j \sim N(0, \sigma_0^2)$. Because $T$ is a linear combination of independent normal variables, it is also normally distributed.</p>
+    <div class="math-display">
+        $$E_{H_0}[T] = \sum E[X_i] + 2\sum E[Y_j] = 0$$
+    </div>
+    <div class="math-display">
+        $$Var_{H_0}(T) = \sum Var(X_i) + 4\sum Var(Y_j) = m\sigma_0^2 + 4n\sigma_0^2 = (m + 4n)\sigma_0^2$$
+    </div>
+    <p>Thus, under $H_0$, $T \sim N(0, (m+4n)\sigma_0^2)$. To achieve a level $\alpha$ test, we standardize $T$:</p>
+    <div class="math-display">
+        $$P_{H_0}(T > c) = \alpha \implies P\left( \frac{T}{\sigma_0\sqrt{m+4n}} > \frac{c}{\sigma_0\sqrt{m+4n}} \right) = \alpha$$
+    </div>
+    <p>Where $Z \sim N(0,1)$. Thus, the threshold is $c = z_\alpha \sigma_0 \sqrt{m+4n}$, where $z_\alpha$ is the upper $\alpha$-quantile of the standard normal distribution.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Step 4: Proving UMP for Composite Hypotheses (Part b)</strong></p>
+    <p>We factor the general likelihood function $L(\mu)$ for any $\mu$ to check for the Monotone Likelihood Ratio (MLR) property:</p>
+    <div class="math-display">
+        $$L(\mu) = C(\mathbf{x}, \mathbf{y}) \exp\left( -\frac{1}{2\sigma_0^2} [ -2\mu\sum x_i + m\mu^2 - 4\mu\sum y_j + 4n\mu^2 ] \right)$$
+    </div>
+    <div class="math-display">
+        $$L(\mu) = C(\mathbf{x}, \mathbf{y}) \exp\left( \frac{\mu}{\sigma_0^2} \left( \sum x_i + 2\sum y_j \right) - \frac{\mu^2(m+4n)}{2\sigma_0^2} \right)$$
+    </div>
+    <p>This demonstrates that the joint distribution forms a one-parameter exponential family with $T = \sum x_i + 2\sum y_j$ as the sufficient statistic. Because the coefficient of $T$ is $\frac{\mu}{\sigma_0^2}$, which is a strictly increasing function of $\mu$, the family possesses an MLR in $T$.</p>
+    <p>By the <strong>Karlin-Rubin Theorem</strong>, a test of the form "Reject $H_0$ if $T > c$" is the Uniformly Most Powerful test for testing $H_0: \mu \leq \mu_0$ versus $H_1: \mu > \mu_0$. Setting $\mu_0 = 0$ perfectly matches our scenario.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The Most Powerful level $\alpha$ test rejects $H_0$ if $T = \sum_{i=1}^m X_i + 2\sum_{j=1}^n Y_j > z_\alpha \sigma_0 \sqrt{m+4n}$.<br>
+        (b) <strong>Yes</strong>. By the Karlin-Rubin Theorem, because the distribution has a Monotone Likelihood Ratio in $T$, this exact same test is the UMP test for the composite one-sided alternative.
+    </div>
+</div>
+
+<div class="question-section" id="q2">
+    <h2>📌 Q2 Unbiasedness and UMVUE for Poisson Distribution (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose $X \sim \text{Poisson}(\lambda)$, $\lambda > 0$. Let $\theta = \lambda^3 \exp(-2\lambda)$.<br>
+        (a) Show that $S = (-1)^{X-1}X(X-1)(X-2)$ is an unbiased estimate of $\theta$.<br>
+        (b) Consider a random sample $X_1, X_2, \dots, X_n$ from $\text{Poisson}(\lambda)$. Derive the Uniformly Minimum Variance Unbiased Estimator (UMVUE) of $\theta$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>Part (a) is an algebraic verification exercise utilizing the definition of expectation and the Taylor series expansion of $e^x$. For Part (b), we rely on the <strong>Lehmann-Scheffé Theorem</strong>. We first identify a complete sufficient statistic for $\lambda$ in the Poisson distribution, which is the sample sum $T = \sum X_i$. Then, we construct a function $g(T)$ such that its expectation exactly equals the parameter $\theta = \lambda^3 e^{-2\lambda}$. Because $T$ is complete and sufficient, this unbiased $g(T)$ is guaranteed to be the unique UMVUE.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Verify Unbiasedness of $S$ (Part a)</strong></p>
+    <p>The expectation of $S$ is computed using the PMF of the Poisson distribution, $P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}$:</p>
+    <div class="math-display">
+        $$E[S] = \sum_{x=0}^{\infty} (-1)^{x-1} x(x-1)(x-2) \frac{e^{-\lambda}\lambda^x}{x!}$$
+    </div>
+    <p>Notice that for $x = 0, 1, 2$, the term $x(x-1)(x-2)$ evaluates to $0$. Therefore, we can start the summation index from $x = 3$. This allows us to cancel terms in the factorial $x! = x(x-1)(x-2)(x-3)!$:</p>
+    <div class="math-display">
+        $$E[S] = \sum_{x=3}^{\infty} (-1)^{x-1} \frac{e^{-\lambda}\lambda^x}{(x-3)!}$$
+    </div>
+    <p>To evaluate this series, let's re-index by setting $y = x - 3$. As $x$ goes from 3 to $\infty$, $y$ goes from 0 to $\infty$. We replace $x$ with $y + 3$:</p>
+    <div class="math-display">
+        $$E[S] = \sum_{y=0}^{\infty} (-1)^{y+2} \frac{e^{-\lambda}\lambda^{y+3}}{y!}$$
+    </div>
+    <p>We factor out constants with respect to $y$, noting that $(-1)^{y+2} = (-1)^y (-1)^2 = (-1)^y$:</p>
+    <div class="math-display">
+        $$E[S] = e^{-\lambda} \lambda^3 \sum_{y=0}^{\infty} \frac{(-\lambda)^y}{y!}$$
+    </div>
+    <p>We recognize the sum as the Maclaurin series expansion for $e^{-\lambda}$ (since $\sum \frac{z^y}{y!} = e^z$ for $z = -\lambda$):</p>
+    <div class="math-display">
+        $$E[S] = e^{-\lambda} \lambda^3 (e^{-\lambda}) = \lambda^3 e^{-2\lambda} = \theta$$
+    </div>
+    <p>Thus, $S$ is an unbiased estimator of $\theta$.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Step 2: Identify Complete Sufficient Statistic (Part b)</strong></p>
+    <p>For a random sample from a Poisson distribution, the sum of the observations $T = \sum_{i=1}^n X_i$ is a complete and sufficient statistic for $\lambda$. Furthermore, by the additive property of independent Poisson variables, $T \sim \text{Poisson}(n\lambda)$. Its PMF is $P(T = t) = \frac{e^{-n\lambda}(n\lambda)^t}{t!}$.</p>
+
+    <p><strong>Step 3: Construct the UMVUE via Expectation Matching</strong></p>
+    <p>By the <strong>Lehmann-Scheffé Theorem</strong>, we must find a function $g(T)$ such that $E[g(T)] = \theta$:</p>
+    <div class="math-display">
+        $$\sum_{t=0}^{\infty} g(t) \frac{e^{-n\lambda}(n\lambda)^t}{t!} = \lambda^3 e^{-2\lambda}$$
+    </div>
+    <p>Multiply both sides by $e^{n\lambda}$:</p>
+    <div class="math-display">
+        $$\sum_{t=0}^{\infty} g(t) \frac{n^t}{t!} \lambda^t = \lambda^3 e^{(n-2)\lambda}$$
+    </div>
+    <p>We expand the right side using the Taylor series for the exponential function, $e^{(n-2)\lambda} = \sum_{k=0}^{\infty} \frac{((n-2)\lambda)^k}{k!}$:</p>
+    <div class="math-display">
+        $$\text{RHS} = \lambda^3 \sum_{k=0}^{\infty} \frac{(n-2)^k}{k!} \lambda^k = \sum_{k=0}^{\infty} \frac{(n-2)^k}{k!} \lambda^{k+3}$$
+    </div>
+    <p>To match the powers of $\lambda$ on both sides, let's re-index the right side by setting $t = k + 3$, which means $k = t - 3$. As $k$ starts from $0$, $t$ starts from $3$:</p>
+    <div class="math-display">
+        $$\sum_{t=0}^{\infty} g(t) \frac{n^t}{t!} \lambda^t = \sum_{t=3}^{\infty} \frac{(n-2)^{t-3}}{(t-3)!} \lambda^t$$
+    </div>
+
+    <p><strong>Step 4: Solve for $g(t)$</strong></p>
+    <p>Because this equality must hold for all $\lambda > 0$, the coefficients of $\lambda^t$ on both sides must be strictly equal. </p>
+    <ul>
+        <li>For $t = 0, 1, 2$: The right side has no terms for these powers of $\lambda$, implying the coefficient is 0. Thus, $g(t) = 0$.</li>
+        <li>For $t \geq 3$: Equating the coefficients yields:</li>
+    </ul>
+    <div class="math-display">
+        $$g(t) \frac{n^t}{t!} = \frac{(n-2)^{t-3}}{(t-3)!}$$
+    </div>
+    <p>Isolating $g(t)$:</p>
+    <div class="math-display">
+        $$g(t) = \frac{t!}{n^t(t-3)!} (n-2)^{t-3}$$
+    </div>
+    <p>Expanding the factorial $t! / (t-3)! = t(t-1)(t-2)$ and rearranging the terms algebraically:</p>
+    <div class="math-display">
+        $$g(t) = \frac{t(t-1)(t-2)}{n^3 \cdot n^{t-3}} (n-2)^{t-3} = \frac{t(t-1)(t-2)}{n^3} \left( \frac{n-2}{n} \right)^{t-3}$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        The Uniformly Minimum Variance Unbiased Estimator (UMVUE) of $\theta$ is:<br>
+        $$g(T) = \begin{cases} \frac{T(T-1)(T-2)}{n^3} \left( 1 - \frac{2}{n} \right)^{T-3} & \text{if } T \geq 3 \\ 0 & \text{if } T < 3 \end{cases}$$
+        where $T = \sum_{i=1}^n X_i$.
+    </div>
+</div>
+
+<div class="question-section" id="q3">
+    <h2>📌 Q3 Asymptotic Probability using Central Limit Theorem (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X_1, X_2, \dots$ be a sequence of independent and identically distributed $\text{Uniform}(0, 1)$ random variables. If $Z_n = \sum_{i=1}^n X_i^2$, find:
+        $$\lim_{n \to \infty} P\left(Z_n \leq \frac{n}{3} + \left(\frac{2n}{45}\right)^{1/2}\right)$$
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem is a direct application of the <strong>Lindeberg-Lévy Central Limit Theorem (CLT)</strong>. The statistic $Z_n$ is a sum of i.i.d. random variables $Y_i = X_i^2$. We first compute the mean and variance of the transformed variable $Y_i$. Once we establish the true mean and standard deviation of the sum $Z_n$, we standardize the probability expression. As $n \to \infty$, the standardized variable converges in distribution to a standard normal variable, allowing us to evaluate the limit using the standard normal CDF $\Phi(z)$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Calculate Moments of $Y_i = X_i^2$</strong></p>
+    <p>Since $X_i \sim \text{Uniform}(0, 1)$, its PDF is $f(x) = 1$ for $x \in (0, 1)$. We find the first and second moments of $Y_i$:</p>
+    <div class="math-display">
+        $$E[Y_i] = E[X_i^2] = \int_{0}^{1} x^2 \cdot 1 \, dx = \left[ \frac{x^3}{3} \right]_0^1 = \frac{1}{3}$$
+    </div>
+    <div class="math-display">
+        $$E[Y_i^2] = E[(X_i^2)^2] = E[X_i^4] = \int_{0}^{1} x^4 \cdot 1 \, dx = \left[ \frac{x^5}{5} \right]_0^1 = \frac{1}{5}$$
+    </div>
+    <p>Now, compute the variance of $Y_i$:</p>
+    <div class="math-display">
+        $$Var(Y_i) = E[Y_i^2] - (E[Y_i])^2 = \frac{1}{5} - \left(\frac{1}{3}\right)^2 = \frac{1}{5} - \frac{1}{9} = \frac{9 - 5}{45} = \frac{4}{45}$$
+    </div>
+
+    <p><strong>Step 2: Apply the Central Limit Theorem</strong></p>
+    <p>Since $Z_n = \sum_{i=1}^n Y_i$ is the sum of $n$ i.i.d. random variables with finite mean $\mu = 1/3$ and variance $\sigma^2 = 4/45$, the <strong>Central Limit Theorem</strong> asserts that:</p>
+    <div class="math-display">
+        $$\frac{Z_n - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1) \text{ as } n \to \infty$$
+    </div>
+    <p>Substituting our calculated values for $\mu$ and $\sigma$:</p>
+    <div class="math-display">
+        $$W_n = \frac{Z_n - n(1/3)}{\sqrt{n(4/45)}} = \frac{Z_n - n/3}{\sqrt{4n/45}} \xrightarrow{d} Z \sim N(0, 1)$$
+    </div>
+
+    <p><strong>Step 3: Standardize the Probability Expression</strong></p>
+    <p>We are asked to evaluate $\lim_{n \to \infty} P\left(Z_n \leq \frac{n}{3} + \sqrt{\frac{2n}{45}}\right)$. We manipulate the inequality to match the form of $W_n$:</p>
+    <div class="math-display">
+        $$P\left(Z_n - \frac{n}{3} \leq \sqrt{\frac{2n}{45}}\right)$$
+    </div>
+    <p>Divide both sides by the standard deviation of $Z_n$, which is $\sqrt{4n/45}$:</p>
+    <div class="math-display">
+        $$P\left( \frac{Z_n - n/3}{\sqrt{4n/45}} \leq \frac{\sqrt{2n/45}}{\sqrt{4n/45}} \right) = P\left( W_n \leq \sqrt{\frac{2n/45}{4n/45}} \right)$$
+    </div>
+    <p>Simplifying the ratio on the right-hand side:</p>
+    <div class="math-display">
+        $$\sqrt{\frac{2n/45}{4n/45}} = \sqrt{\frac{2}{4}} = \sqrt{\frac{1}{2}} = \frac{1}{\sqrt{2}}$$
+    </div>
+    <p>Therefore, the expression becomes $\lim_{n \to \infty} P\left( W_n \leq \frac{1}{\sqrt{2}} \right)$. By the definition of convergence in distribution to standard normal $Z$:</p>
+    <div class="math-display">
+        $$\lim_{n \to \infty} P\left( W_n \leq \frac{1}{\sqrt{2}} \right) = P\left( Z \leq \frac{1}{\sqrt{2}} \right) = \Phi\left(\frac{1}{\sqrt{2}}\right)$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The limit evaluates to $\Phi\left(\frac{1}{\sqrt{2}}\right)$, where $\Phi$ is the cumulative distribution function of the standard normal distribution.
+    </div>
+</div>
+<div class="question-section" id="q4">
+    <h2>📌 Q4 Asymptotic Confidence Interval for Trinomial Distribution (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose $\mathbf{X}_1, \dots, \mathbf{X}_m$ is a random sample from a Trinomial distribution with $n=1$, and $\pi = [\pi_1, \pi_2, \pi_3]^T$, where $0 < \pi_1, \pi_2, \pi_3 < 1$, and $\pi_1 + \pi_2 + \pi_3 = 1$. Find an approximate 95% confidence interval for $\pi_1 + \frac{1}{2}\pi_2$, for large $m$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem calls for the application of asymptotic theory, specifically the <strong>Multivariate Central Limit Theorem (CLT)</strong> combined with the <strong>Delta Method</strong> (or simply the linear combination of asymptotically normal variables). Since $n=1$, each observation $\mathbf{X}_i$ is a single categorical trial. We will first establish the asymptotic joint distribution of the sample proportions. Then, we will define a transformation function $g(\pi) = \pi_1 + \frac{1}{2}\pi_2$, find its gradient, and compute the asymptotic variance of our plug-in estimator. This level of rigorous derivation is essential when developing a comprehensive collection of model solutions for advanced statistical inference.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Define the Moments of the Trinomial Vector</strong></p>
+    <p>Let $\mathbf{X}_i = (X_{i1}, X_{i2}, X_{i3})^T$. For a single trial ($n=1$), $X_{ij}$ acts as an indicator variable for category $j$. The expectation and covariance matrix of $\mathbf{X}_i$ are given by standard Multinomial properties:</p>
+    <div class="math-display">
+        $$E[\mathbf{X}_i] = \pi = \begin{pmatrix} \pi_1 \\ \pi_2 \\ \pi_3 \end{pmatrix}, \quad \Sigma = Var(\mathbf{X}_i) = \begin{pmatrix} \pi_1(1-\pi_1) & -\pi_1\pi_2 & -\pi_1\pi_3 \\ -\pi_1\pi_2 & \pi_2(1-\pi_2) & -\pi_2\pi_3 \\ -\pi_1\pi_3 & -\pi_2\pi_3 & \pi_3(1-\pi_3) \end{pmatrix}$$
+    </div>
+    
+    <p><strong>Step 2: Apply the Multivariate Central Limit Theorem</strong></p>
+    <p>Let the sample mean vector be $\hat{\pi} = \bar{\mathbf{X}} = \frac{1}{m} \sum_{i=1}^m \mathbf{X}_i$. By the Multivariate CLT, as $m \to \infty$:</p>
+    <div class="math-display">
+        $$\sqrt{m}(\hat{\pi} - \pi) \xrightarrow{d} N_3(\mathbf{0}, \Sigma)$$
+    </div>
+
+    <p><strong>Step 3: Linear Transformation for the Target Parameter</strong></p>
+    <p>We want to estimate $\theta = \pi_1 + \frac{1}{2}\pi_2$. This is a linear combination of the components of $\pi$, which can be written as $\theta = \mathbf{a}^T \pi$, where $\mathbf{a} = (1, 1/2, 0)^T$. Our estimator is $\hat{\theta} = \mathbf{a}^T \hat{\pi} = \hat{\pi}_1 + \frac{1}{2}\hat{\pi}_2$.</p>
+    <p>By the continuous mapping theorem (or Delta Method for linear functions), the asymptotic distribution of $\hat{\theta}$ is:</p>
+    <div class="math-display">
+        $$\sqrt{m}(\hat{\theta} - \theta) \xrightarrow{d} N(0, V)$$
+    </div>
+    <p>where the asymptotic variance $V = \mathbf{a}^T \Sigma \mathbf{a}$.</p>
+
+    <p><strong>Step 4: Compute the Asymptotic Variance $V$</strong></p>
+    <p>We perform the matrix multiplication $V = \mathbf{a}^T \Sigma \mathbf{a}$:</p>
+    <div class="math-display">
+        $$V = (1)^2 \Sigma_{11} + \left(\frac{1}{2}\right)^2 \Sigma_{22} + 2(1)\left(\frac{1}{2}\right) \Sigma_{12}$$
+    </div>
+    <div class="math-display">
+        $$V = \pi_1(1-\pi_1) + \frac{1}{4}\pi_2(1-\pi_2) - \pi_1\pi_2$$
+    </div>
+    <p>Expanding and regrouping the terms:</p>
+    <div class="math-display">
+        $$V = \pi_1 - \pi_1^2 + \frac{1}{4}\pi_2 - \frac{1}{4}\pi_2^2 - \pi_1\pi_2 = \left(\pi_1 + \frac{1}{4}\pi_2\right) - \left(\pi_1^2 + \pi_1\pi_2 + \frac{1}{4}\pi_2^2\right)$$
+    </div>
+    <p>Notice that the second grouped term is a perfect square:</p>
+    <div class="math-display">
+        $$V = \left(\pi_1 + \frac{1}{4}\pi_2\right) - \left(\pi_1 + \frac{1}{2}\pi_2\right)^2$$
+    </div>
+
+    <p><strong>Step 5: Construct the Confidence Interval</strong></p>
+    <p>By Slutsky's Theorem, we can substitute the consistent estimator $\hat{\pi}$ into $V$ to get a consistent estimator of the variance, $\hat{V}$.</p>
+    <div class="math-display">
+        $$\hat{V} = \hat{\pi}_1 + \frac{1}{4}\hat{\pi}_2 - \left(\hat{\pi}_1 + \frac{1}{2}\hat{\pi}_2\right)^2$$
+    </div>
+    <p>The standardized statistic $\frac{\hat{\theta} - \theta}{\sqrt{\hat{V}/m}}$ converges in distribution to $N(0,1)$. For a 95% confidence interval, the critical value is $z_{0.025} \approx 1.96$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The approximate 95% confidence interval for $\pi_1 + \frac{1}{2}\pi_2$ is given by:
+        $$\left( \hat{\pi}_1 + \frac{1}{2}\hat{\pi}_2 \right) \pm 1.96 \sqrt{ \frac{\left(\hat{\pi}_1 + \frac{1}{4}\hat{\pi}_2\right) - \left(\hat{\pi}_1 + \frac{1}{2}\hat{\pi}_2\right)^2}{m} }$$
+        where $\hat{\pi}_1$ and $\hat{\pi}_2$ are the sample proportions of categories 1 and 2, respectively.
+    </div>
+</div>
+
+<div class="question-section" id="q5">
+    <h2>📌 Q5 Markov Chain Marginals and Correlation (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $Y_1, Y_2, \dots$ be categorical random variables (categories $C_1, \dots, C_k$). For $t \ge 2$, conditional probabilities are:
+        $P(Y_t = C_i | Y_{t-1} = C_{j_1}, Y_{t-2} = C_{j_2}, \dots) = P(Y_t = C_i | Y_{t-1} = C_{j_1}) = (1-\alpha)p_i + \alpha I(i = j_1)$, and $P(Y_1 = C_i) = p_i$, where $0 \le \alpha \le 1$.<br>
+        (a) Find the marginal distribution of $Y_t$ for $t \ge 2$.<br>
+        (b) Find the conditional distribution of $Y_{t+h}$ given $Y_t$, for $h \ge 1$.<br>
+        (c) If $C_i = i$, find the correlation coefficient between $Y_t$ and $Y_{t+h}$ for $h \ge 1$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>The problem defines a discrete-time <strong>Markov Chain</strong> with a specific transition mechanism: with probability $\alpha$, the state remains exactly the same as the previous step, and with probability $(1-\alpha)$, the state is completely redrawn from a baseline distribution $\mathbf{p}$. We will use matrix algebra and the <strong>Law of Total Probability</strong> to prove that $\mathbf{p}$ is the stationary distribution. For the $h$-step transitions, we will utilize the properties of the transition matrix, specifically looking at the <strong>spectral decomposition</strong> or simply mathematical induction. Finally, we compute moments to find the covariance and correlation.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Part (a): Marginal Distribution of $Y_t$</strong></p>
+    <p>We proceed by mathematical induction. Base case: $P(Y_1 = C_i) = p_i$. Assume for $t-1$ that $P(Y_{t-1} = C_j) = p_j$. Using the Law of Total Probability for $Y_t$:</p>
+    <div class="math-display">
+        $$P(Y_t = C_i) = \sum_{j=1}^k P(Y_t = C_i | Y_{t-1} = C_j) P(Y_{t-1} = C_j)$$
+    </div>
+    <div class="math-display">
+        $$P(Y_t = C_i) = \sum_{j=1}^k \left[ (1-\alpha)p_i + \alpha \delta_{ij} \right] p_j$$
+    </div>
+    <p>where $\delta_{ij}$ is the Kronecker delta (equal to $I(i=j)$). Distributing the sum:</p>
+    <div class="math-display">
+        $$P(Y_t = C_i) = (1-\alpha)p_i \sum_{j=1}^k p_j + \alpha \sum_{j=1}^k \delta_{ij} p_j$$
+    </div>
+    <p>Since $\sum_{j=1}^k p_j = 1$ and the delta function collapses the sum to just the $j=i$ term:</p>
+    <div class="math-display">
+        $$P(Y_t = C_i) = (1-\alpha)p_i(1) + \alpha p_i = p_i - \alpha p_i + \alpha p_i = p_i$$
+    </div>
+    <p>Thus, by induction, the marginal distribution is $P(Y_t = C_i) = p_i$ for all $t \ge 1$.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (b): $h$-step Conditional Distribution</strong></p>
+    <p>Let $P$ be the transition matrix with elements $P_{ji} = (1-\alpha)p_i + \alpha \delta_{ji}$. In matrix notation, $P = (1-\alpha)\mathbf{1}\mathbf{p}^T + \alpha I$, where $\mathbf{1}$ is a column vector of ones, $\mathbf{p}$ is the column vector of probabilities, and $I$ is the identity matrix.</p>
+    <p>Let $Q = \mathbf{1}\mathbf{p}^T$. Note that $Q^2 = (\mathbf{1}\mathbf{p}^T)(\mathbf{1}\mathbf{p}^T) = \mathbf{1}(\mathbf{p}^T\mathbf{1})\mathbf{p}^T$. Since $\mathbf{p}$ is a probability vector, its sum is 1, so $\mathbf{p}^T\mathbf{1} = 1$. Thus, $Q^2 = Q$ (it is an idempotent matrix representing the steady-state). Because $I$ commutes with any matrix, we can easily find $P^h$:</p>
+    <p>We claim $P^h = (1-\alpha^h)Q + \alpha^h I$. We prove by induction. True for $h=1$. Assume for $h$. For $h+1$:</p>
+    <div class="math-display">
+        $$P^{h+1} = P^h P = \left( (1-\alpha^h)Q + \alpha^h I \right) \left( (1-\alpha)Q + \alpha I \right)$$
+    </div>
+    <div class="math-display">
+        $$P^{h+1} = (1-\alpha^h)(1-\alpha)Q^2 + (1-\alpha^h)\alpha Q + \alpha^h(1-\alpha)Q + \alpha^{h+1} I$$
+    </div>
+    <p>Substitute $Q^2 = Q$ and combine the $Q$ terms:</p>
+    <div class="math-display">
+        $$Q \left[ (1-\alpha^h - \alpha + \alpha^{h+1}) + (\alpha - \alpha^{h+1}) + (\alpha^h - \alpha^{h+1}) \right] = Q \left[ 1 - \alpha^{h+1} \right]$$
+    </div>
+    <p>Thus, $P^{h+1} = (1-\alpha^{h+1})Q + \alpha^{h+1} I$. Converting this back to probabilities:</p>
+    <div class="math-display">
+        $$P(Y_{t+h} = C_i | Y_t = C_j) = (1-\alpha^h)p_i + \alpha^h \delta_{ij}$$
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (c): Correlation Coefficient</strong></p>
+    <p>Let $C_i = i$. Let $\mu = E[Y_t] = \sum_{i=1}^k i p_i$ and $\sigma^2 = Var(Y_t) = \sum_{i=1}^k i^2 p_i - \mu^2$. Because the marginal distribution is stationary, $E[Y_t] = E[Y_{t+h}] = \mu$ and $Var(Y_t) = Var(Y_{t+h}) = \sigma^2$.</p>
+    <p>We need $E[Y_t Y_{t+h}]$. By the Law of Iterated Expectations:</p>
+    <div class="math-display">
+        $$E[Y_t Y_{t+h}] = E_{Y_t}\left[ Y_t E[Y_{t+h} | Y_t] \right]$$
+    </div>
+    <p>Calculate the inner conditional expectation using the $h$-step transition probabilities from part (b):</p>
+    <div class="math-display">
+        $$E[Y_{t+h} | Y_t = j] = \sum_{i=1}^k i \left[ (1-\alpha^h)p_i + \alpha^h \delta_{ij} \right] = (1-\alpha^h)\sum_{i=1}^k i p_i + \alpha^h j = (1-\alpha^h)\mu + \alpha^h j$$
+    </div>
+    <p>Therefore, $E[Y_{t+h} | Y_t] = (1-\alpha^h)\mu + \alpha^h Y_t$. Substitute this back into the outer expectation:</p>
+    <div class="math-display">
+        $$E[Y_t Y_{t+h}] = E\left[ Y_t \left( (1-\alpha^h)\mu + \alpha^h Y_t \right) \right] = (1-\alpha^h)\mu E[Y_t] + \alpha^h E[Y_t^2]$$
+    </div>
+    <div class="math-display">
+        $$E[Y_t Y_{t+h}] = (1-\alpha^h)\mu^2 + \alpha^h (\sigma^2 + \mu^2) = \mu^2 - \alpha^h\mu^2 + \alpha^h\sigma^2 + \alpha^h\mu^2 = \mu^2 + \alpha^h\sigma^2$$
+    </div>
+    <p>Now, compute the covariance:</p>
+    <div class="math-display">
+        $$Cov(Y_t, Y_{t+h}) = E[Y_t Y_{t+h}] - E[Y_t]E[Y_{t+h}] = (\mu^2 + \alpha^h\sigma^2) - \mu^2 = \alpha^h\sigma^2$$
+    </div>
+    <p>Finally, the correlation coefficient $\rho$ is:</p>
+    <div class="math-display">
+        $$Corr(Y_t, Y_{t+h}) = \frac{Cov(Y_t, Y_{t+h})}{\sqrt{Var(Y_t)Var(Y_{t+h})}} = \frac{\alpha^h\sigma^2}{\sigma \cdot \sigma} = \alpha^h$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The marginal distribution is strictly stationary: $P(Y_t = C_i) = p_i$.<br>
+        (b) The conditional distribution is $P(Y_{t+h} = C_i | Y_t = C_j) = (1-\alpha^h)p_i + \alpha^h I(i=j)$.<br>
+        (c) The correlation coefficient is $\rho = \alpha^h$.
+    </div>
+</div>
+
+<div class="question-section" id="q6">
+    <h2>📌 Q6 Fixed Effects Additive Block Design (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Consider a block design in $b=v$ blocks of size $k=v+1$ with $v$ treatments such that the $i$-th treatment occurs twice in the $i$-th block and all other $v-1$ treatments occur once. Assume a fixed effects additive model.<br>
+        (a) Find maximum number of estimable independent pairwise differences. Is it connected?<br>
+        (b) Is the design orthogonal? Give reasons.<br>
+        (c) Obtain the C-matrix. Find the BLUE of all estimable pairwise differences along with their variance.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem analyzes the properties of an incomplete/irregular block design using the <strong>Incidence Matrix $N$</strong> and the <strong>Information Matrix $C$</strong>. We first construct $N$, where $N_{ij}$ denotes the occurrences of treatment $i$ in block $j$. Connectedness is determined by the rank of $C$ or by examining the incidence graph. Orthogonality requires a strict proportional relationship $N_{ij} = r_i k_j / n$. Finally, to find the Best Linear Unbiased Estimators (BLUE), we construct the matrix $C = R - NK^{-1}N^T$, analyze its eigenvalues, and solve the normal equations $C\hat{\tau} = Q$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Construct the Incidence Matrix $N$</strong></p>
+    <p>There are $v$ treatments and $v$ blocks. The elements of $N$ are $N_{ii} = 2$ and $N_{ij} = 1$ for $i \neq j$. Thus, $N$ can be decomposed as:</p>
+    <div class="math-display">
+        $$N = J_v + I_v$$
+    </div>
+    <p>where $J_v$ is a $v \times v$ matrix of all ones, and $I_v$ is the $v \times v$ identity matrix.
+    <br>Replication sizes: $r_i = \sum_{j} N_{ij} = 2 + (v-1)1 = v+1$. So $R = (v+1)I_v$.
+    <br>Block sizes: $k_j = \sum_{i} N_{ij} = v+1$. So $K = (v+1)I_v$.
+    <br>Total observations: $n = \sum r_i = v(v+1)$.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (a): Connectedness and Estimability</strong></p>
+    <p>A design is connected if there is a path between any two treatments in its incidence graph. Since $N_{ij} \ge 1$ for all $i, j$, every treatment appears in every block. This trivially forms a fully connected graph. Because the design is connected, the maximum number of linearly independent estimable pairwise differences of treatment effects is equal to its degrees of freedom:</p>
+    <div class="math-display">
+        $$\text{Max Estimable Differences} = v - 1$$
+    </div>
+
+    <p><strong>Part (b): Orthogonality</strong></p>
+    <p>A block design is orthogonal if and only if the incidence matrix satisfies $N_{ij} = \frac{r_i k_j}{n}$ for all $i, j$. Let's test this condition:</p>
+    <div class="math-display">
+        $$\frac{r_i k_j}{n} = \frac{(v+1)(v+1)}{v(v+1)} = \frac{v+1}{v} = 1 + \frac{1}{v}$$
+    </div>
+    <p>However, from our design definition, $N_{ij}$ only takes integer values of 1 or 2. Since $v$ is a positive integer (typically $v \ge 2$), $1 + 1/v$ is fractional and strictly between 1 and 2. Thus $N_{ij} \neq r_i k_j / n$. Therefore, the design is <strong>not orthogonal</strong>.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (c): Information Matrix C and BLUE</strong></p>
+    <p>The C-matrix is defined as $C = R - NK^{-1}N^T$. Substituting our defined matrices:</p>
+    <div class="math-display">
+        $$C = (v+1)I - (J + I) \left[\frac{1}{v+1} I\right] (J + I)^T = (v+1)I - \frac{1}{v+1}(J + I)^2$$
+    </div>
+    <p>Since $J^2 = vJ$, expanding the square gives $(J+I)^2 = J^2 + 2J + I = (v+2)J + I$.</p>
+    <div class="math-display">
+        $$C = (v+1)I - \frac{1}{v+1} \left[ (v+2)J + I \right] = \left( (v+1) - \frac{1}{v+1} \right)I - \frac{v+2}{v+1}J$$
+    </div>
+    <div class="math-display">
+        $$C = \frac{(v+1)^2 - 1}{v+1}I - \frac{v+2}{v+1}J = \frac{v^2 + 2v}{v+1}I - \frac{v+2}{v+1}J = \frac{v+2}{v+1} \left( vI - J \right)$$
+    </div>
+    <p>This $C$ matrix is totally symmetric (all diagonal elements are equal, all off-diagonals are equal). To find the BLUE $\hat{\tau}$, we solve the reduced normal equations $C\hat{\tau} = \mathbf{Q}$, where $\mathbf{Q} = \mathbf{T} - NK^{-1}\mathbf{B}$ (adjusted treatment totals). To solve, we impose the standard restriction $\sum \hat{\tau}_i = 0$, which implies $J\hat{\tau} = \mathbf{0}$.</p>
+    <div class="math-display">
+        $$\frac{v+2}{v+1} (vI - J)\hat{\tau} = \mathbf{Q} \implies \frac{v(v+2)}{v+1}\hat{\tau} - \mathbf{0} = \mathbf{Q} \implies \hat{\tau} = \frac{v+1}{v(v+2)}\mathbf{Q}$$
+    </div>
+    <p>The BLUE of a pairwise difference $\tau_i - \tau_j$ is simply:</p>
+    <div class="math-display">
+        $$\hat{\tau}_i - \hat{\tau}_j = \frac{v+1}{v(v+2)} (Q_i - Q_j)$$
+    </div>
+    <p>The variance of this estimator for any normalized contrast $\mathbf{c}^T \hat{\tau}$ is $\sigma^2 \mathbf{c}^T C^{-} \mathbf{c}$, where $C^{-}$ is the generalized inverse. Because the non-zero eigenvalues of $C$ are all equal to $\theta = \frac{v(v+2)}{v+1}$, the variance of the difference between any two treatments is $\frac{2\sigma^2}{\theta}$:</p>
+    <div class="math-display">
+        $$Var(\hat{\tau}_i - \hat{\tau}_j) = \frac{2(v+1)}{v(v+2)}\sigma^2$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) Max estimable differences = $v-1$. The design is fully connected.<br>
+        (b) Not orthogonal, because $N_{ij} \in \{1, 2\}$, but $\frac{r_i k_j}{n} = 1 + \frac{1}{v}$, which does not equal $N_{ij}$.<br>
+        (c) $C = \frac{v+2}{v+1}(vI - J)$. The BLUE is $\hat{\tau}_i - \hat{\tau}_j = \frac{v+1}{v(v+2)}(Q_i - Q_j)$, with Variance = $\frac{2(v+1)}{v(v+2)}\sigma^2$.
+    </div>
+</div>
+
+
+<div class="question-section" id="q7">
+    <h2>📌 Q7 Independence on a Uniform Unit Circle (15 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose that $(X,Y)$ follows a uniform distribution on the unit circle with the centre at the origin. Then prove or disprove the following statements.
+        <br>(a) $|X|$ and $|Y|$ are independent.
+        <br>(b) $\text{Sign}(X)$ and $\text{Sign}(Y)$ are independent, where $\text{Sign}(t) = 1, 0, -1$, respectively, for $t > 0, t = 0$, and $t < 0$.
+        <br>(c) $|X|$ and $\text{Sign}(X)$ are independent.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>The random vector $(X,Y)$ is uniformly distributed over the disk $D = \{(x,y) : x^2 + y^2 \leq 1\}$. The joint PDF is $f(x,y) = \frac{1}{\pi}$ on $D$, and $0$ otherwise. Because the boundary of the support region for $y$ depends on $x$ (specifically, $-\sqrt{1-x^2} \leq y \leq \sqrt{1-x^2}$), $X$ and $Y$ are naturally dependent. We will use the definition of independence—$P(A \cap B) = P(A)P(B)$—and geometric probability (area ratios) to rigorously prove or disprove each statement.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Part (a): Independence of $|X|$ and $|Y|$</strong></p>
+    <p>To disprove independence, we only need a single counter-example where the joint probability does not equal the product of the marginal probabilities. Let's look at the extreme edges of the support.</p>
+    <div class="math-display">
+        $$P\left(|X| > \frac{1}{\sqrt{2}}\right) > 0 \quad \text{and} \quad P\left(|Y| > \frac{1}{\sqrt{2}}\right) > 0$$
+    </div>
+    <p>Both of these probabilities are strictly positive (they correspond to the areas of circular segments cut off by vertical and horizontal lines, respectively). However, consider their intersection:</p>
+    <div class="math-display">
+        $$P\left(|X| > \frac{1}{\sqrt{2}} \text{ and } |Y| > \frac{1}{\sqrt{2}}\right) = P\left(X^2 > \frac{1}{2} \text{ and } Y^2 > \frac{1}{2}\right)$$
+    </div>
+    <p>If both conditions hold, then $X^2 + Y^2 > \frac{1}{2} + \frac{1}{2} = 1$. But the support of our distribution strictly requires $X^2 + Y^2 \leq 1$. Therefore, the probability of this intersection is exactly $0$.</p>
+    <div class="math-display">
+        $$0 = P\left(|X| > \frac{1}{\sqrt{2}} \cap |Y| > \frac{1}{\sqrt{2}}\right) \neq P\left(|X| > \frac{1}{\sqrt{2}}\right) P\left(|Y| > \frac{1}{\sqrt{2}}\right) > 0$$
+    </div>
+    <p><strong>Conclusion: Disproved. $|X|$ and $|Y|$ are dependent.</strong></p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (b): Independence of $\text{Sign}(X)$ and $\text{Sign}(Y)$</strong></p>
+    <p>Since the boundary of the circle has area $0$, $P(X=0) = P(Y=0) = 0$. The Sign functions effectively take values in $\{-1, 1\}$. By the radial symmetry of the circle across the axes, the probability of falling into any specific quadrant is equal to the area of that quadrant divided by the total area.</p>
+    <div class="math-display">
+        $$P(\text{Sign}(X) = 1, \text{Sign}(Y) = 1) = P(X > 0, Y > 0) = \frac{\text{Area of Quarter Circle}}{\text{Area of Full Circle}} = \frac{\pi/4}{\pi} = \frac{1}{4}$$
+    </div>
+    <p>Now we find the marginal probabilities:</p>
+    <div class="math-display">
+        $$P(\text{Sign}(X) = 1) = P(X > 0) = \frac{\text{Area of Right Half}}{\pi} = \frac{\pi/2}{\pi} = \frac{1}{2}$$
+    </div>
+    <div class="math-display">
+        $$P(\text{Sign}(Y) = 1) = P(Y > 0) = \frac{1}{2}$$
+    </div>
+    <p>Checking the independence condition:</p>
+    <div class="math-display">
+        $$P(\text{Sign}(X) = 1, \text{Sign}(Y) = 1) = \frac{1}{4} = \left(\frac{1}{2}\right)\left(\frac{1}{2}\right) = P(\text{Sign}(X) = 1) P(\text{Sign}(Y) = 1)$$
+    </div>
+    <p>By symmetry, this holds for all four combinations of signs $(1,1), (1,-1), (-1,1), (-1,-1)$.</p>
+    <p><strong>Conclusion: Proved. $\text{Sign}(X)$ and $\text{Sign}(Y)$ are independent.</strong></p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (c): Independence of $|X|$ and $\text{Sign}(X)$</strong></p>
+    <p>We need to check if the conditional distribution of $|X|$ given $\text{Sign}(X)$ is the same as the marginal distribution of $|X|$. Let $0 \leq x \leq 1$.</p>
+    <div class="math-display">
+        $$P(|X| \leq x \mid \text{Sign}(X) = 1) = \frac{P(|X| \leq x \text{ and } X > 0)}{P(X > 0)} = \frac{P(0 < X \leq x)}{1/2}$$
+    </div>
+    <p>By symmetry of the unit circle across the y-axis, the probability mass on the right side ($X > 0$) perfectly mirrors the left side ($X < 0$).</p>
+    <div class="math-display">
+        $$P(0 < X \leq x) = P(-x \leq X < 0) = \frac{1}{2} P(-x \leq X \leq x) = \frac{1}{2} P(|X| \leq x)$$
+    </div>
+    <p>Substitute this back into the conditional probability:</p>
+    <div class="math-display">
+        $$P(|X| \leq x \mid \text{Sign}(X) = 1) = \frac{\frac{1}{2} P(|X| \leq x)}{1/2} = P(|X| \leq x)$$
+    </div>
+    <p>Similarly, $P(|X| \leq x \mid \text{Sign}(X) = -1) = P(|X| \leq x)$. Because the conditional CDF equals the marginal CDF regardless of the sign, the variables are independent.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) Disproved. They are dependent due to the coupled support boundary $X^2 + Y^2 \leq 1$.<br>
+        (b) Proved. Quadrant probabilities naturally factorize into marginal half-plane probabilities.<br>
+        (c) Proved. The magnitude's distribution is perfectly symmetric and identical on both the positive and negative halves of the $x$-axis.
+    </div>
+</div>
+
+<div class="question-section" id="q8">
+    <h2>📌 Q8 Maximum Likelihood and Consistency on a Diamond Support (15 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose that $\begin{bmatrix} X_1 \\ Y_1 \end{bmatrix}, \begin{bmatrix} X_2 \\ Y_2 \end{bmatrix}, \dots, \begin{bmatrix} X_n \\ Y_n \end{bmatrix}$ are independent and identically distributed as uniform random vectors on the square with vertices $(\theta, 0), (0, \theta), (-\theta, 0), (0, -\theta)$.
+        <br>(a) Find the Maximum Likelihood Estimator of $\theta$.
+        <br>(b) Show that the estimator in (a) converges to $\theta$ in probability as $n \to \infty$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This is a <strong>non-regular estimation problem</strong> because the parameter $\theta$ determines the boundary of the support. The square described is a "diamond" shape centered at the origin, defined mathematically by the inequality $|x| + |y| \leq \theta$. We will construct the likelihood function, which will be a strictly decreasing function of $\theta$ subject to an indicator function bounding it from below. For part (b), we will prove consistency by deriving the Cumulative Distribution Function (CDF) of the sufficient statistic and evaluating the limit of the probability $P(|\hat{\theta} - \theta| > \epsilon)$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Part (a): Finding the MLE</strong></p>
+    <p>First, calculate the area of the square support region. The square consists of 4 right-angled triangles with base $\theta$ and height $\theta$.</p>
+    <div class="math-display">
+        $$\text{Area} = 4 \times \left( \frac{1}{2} \cdot \theta \cdot \theta \right) = 2\theta^2$$
+    </div>
+    <p>Because the distribution is uniform, the joint PDF for a single observation is:</p>
+    <div class="math-display">
+        $$f(x_i, y_i; \theta) = \begin{cases} \frac{1}{2\theta^2} & \text{if } |x_i| + |y_i| \leq \theta \\ 0 & \text{otherwise} \end{cases}$$
+    </div>
+    <p>The likelihood function for the sample of $n$ i.i.d. observations is the product of the individual PDFs:</p>
+    <div class="math-display">
+        $$L(\theta) = \prod_{i=1}^n \frac{1}{2\theta^2} \mathbf{1}_{\{|x_i| + |y_i| \leq \theta\}} = \frac{1}{2^n \theta^{2n}} \mathbf{1}_{\{ \max_{1 \leq i \leq n} (|x_i| + |y_i|) \leq \theta \}}$$
+    </div>
+    <p>For $\theta \geq \max_{i} (|x_i| + |y_i|)$, the function $L(\theta) = \frac{1}{2^n \theta^{2n}}$ is a strictly decreasing function of $\theta$. To maximize $L(\theta)$, we must choose the smallest possible value for $\theta$ that satisfies the indicator condition.</p>
+    <div class="math-display">
+        $$\hat{\theta} = \max_{1 \leq i \leq n} (|X_i| + |Y_i|)$$
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (b): Convergence in Probability (Consistency)</strong></p>
+    <p>Let $Z_i = |X_i| + |Y_i|$. Thus, $\hat{\theta} = \max(Z_1, Z_2, \dots, Z_n) = Z_{(n)}$. We must show that for any $\epsilon > 0$, $\lim_{n \to \infty} P(|\hat{\theta} - \theta| \geq \epsilon) = 0$.</p>
+    
+    <p>First, we find the CDF of $Z_i$. For $0 \leq z \leq \theta$, the event $Z_i \leq z$ corresponds to the point falling inside a smaller diamond with vertices at $(\pm z, 0)$ and $(0, \pm z)$. The area of this smaller diamond is $2z^2$. By geometric probability:</p>
+    <div class="math-display">
+        $$F_Z(z) = P(Z_i \leq z) = \frac{\text{Area}(|X| + |Y| \leq z)}{\text{Total Area}} = \frac{2z^2}{2\theta^2} = \left(\frac{z}{\theta}\right)^2$$
+    </div>
+
+    <p>Now, we evaluate the probability of the estimator deviating from the true parameter. Since $Z_i \leq \theta$ by definition, the maximum order statistic $\hat{\theta}$ can never exceed $\theta$. Therefore, $|\hat{\theta} - \theta| = \theta - \hat{\theta}$.</p>
+    <div class="math-display">
+        $$P(|\hat{\theta} - \theta| \geq \epsilon) = P(\theta - \hat{\theta} \geq \epsilon) = P(\hat{\theta} \leq \theta - \epsilon)$$
+    </div>
+    <p>The maximum of the sample is less than or equal to $\theta - \epsilon$ if and only if <em>every</em> individual $Z_i$ is less than or equal to $\theta - \epsilon$. Because the observations are independent:</p>
+    <div class="math-display">
+        $$P(\hat{\theta} \leq \theta - \epsilon) = P(Z_1 \leq \theta - \epsilon, \dots, Z_n \leq \theta - \epsilon) = \prod_{i=1}^n P(Z_i \leq \theta - \epsilon)$$
+    </div>
+    <div class="math-display">
+        $$= \left[ F_Z(\theta - \epsilon) \right]^n = \left[ \left( \frac{\theta - \epsilon}{\theta} \right)^2 \right]^n = \left( 1 - \frac{\epsilon}{\theta} \right)^{2n}$$
+    </div>
+
+    <p>Since $\epsilon > 0$, we have $0 \leq 1 - \frac{\epsilon}{\theta} < 1$. Taking the limit as $n \to \infty$ of a constant less than 1 raised to a growing power yields zero:</p>
+    <div class="math-display">
+        $$\lim_{n \to \infty} P(|\hat{\theta} - \theta| \geq \epsilon) = \lim_{n \to \infty} \left( 1 - \frac{\epsilon}{\theta} \right)^{2n} = 0$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) The MLE is the maximum $L_1$ norm of the sample: $\hat{\theta} = \max_{1 \leq i \leq n} (|X_i| + |Y_i|)$.<br>
+        (b) By deriving the CDF of the order statistic and taking the limit, we rigorously established that $P(|\hat{\theta} - \theta| \geq \epsilon) \to 0$, proving that $\hat{\theta} \xrightarrow{P} \theta$ (the estimator is consistent).
+    </div>
+</div>
+
+
+</div>
+
+</body>
+</html>
