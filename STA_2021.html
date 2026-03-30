@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STA 2022 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STA (Statistics A) 2021 — Model Solutions</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Real_Analysis_%26_Linear_Algebra-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STA-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+
+
+
+<div class="question-section" id="q1">
+    <h2>📌 Q1 Limits and Sequence Convergence (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose $\{a_n : n \ge 1\}$ and $\{b_n : n \ge 1\}$ are two sequences of positive real numbers such that $\limsup_{n \to \infty} \frac{1}{n} \log b_n = -\infty$. Show that:
+        <div class="math-display">
+            $$\liminf_{n \to \infty} \frac{\log(a_n + b_n)}{n} = \liminf_{n \to \infty} \frac{\log a_n}{n}$$
+        </div>
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem asks us to prove an equality of limits inferior by proving two inequalities: $LHS \ge RHS$ and $LHS \le RHS$. The "greater than or equal to" direction is trivial because adding positive numbers strictly increases the logarithm. For the "less than or equal to" direction, we leverage the asymptotic behavior of $b_n$. The condition $\limsup \frac{1}{n} \log b_n = -\infty$ strictly means that $b_n$ decays to 0 faster than any exponential function. We can use the inequality $a_n + b_n \le 2\max(a_n, b_n)$ to bound the sequence and show that the rapidly shrinking $b_n$ term cannot pull the limit inferior above the limit inferior generated by $a_n$ alone.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Establish the Trivial Lower Bound</strong></p>
+    <p>Since both $a_n$ and $b_n$ are positive sequences, it is strictly true that $a_n + b_n > a_n$ for all $n \ge 1$. Because the natural logarithm is a strictly monotonically increasing function, we have:</p>
+    <div class="math-display">
+        $$\log(a_n + b_n) > \log(a_n)$$
+    </div>
+    <p>Dividing by $n$ (which is strictly positive) preserves the inequality:</p>
+    <div class="math-display">
+        $$\frac{\log(a_n + b_n)}{n} > \frac{\log(a_n)}{n}$$
+    </div>
+    <p>Taking the limit inferior of both sides yields the first critical inequality:</p>
+    <div class="math-display">
+        $$\liminf_{n \to \infty} \frac{\log(a_n + b_n)}{n} \ge \liminf_{n \to \infty} \frac{\log(a_n)}{n}$$
+    </div>
+    
+    <p><strong>Step 2: Establish the Upper Bound Relationship</strong></p>
+    <p>We need to show the reverse inequality. We begin with a basic algebraic bound on the sum of two positive numbers:</p>
+    <div class="math-display">
+        $$a_n + b_n \le 2 \max(a_n, b_n)$$
+    </div>
+    <p>Taking the logarithm and dividing by $n$ gives:</p>
+    <div class="math-display">
+        $$\frac{\log(a_n + b_n)}{n} \le \frac{\log(2) + \max(\log a_n, \log b_n)}{n} = \frac{\log 2}{n} + \max\left(\frac{\log a_n}{n}, \frac{\log b_n}{n}\right)$$
+    </div>
+    <p>Taking the limit inferior of both sides:</p>
+    <div class="math-display">
+        $$\liminf_{n \to \infty} \frac{\log(a_n + b_n)}{n} \le \liminf_{n \to \infty} \left[ \frac{\log 2}{n} + \max\left(\frac{\log a_n}{n}, \frac{\log b_n}{n}\right) \right]$$
+    </div>
+    <p>Since $\lim_{n \to \infty} \frac{\log 2}{n} = 0$, this simplifies to:</p>
+    <div class="math-display">
+        $$\liminf_{n \to \infty} \frac{\log(a_n + b_n)}{n} \le \liminf_{n \to \infty} \max\left(\frac{\log a_n}{n}, \frac{\log b_n}{n}\right)$$
+    </div>
+
+    <p><strong>Step 3: Analyze the Behavior of the Maxima</strong></p>
+    <p>Let $x_n = \frac{\log a_n}{n}$, $y_n = \frac{\log b_n}{n}$, and $\alpha = \liminf_{n \to \infty} x_n$. We are given that $\limsup_{n \to \infty} y_n = -\infty$, which implies that $\lim_{n \to \infty} y_n = -\infty$. We want to prove that $\liminf_{n \to \infty} \max(x_n, y_n) \le \alpha$.</p>
+    <p>By the definition of the limit inferior, there exists a subsequence $\{x_{n_k}\}$ such that:</p>
+    <div class="math-display">
+        $$\lim_{k \to \infty} x_{n_k} = \alpha$$
+    </div>
+    <p>Let us evaluate the sequence $\max(x_{n_k}, y_{n_k})$ along this specific subsequence. Since $y_n \to -\infty$, it must be true that any subsequence $y_{n_k} \to -\infty$.</p>
+    <ul>
+        <li><strong>Case A ($\alpha > -\infty$):</strong> For sufficiently large $k$, $x_{n_k}$ will be close to the finite value $\alpha$, while $y_{n_k}$ will be an extremely large negative number. Therefore, eventually $\max(x_{n_k}, y_{n_k}) = x_{n_k}$. Taking the limit: $\lim_{k \to \infty} \max(x_{n_k}, y_{n_k}) = \lim_{k \to \infty} x_{n_k} = \alpha$.</li>
+        <li><strong>Case B ($\alpha = -\infty$):</strong> Both $x_{n_k} \to -\infty$ and $y_{n_k} \to -\infty$. The maximum of two sequences tending to negative infinity also tends to negative infinity. Thus, $\lim_{k \to \infty} \max(x_{n_k}, y_{n_k}) = -\infty = \alpha$.</li>
+    </ul>
+    <p>Because we found a subsequence of $\max(x_n, y_n)$ that converges strictly to $\alpha$, the overall limit inferior of the sequence cannot exceed $\alpha$:</p>
+    <div class="math-display">
+        $$\liminf_{n \to \infty} \max(x_n, y_n) \le \alpha = \liminf_{n \to \infty} \frac{\log a_n}{n}$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> By combining the results from Step 1 and Step 3, we have successfully sandwiched the limit inferior: 
+        $$\liminf_{n \to \infty} \frac{\log a_n}{n} \le \liminf_{n \to \infty} \frac{\log(a_n + b_n)}{n} \le \liminf_{n \to \infty} \frac{\log a_n}{n}$$
+        This proves that the two limits inferior are exactly equal.
+    </div>
+</div>
+
+<div class="question-section" id="q2">
+    <h2>📌 Q2 Algebraic Sets and Subspaces (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $T = \{(x, y, z) \in \mathbb{R}^3 : 5x^2 + y^2 + z^2 + 4xy + 2xz = 0\}$. Show that $T$ is a subspace of $\mathbb{R}^3$, and find a basis of $T$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>At first glance, $T$ is defined by a quadratic polynomial, which generally outlines a conic or a quadric surface (like a cone or ellipsoid)—not a linear subspace. However, in $\mathbb{R}^n$, if a quadratic form can be expressed purely as a sum of perfect squares equal to zero, the only solution over the real numbers is when every individual squared term is exactly zero. This forces the quadratic constraint to collapse into a system of homogeneous linear equations. The solution set of any homogeneous linear system is the null space of a matrix, which is inherently a valid vector subspace.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Algebraic Manipulation of the Condition</strong></p>
+    <p>We are given the governing equation for $T$:</p>
+    <div class="math-display">
+        $$5x^2 + y^2 + z^2 + 4xy + 2xz = 0$$
+    </div>
+    <p>We want to complete the square by grouping terms to form perfect binomial squares. Notice the cross terms $4xy$ and $2xz$. Let's try to construct squares involving $x$ with $y$, and $x$ with $z$:</p>
+    <div class="math-display">
+        $$(2x + y)^2 = 4x^2 + 4xy + y^2$$
+    </div>
+    <div class="math-display">
+        $$(x + z)^2 = x^2 + 2xz + z^2$$
+    </div>
+    <p>Let's add these two expansions together to see what we get:</p>
+    <div class="math-display">
+        $$(4x^2 + 4xy + y^2) + (x^2 + 2xz + z^2) = (4x^2 + x^2) + y^2 + z^2 + 4xy + 2xz = 5x^2 + y^2 + z^2 + 4xy + 2xz$$
+    </div>
+    <p>This matches our original equation perfectly! Therefore, we can rewrite the set $T$ constraint as:</p>
+    <div class="math-display">
+        $$(2x + y)^2 + (x + z)^2 = 0$$
+    </div>
+    
+    <p><strong>Step 2: Proving it is a Subspace</strong></p>
+    <p>Because $x, y, z \in \mathbb{R}$, the squares of real numbers must be non-negative: $(2x+y)^2 \ge 0$ and $(x+z)^2 \ge 0$. The sum of two non-negative numbers can only be zero if both numbers are individually zero. Thus, the condition reduces to:</p>
+    <div class="math-display">
+        $$2x + y = 0 \quad \text{and} \quad x + z = 0$$
+    </div>
+    <p>The set $T$ is therefore mathematically identical to the solution set of the homogeneous linear system:</p>
+    <div class="math-display">
+        $$T = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in \mathbb{R}^3 : \begin{pmatrix} 2 & 1 & 0 \\ 1 & 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \right\}$$
+    </div>
+    <p>Because $T$ represents the null space (or kernel) of a $2 \times 3$ matrix, it is, by definition of linear algebra, a valid linear subspace of $\mathbb{R}^3$.</p>
+
+    <p><strong>Step 3: Finding the Basis</strong></p>
+    <p>To find the basis, we parameterize the solution to the linear system. From our two equations, we can express $y$ and $z$ purely in terms of the free variable $x$:</p>
+    <div class="math-display">
+        $$y = -2x \quad \text{and} \quad z = -x$$
+    </div>
+    <p>A general vector in the subspace $T$ looks like:</p>
+    <div class="math-display">
+        $$\mathbf{v} = \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} x \\ -2x \\ -x \end{pmatrix} = x \begin{pmatrix} 1 \\ -2 \\ -1 \end{pmatrix}, \quad \text{for any } x \in \mathbb{R}$$
+    </div>
+    <p>This shows that $T$ is a 1-dimensional subspace (a line passing through the origin) spanned by a single non-zero vector.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> We established $T$ is the null space of a linear system, proving it is a valid subspace. A basis for $T$ is the set containing the single vector: 
+        $$\mathcal{B} = \left\{ (1, -2, -1)^T \right\}$$
+    </div>
+</div>
+
+<div class="question-section" id="q3">
+    <h2>📌 Q3 Eigenvalues of Block Matrices and Kronecker Products (12 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Consider a matrix $C$ of order $mn \times mn$, defined as an $n \times n$ grid of $m \times m$ blocks: $C_{ii} = A$ and $C_{ij} = B$ for $i \neq j$. Here, $A_{m \times m} = aI_m + bJ_m$ and $B_{m \times m} = dJ_m$, where $I$ is the identity and $J$ is the matrix of all ones. Obtain the eigenvalues of $C$ along with their algebraic multiplicities.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem is a beautiful application of <strong>Kronecker Products (Tensor Products)</strong>. The structure of the $mn \times mn$ matrix $C$ allows us to decompose it entirely using the Kronecker product $\otimes$. Once rewritten as a sum of Kronecker products involving $I$ and $J$ matrices, we can systematically construct the eigenvectors of $C$ by taking the tensor products of the known eigenvectors of $J_n$ and $J_m$. Because the $J$ matrix has very simple eigen-properties (one eigenvalue of 'size', the rest zero), this dramatically simplifies finding the spectrum of $C$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Express $C$ using Kronecker Products</strong></p>
+    <p>The block matrix $C$ can be written using the identity matrix $I_n$ and the all-ones matrix $J_n$:</p>
+    <div class="math-display">
+        $$C = I_n \otimes A + (J_n - I_n) \otimes B = I_n \otimes (A - B) + J_n \otimes B$$
+    </div>
+    <p>Substitute the definitions $A = aI_m + bJ_m$ and $B = dJ_m$:</p>
+    <div class="math-display">
+        $$A - B = aI_m + (b - d)J_m$$
+    </div>
+    <p>Plugging this back into $C$, and using the distributive property of the Kronecker product:</p>
+    <div class="math-display">
+        $$C = I_n \otimes \left( aI_m + (b-d)J_m \right) + J_n \otimes (dJ_m)$$
+    </div>
+    <div class="math-display">
+        $$C = a(I_n \otimes I_m) + (b-d)(I_n \otimes J_m) + d(J_n \otimes J_m)$$
+    </div>
+    
+    <p><strong>Step 2: Identify Eigenvectors of the Component Matrices</strong></p>
+    <p>Recall the eigen-structure of the $k \times k$ matrix of all ones, $J_k$:</p>
+    <ul>
+        <li>It has one eigenvector $\mathbf{1}_k$ (a vector of all ones) with eigenvalue $k$.</li>
+        <li>It has a $(k-1)$-dimensional eigenspace orthogonal to $\mathbf{1}_k$, corresponding to the eigenvalue $0$. Let's denote a vector in this space as $\mathbf{v}$ where $J_k \mathbf{v} = \mathbf{0}$.</li>
+    </ul>
+
+    <p><strong>Step 3: Construct the Eigenspaces for $C$</strong></p>
+    <p>Since the mixed product property implies $(U \otimes V)(x \otimes y) = (Ux) \otimes (Vy)$, we can build eigenvectors for $C$ by pairing the eigenvectors of the $n$-space and $m$-space.</p>
+
+    <p><em>Case 1: The "All Ones" Vector Space (Dimension: $1 \times 1 = 1$)</em><br>
+    Let $\mathbf{w}_1 = \mathbf{1}_n \otimes \mathbf{1}_m$. <br>
+    $C \mathbf{w}_1 = a(I_n\mathbf{1}_n \otimes I_m\mathbf{1}_m) + (b-d)(I_n\mathbf{1}_n \otimes J_m\mathbf{1}_m) + d(J_n\mathbf{1}_n \otimes J_m\mathbf{1}_m)$<br>
+    $C \mathbf{w}_1 = a(\mathbf{1}_n \otimes \mathbf{1}_m) + (b-d)(\mathbf{1}_n \otimes m\mathbf{1}_m) + d(n\mathbf{1}_n \otimes m\mathbf{1}_m)$<br>
+    $C \mathbf{w}_1 = \left[ a + m(b-d) + mnd \right] \mathbf{w}_1 = \left[ a + mb + m(n-1)d \right] \mathbf{w}_1$.<br>
+    This provides our first eigenvalue.</p>
+
+    <p><em>Case 2: Null space in $n$, Ones in $m$ (Dimension: $(n-1) \times 1 = n - 1$)</em><br>
+    Let $\mathbf{w}_2 = \mathbf{x} \otimes \mathbf{1}_m$, where $J_n \mathbf{x} = \mathbf{0}$. <br>
+    $C \mathbf{w}_2 = a(\mathbf{x} \otimes \mathbf{1}_m) + (b-d)(\mathbf{x} \otimes m\mathbf{1}_m) + d(\mathbf{0} \otimes m\mathbf{1}_m)$<br>
+    $C \mathbf{w}_2 = \left[ a + m(b-d) \right] (\mathbf{x} \otimes \mathbf{1}_m)$.<br>
+    This provides our second eigenvalue.</p>
+
+    <p><em>Case 3: Ones in $n$, Null space in $m$ (Dimension: $1 \times (m-1) = m - 1$)</em><br>
+    Let $\mathbf{w}_3 = \mathbf{1}_n \otimes \mathbf{y}$, where $J_m \mathbf{y} = \mathbf{0}$. <br>
+    $C \mathbf{w}_3 = a(\mathbf{1}_n \otimes \mathbf{y}) + (b-d)(\mathbf{1}_n \otimes \mathbf{0}) + d(n\mathbf{1}_n \otimes \mathbf{0})$<br>
+    $C \mathbf{w}_3 = a (\mathbf{1}_n \otimes \mathbf{y})$.<br>
+    This provides the eigenvalue $a$ with a baseline multiplicity of $m-1$.</p>
+
+    <p><em>Case 4: Null space in both (Dimension: $(n-1) \times (m-1)$)</em><br>
+    Let $\mathbf{w}_4 = \mathbf{x} \otimes \mathbf{y}$, where $J_n \mathbf{x} = \mathbf{0}$ and $J_m \mathbf{y} = \mathbf{0}$. <br>
+    $C \mathbf{w}_4 = a(\mathbf{x} \otimes \mathbf{y}) + (b-d)(\mathbf{x} \otimes \mathbf{0}) + d(\mathbf{0} \otimes \mathbf{0})$<br>
+    $C \mathbf{w}_4 = a (\mathbf{x} \otimes \mathbf{y})$.<br>
+    This provides the same eigenvalue $a$, adding $(n-1)(m-1)$ to its multiplicity.</p>
+
+    <p><strong>Step 4: Combine Multiplicities</strong></p>
+    <p>The total algebraic multiplicity for the eigenvalue $\lambda = a$ is the sum of dimensions from Case 3 and Case 4:<br>
+    $(m - 1) + (n - 1)(m - 1) = (m - 1)(1 + n - 1) = n(m - 1)$.<br>
+    Checking the total dimensions: $1 + (n-1) + n(m-1) = n + nm - n = nm$, which perfectly matches the size of matrix $C$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The spectrum of matrix $C$ consists of three distinct eigenvalues with the following algebraic multiplicities:
+        <br>1) $\lambda_1 = a + mb + m(n-1)d$ with multiplicity $1$.
+        <br>2) $\lambda_2 = a + m(b-d)$ with multiplicity $n - 1$.
+        <br>3) $\lambda_3 = a$ with multiplicity $n(m - 1)$.
+    </div>
+</div>
+
+<div class="question-section" id="q4">
+    <h2>📌 Q4 Order Statistics and Exponential Spacings (12 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X_1, X_2, X_3, X_4$ be an independent and identically distributed sample from an exponential distribution with mean $\lambda > 0$. Find the correlation coefficient between $X_{(2)}$ and $X_{(3)}$, where $X_{(r)}$ is the $r$-th order statistic.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>To find the correlation, we could attempt to calculate the double integral over the joint PDF of two order statistics, but this is computationally heavy. A far more elegant approach relies on the <strong>Memoryless Property of the Exponential Distribution</strong> (also known as the Rényi representation). It states that the "spacings" between consecutive exponential order statistics are themselves independent exponential random variables. Because $X_{(3)}$ can be written simply as $X_{(2)}$ plus an independent spacing, calculating their covariance becomes a straightforward exercise in variance addition.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: The Rényi Representation of Spacings</strong></p>
+    <p>Let $D_i = X_{(i)} - X_{(i-1)}$ be the spacing between the $i$-th and $(i-1)$-th order statistic (with $X_{(0)} \equiv 0$). A fundamental theorem of order statistics states that for a sample of size $n$ from an Exponential distribution with mean $\lambda$, the spacings $D_1, D_2, \dots, D_n$ are strictly independent random variables, and each $D_i$ follows an exponential distribution with mean $\frac{\lambda}{n-i+1}$.</p>
+    <p>For our sample of $n=4$, we define the first three spacings:</p>
+    <ul>
+        <li>$D_1 = X_{(1)} \sim \text{Exp}(\text{mean} = \lambda/4)$</li>
+        <li>$D_2 = X_{(2)} - X_{(1)} \sim \text{Exp}(\text{mean} = \lambda/3)$</li>
+        <li>$D_3 = X_{(3)} - X_{(2)} \sim \text{Exp}(\text{mean} = \lambda/2)$</li>
+    </ul>
+    
+    <p><strong>Step 2: Calculate the Variances of the Order Statistics</strong></p>
+    <p>Recall that if a variable $Z \sim \text{Exp}(\text{mean} = \mu)$, its variance is $\mu^2$. We can express our target order statistics as sums of these independent spacings:</p>
+    <div class="math-display">
+        $$X_{(2)} = D_1 + D_2$$
+    </div>
+    <div class="math-display">
+        $$X_{(3)} = D_1 + D_2 + D_3 = X_{(2)} + D_3$$
+    </div>
+    <p>Because the spacings are independent, the variance of the sum is the sum of the variances:</p>
+    <div class="math-display">
+        $$Var(X_{(2)}) = Var(D_1) + Var(D_2) = \left(\frac{\lambda}{4}\right)^2 + \left(\frac{\lambda}{3}\right)^2 = \lambda^2 \left( \frac{1}{16} + \frac{1}{9} \right) = \lambda^2 \left( \frac{9 + 16}{144} \right) = \frac{25}{144}\lambda^2$$
+    </div>
+    <div class="math-display">
+        $$Var(X_{(3)}) = Var(D_1) + Var(D_2) + Var(D_3) = Var(X_{(2)}) + Var(D_3) = \frac{25}{144}\lambda^2 + \left(\frac{\lambda}{2}\right)^2 = \lambda^2 \left( \frac{25}{144} + \frac{1}{4} \right)$$
+    </div>
+    <div class="math-display">
+        $$Var(X_{(3)}) = \lambda^2 \left( \frac{25 + 36}{144} \right) = \frac{61}{144}\lambda^2$$
+    </div>
+
+    <p><strong>Step 3: Calculate the Covariance and Correlation</strong></p>
+    <p>We use the bilinear properties of covariance, specifically $Cov(U, U+V) = Var(U) + Cov(U, V)$. Treating $X_{(2)}$ as $U$ and $D_3$ as $V$:</p>
+    <div class="math-display">
+        $$Cov(X_{(2)}, X_{(3)}) = Cov(X_{(2)}, X_{(2)} + D_3) = Var(X_{(2)}) + Cov(X_{(2)}, D_3)$$
+    </div>
+    <p>Because $X_{(2)}$ depends only on $D_1$ and $D_2$, and all spacings are mutually independent, the covariance term $Cov(X_{(2)}, D_3)$ is strictly exactly $0$. Therefore:</p>
+    <div class="math-display">
+        $$Cov(X_{(2)}, X_{(3)}) = Var(X_{(2)}) = \frac{25}{144}\lambda^2$$
+    </div>
+    <p>Finally, we calculate the Pearson correlation coefficient $\rho$:</p>
+    <div class="math-display">
+        $$\rho(X_{(2)}, X_{(3)}) = \frac{Cov(X_{(2)}, X_{(3)})}{\sqrt{Var(X_{(2)}) \cdot Var(X_{(3)})}}$$
+    </div>
+    <div class="math-display">
+        $$\rho = \frac{\frac{25}{144}\lambda^2}{\sqrt{\left(\frac{25}{144}\lambda^2\right) \left(\frac{61}{144}\lambda^2\right)}} = \frac{\frac{25}{144}}{\frac{1}{144}\sqrt{25 \cdot 61}} = \frac{25}{\sqrt{25 \cdot 61}} = \frac{25}{5\sqrt{61}} = \frac{5}{\sqrt{61}}$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The correlation coefficient between the second and third order statistics is $\frac{5}{\sqrt{61}}$.
+    </div>
+</div>
+<div class="question-section" id="q5">
+    <h2>📌 Q5 Global Bound for Uniformly Continuous Functions (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $f: \mathbb{R} \to \mathbb{R}$ be a uniformly continuous function. Prove that there exist strictly positive constants $A$ and $B$ such that $|f(x)| \le A|x| + B$ for all $x \in \mathbb{R}$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This is a classic problem in <strong>Real Analysis</strong>. Uniform continuity means that the $\delta$ response to any $\epsilon$ challenge depends only on $\epsilon$, not on the point $x$. This prevents the function from growing infinitely steep. By fixing a specific $\epsilon$ (e.g., $\epsilon = 1$), we obtain a universal step size $\delta$. We can then bound the value of $f(x)$ by breaking the interval from $0$ to $x$ into smaller steps of length less than $\delta$. Applying the triangle inequality iteratively across these steps will yield a linear bound on the function's growth.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Apply the Definition of Uniform Continuity</strong></p>
+    <p>By the definition of uniform continuity, for any $\epsilon > 0$, there exists a $\delta > 0$ such that for all $x, y \in \mathbb{R}$:</p>
+    <div class="math-display">
+        $$|x - y| < \delta \implies |f(x) - f(y)| < \epsilon$$
+    </div>
+    <p>Let us fix $\epsilon = 1$. Then, there exists a specific, constant $\delta > 0$ such that:</p>
+    <div class="math-display">
+        $$|x - y| < \delta \implies |f(x) - f(y)| < 1$$
+    </div>
+    
+    <p><strong>Step 2: Partition the Interval</strong></p>
+    <p>Let $x \in \mathbb{R}$ be an arbitrary point. We want to relate $f(x)$ to $f(0)$. We can divide the line segment between $0$ and $x$ into $n$ equal pieces, where the length of each piece is strictly less than $\delta$.</p>
+    <p>By the Archimedean property, let $n$ be the unique integer such that:</p>
+    <div class="math-display">
+        $$(n-1)\delta \le |x| < n\delta \implies n \le \frac{|x|}{\delta} + 1$$
+    </div>
+    <p>We construct intermediate points $x_k = k \frac{x}{n}$ for $k = 0, 1, 2, \dots, n$. Notice that $x_0 = 0$ and $x_n = x$.</p>
+
+    <p><strong>Step 3: Iterative Application of the Triangle Inequality</strong></p>
+    <p>The distance between consecutive points is:</p>
+    <div class="math-display">
+        $$|x_k - x_{k-1}| = \left| k\frac{x}{n} - (k-1)\frac{x}{n} \right| = \frac{|x|}{n}$$
+    </div>
+    <p>Since $n > \frac{|x|}{\delta}$, we have $\frac{|x|}{n} < \delta$. Therefore, the uniform continuity condition applies to every adjacent pair of points:</p>
+    <div class="math-display">
+        $$|f(x_k) - f(x_{k-1})| < 1 \quad \text{for all } k = 1, \dots, n$$
+    </div>
+    <p>Now, we use a telescoping sum to express $f(x) - f(0)$ and apply the generalized triangle inequality:</p>
+    <div class="math-display">
+        $$|f(x) - f(0)| = \left| \sum_{k=1}^n (f(x_k) - f(x_{k-1})) \right| \le \sum_{k=1}^n |f(x_k) - f(x_{k-1})|$$
+    </div>
+    <div class="math-display">
+        $$|f(x) - f(0)| < \sum_{k=1}^n 1 = n$$
+    </div>
+
+    <p><strong>Step 4: Construct the Linear Bound</strong></p>
+    <p>Using the reverse triangle inequality $|f(x)| - |f(0)| \le |f(x) - f(0)|$, we get:</p>
+    <div class="math-display">
+        $$|f(x)| \le |f(0)| + n$$
+    </div>
+    <p>Substitute our upper bound for $n$ from Step 2 ($n \le \frac{|x|}{\delta} + 1$):</p>
+    <div class="math-display">
+        $$|f(x)| \le |f(0)| + \frac{|x|}{\delta} + 1 = \left(\frac{1}{\delta}\right)|x| + \left(|f(0)| + 1\right)$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> By setting $A = \frac{1}{\delta} > 0$ and $B = |f(0)| + 1 > 0$, we have rigorously shown that $|f(x)| \le A|x| + B$ for all $x \in \mathbb{R}$. This confirms that uniformly continuous functions can grow at most linearly.
+    </div>
+</div>
+
+<div class="question-section" id="q6">
+    <h2>📌 Q6 Distribution of a Squared Normal Ratio (12 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $X$ and $Y$ be independent standard normal random variables, $X, Y \sim N(0,1)$. Find the exact probability density function of the random variable:
+        <div class="math-display">
+            $$U = \frac{X^2}{X^2 + Y^2}$$
+        </div>
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>While one could solve this using a bivariate transformation (e.g., Jacobian method with polar coordinates), there is a much more elegant statistical approach utilizing the properties of the <strong>Gamma and Beta Distributions</strong>. The square of a standard normal variable follows a Chi-square distribution with 1 degree of freedom, which is a special case of the Gamma distribution. A well-known theorem states that if $V_1$ and $V_2$ are independent Gamma variables with the same scale parameter, their ratio $V_1 / (V_1 + V_2)$ strictly follows a Beta distribution.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Identify the Component Distributions</strong></p>
+    <p>We are given that $X \sim N(0,1)$ and $Y \sim N(0,1)$ are independent. It is a standard result that the square of a standard normal random variable follows a $\chi^2$ distribution with 1 degree of freedom.</p>
+    <div class="math-display">
+        $$X^2 \sim \chi^2_{(1)} \quad \text{and} \quad Y^2 \sim \chi^2_{(1)}$$
+    </div>
+    <p>The $\chi^2_{(k)}$ distribution is identically a Gamma distribution with shape parameter $\alpha = k/2$ and rate parameter $\lambda = 1/2$ (or scale parameter $\theta = 2$). Therefore:</p>
+    <div class="math-display">
+        $$X^2 \sim \text{Gamma}\left(\frac{1}{2}, \frac{1}{2}\right) \quad \text{and} \quad Y^2 \sim \text{Gamma}\left(\frac{1}{2}, \frac{1}{2}\right)$$
+    </div>
+
+    <p><strong>Step 2: Apply the Gamma Ratio Theorem</strong></p>
+    <p>Let $V_1 = X^2$ and $V_2 = Y^2$. Both are independent Gamma random variables sharing the exact same rate parameter $\lambda = 1/2$. Their shape parameters are $\alpha_1 = 1/2$ and $\alpha_2 = 1/2$.</p>
+    <p>A fundamental property of the Gamma family is that the sum $S = V_1 + V_2$ follows $\text{Gamma}(\alpha_1 + \alpha_2, \lambda)$, and the ratio $U = \frac{V_1}{V_1 + V_2}$ follows a <strong>Beta distribution</strong> parameterized by the two shape parameters:</p>
+    <div class="math-display">
+        $$U \sim \text{Beta}(\alpha_1, \alpha_2) = \text{Beta}\left(\frac{1}{2}, \frac{1}{2}\right)$$
+    </div>
+    <p>Furthermore, this theorem guarantees that $U$ and the sum $S$ are statistically independent.</p>
+
+    <div class="hint-box">
+        <strong>💡 Pro-Tip:</strong> You can also view this geometrically. If $(X,Y)$ is a point in the 2D plane, $X^2 + Y^2 = R^2$ is the squared radius, and $X = R\cos(\Theta)$. Thus, $U = \frac{R^2\cos^2(\Theta)}{R^2} = \cos^2(\Theta)$. Because $X,Y$ are i.i.d. Normal, the angle $\Theta$ is uniformly distributed on $(0, 2\pi)$. Finding the density of $\cos^2(\Theta)$ where $\Theta \sim U(0, 2\pi)$ yields the exact same Beta distribution!
+    </div>
+
+    <p><strong>Step 3: Write out the PDF</strong></p>
+    <p>The probability density function for a $\text{Beta}(\alpha, \beta)$ random variable is given by:</p>
+    <div class="math-display">
+        $$f_U(u) = \frac{1}{B(\alpha, \beta)} u^{\alpha - 1} (1-u)^{\beta - 1}, \quad 0 < u < 1$$
+    </div>
+    <p>Substituting $\alpha = 1/2$ and $\beta = 1/2$:</p>
+    <div class="math-display">
+        $$f_U(u) = \frac{1}{B(1/2, 1/2)} u^{-1/2} (1-u)^{-1/2} = \frac{1}{B(1/2, 1/2)} \frac{1}{\sqrt{u(1-u)}}$$
+    </div>
+    <p>We evaluate the Beta function in the denominator using the Gamma function, $B(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}$:</p>
+    <div class="math-display">
+        $$B\left(\frac{1}{2}, \frac{1}{2}\right) = \frac{\Gamma(1/2)\Gamma(1/2)}{\Gamma(1)} = \frac{\sqrt{\pi} \cdot \sqrt{\pi}}{1} = \pi$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> The random variable $U$ follows a $\text{Beta}(1/2, 1/2)$ distribution (often known as the Arcsine distribution). Its exact probability density function is:
+        $$f_U(u) = \frac{1}{\pi \sqrt{u(1-u)}}, \quad \text{for } 0 < u < 1$$
+        and $0$ elsewhere.
+    </div>
+</div>
+<div class="question-section" id="q7">
+    <h2>📌 Q7 Expected Absolute Deviation and the Median (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Let $Y$ be a random variable with finite expectation, and $m$ be a median of $Y$, i.e., $P(Y \le m) \ge 1/2$ and $P(Y \ge m) \ge 1/2$. Show that, for any real numbers $a$ and $b$ such that $m \le a \le b$ or $m \ge a \ge b$, $E|Y - a| \le E|Y - b|$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem explores the classic property that the absolute deviation of a random variable is minimized at its median. We need to prove that moving away from the median (from $a$ to $b$) monotonically increases the expected absolute deviation. We can do this by analyzing the expected difference $E[|Y-b| - |Y-a|]$ and showing it is non-negative when $b$ is further from the median than $a$. We will break the domain of $Y$ into intervals relative to $a$ and $b$ to bound the difference inside the expectation.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Setup for $m \le a \le b$</strong></p>
+    <p>Assume $m \le a \le b$. We want to show that $E[|Y-b| - |Y-a|] \ge 0$. Let's analyze the difference $\Delta(Y) = |Y-b| - |Y-a|$ for different regions of $Y$:</p>
+    <ul>
+        <li>If $Y \le a$: $|Y-b| - |Y-a| = (b - Y) - (a - Y) = b - a$.</li>
+        <li>If $a < Y < b$: $|Y-b| - |Y-a| = (b - Y) - (Y - a) = b + a - 2Y$. Notice that since $Y < b$, $-2Y > -2b$, so $b + a - 2Y > a - b$. Thus, $\Delta(Y) \ge a - b$.</li>
+        <li>If $Y \ge b$: $|Y-b| - |Y-a| = (Y - b) - (Y - a) = a - b$.</li>
+    </ul>
+
+    <p><strong>Step 2: Bound the Expected Difference</strong></p>
+    <p>From the above analysis, we have exactly $\Delta(Y) = b - a$ when $Y \le a$, and $\Delta(Y) \ge a - b$ when $Y > a$. We can now take the expectation by integrating over these two regions:</p>
+    <div class="math-display">
+        $$E[|Y-b| - |Y-a|] = \int_{\{Y \le a\}} (b-a) dP + \int_{\{Y > a\}} (|Y-b| - |Y-a|) dP$$
+    </div>
+    <div class="math-display">
+        $$E[|Y-b| - |Y-a|] \ge \int_{\{Y \le a\}} (b-a) dP + \int_{\{Y > a\}} (a-b) dP$$
+    </div>
+    <p>Factoring out the constants:</p>
+    <div class="math-display">
+        $$E[|Y-b| - |Y-a|] \ge (b-a)P(Y \le a) + (a-b)P(Y > a)$$
+    </div>
+
+    <p><strong>Step 3: Apply the Median Property</strong></p>
+    <p>We substitute $P(Y > a) = 1 - P(Y \le a)$ into the inequality:</p>
+    <div class="math-display">
+        $$E[|Y-b| - |Y-a|] \ge (b-a)P(Y \le a) - (b-a)(1 - P(Y \le a))$$
+    </div>
+    <div class="math-display">
+        $$E[|Y-b| - |Y-a|] \ge (b-a) [2P(Y \le a) - 1]$$
+    </div>
+    <p>Since $a \ge m$ and $m$ is a median, the cumulative probability at $a$ must be at least the cumulative probability at $m$: $P(Y \le a) \ge P(Y \le m) \ge 1/2$. Therefore, $2P(Y \le a) - 1 \ge 0$.</p>
+    <p>Because $b \ge a$, we also have $(b-a) \ge 0$. The product of two non-negative terms is non-negative, meaning $E[|Y-b| - |Y-a|] \ge 0 \implies E|Y-a| \le E|Y-b|$.</p>
+
+    <p><strong>Step 4: The Symmetric Case ($m \ge a \ge b$)</strong></p>
+    <p>By defining a new variable $Z = -Y$, the median of $Z$ is $m' = -m$. The condition $m \ge a \ge b$ becomes $m' \le -a \le -b$. By the exact same logic proved in Step 3, $E|Z - (-a)| \le E|Z - (-b)|$, which perfectly equates to $E|-Y + a| \le E|-Y + b| \implies E|Y-a| \le E|Y-b|$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> We rigorously bounded the absolute difference expectation and applied the definition of the median to establish that $E|Y-a| \le E|Y-b|$ holds true for both directions moving away from the median.
+    </div>
+</div>
+
+<div class="question-section" id="q8">
+    <h2>📌 Q8 Maximum Likelihood Estimator for a Shifted Uniform Distribution (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose $X_1, X_2, \dots, X_n$ is a random sample from $\text{Uniform}[\theta-1, \theta+2]$, $\theta \in \mathbb{R}$ being unknown. Show that there exists a maximum likelihood estimator of $\theta$ in the form $(aX_{(1)} + bX_{(n)} + c)$ where $a, b$, and $c$ are positive constants, and $X_{(r)}$ is the $r$-th order statistic.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>For a uniform distribution where the parameter bounds the support, the likelihood function forms a "plateau." We need to determine the upper and lower bounds of $\theta$ that keep all sample points within the uniform interval. The Maximum Likelihood Estimator (MLE) will not be a single unique value, but rather any value within a specific closed interval defined by the first and last order statistics ($X_{(1)}$ and $X_{(n)}$). To prove the existence of an estimator matching the requested form, we will construct a convex combination of the interval endpoints and carefully choose weights to guarantee $a, b, c > 0$.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Construct the Likelihood Function</strong></p>
+    <p>For a single observation, the PDF is $f(x_i; \theta) = \frac{1}{3}$ if $\theta-1 \le x_i \le \theta+2$, and $0$ otherwise. The joint likelihood for the sample is:</p>
+    <div class="math-display">
+        $$L(\theta) = \prod_{i=1}^n f(x_i; \theta) = \frac{1}{3^n} \prod_{i=1}^n I(\theta-1 \le x_i \le \theta+2)$$
+    </div>
+    <p>This product of indicator functions requires the conditions to hold for <i>all</i> $i$. This is equivalent to checking the conditions against the extreme order statistics:</p>
+    <div class="math-display">
+        $$\theta - 1 \le X_{(1)} \implies \theta \le X_{(1)} + 1$$
+    </div>
+    <div class="math-display">
+        $$X_{(n)} \le \theta + 2 \implies \theta \ge X_{(n)} - 2$$
+    </div>
+    <p>Thus, $L(\theta) = 3^{-n}$ for any $\theta \in [X_{(n)} - 2, X_{(1)} + 1]$, and $L(\theta) = 0$ outside this interval. <i>Any</i> value in this interval maximizes the likelihood and is a valid MLE.</p>
+
+    <p><strong>Step 2: Parameterize the MLE Space</strong></p>
+    <p>Any convex combination of the endpoints of this interval will lie strictly inside the interval. Let $\alpha \in (0, 1)$. We define our estimator as:</p>
+    <div class="math-display">
+        $$\hat{\theta} = \alpha(X_{(1)} + 1) + (1-\alpha)(X_{(n)} - 2)$$
+    </div>
+    <p>Expanding and regrouping terms to match the required form $aX_{(1)} + bX_{(n)} + c$:</p>
+    <div class="math-display">
+        $$\hat{\theta} = \alpha X_{(1)} + (1-\alpha)X_{(n)} + \alpha - 2(1-\alpha)$$
+    </div>
+    <div class="math-display">
+        $$\hat{\theta} = \alpha X_{(1)} + (1-\alpha)X_{(n)} + (3\alpha - 2)$$
+    </div>
+
+    <p><strong>Step 3: Solve for Positive Constants</strong></p>
+    <p>We identify the coefficients as $a = \alpha$, $b = 1 - \alpha$, and $c = 3\alpha - 2$. The problem strictly demands that $a, b, c > 0$. Let's establish the necessary constraints on $\alpha$:</p>
+    <ul>
+        <li>$a > 0 \implies \alpha > 0$</li>
+        <li>$b > 0 \implies 1 - \alpha > 0 \implies \alpha < 1$</li>
+        <li>$c > 0 \implies 3\alpha - 2 > 0 \implies \alpha > 2/3$</li>
+    </ul>
+    <p>To satisfy all conditions simultaneously, we must choose an $\alpha$ such that $\frac{2}{3} < \alpha < 1$. Let's select $\alpha = \frac{3}{4}$.</p>
+
+    <p><strong>Step 4: Finalize the Estimator</strong></p>
+    <p>Substitute $\alpha = \frac{3}{4}$ into our coefficient definitions:</p>
+    <div class="math-display">
+        $$a = \frac{3}{4}, \quad b = 1 - \frac{3}{4} = \frac{1}{4}, \quad c = 3\left(\frac{3}{4}\right) - 2 = \frac{9}{4} - \frac{8}{4} = \frac{1}{4}$$
+    </div>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> We have constructed the estimator $\hat{\theta} = \frac{3}{4}X_{(1)} + \frac{1}{4}X_{(n)} + \frac{1}{4}$. This lies within the maximizing interval $[X_{(n)}-2, X_{(1)}+1]$, confirming it is an MLE. Furthermore, the constants $a = 3/4$, $b = 1/4$, and $c = 1/4$ are all strictly positive constants.
+    </div>
+</div>
+
+<div class="question-section" id="q9">
+    <h2>📌 Q9 Correlations and Bounds on Non-degenerate Positive RVs (12 Marks)</h2>
+    
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Suppose $X_1, X_2$ and $X_3$ are positive valued i.i.d. non-degenerate random variables with finite variances.<br>
+        (a) Define $Y = X_1X_2$ and $Z = X_2X_3$. Prove that $0 < \rho < \frac{1}{2}$, where $\rho$ is the correlation coefficient between $Y$ and $Z$.<br>
+        (b) Prove that $E\left[ \frac{X_1 + X_2}{\sqrt{X_1^2 + X_2^2 + X_3^2}} \right] < \frac{2}{\sqrt{3}}$.
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>For part (a), we will define the mean $\mu$ and variance $\sigma^2$ of the underlying $X$ variables. By exploiting the independence, we can calculate the covariance and variances of the products $Y$ and $Z$. Since the variables are strictly positive and non-degenerate, both $\mu > 0$ and $\sigma^2 > 0$, allowing us to strictly bound the correlation. For part (b), the symmetry of the i.i.d. variables suggests evaluating the expected value of the entire symmetric sum $\sum X_i / \sqrt{\sum X_i^2}$. We will use the <strong>Cauchy-Schwarz Inequality</strong> to bound this sum, keeping in mind that non-degeneracy forces a strict inequality.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Part (a): Proving the bounds of $\rho$</strong></p>
+    <p>Let $E[X_i] = \mu$ and $Var(X_i) = \sigma^2$. Since $X_i$ is positive valued, $\mu > 0$. Since it is non-degenerate, $\sigma^2 > 0$. Note that $E[X_i^2] = \mu^2 + \sigma^2$.</p>
+    <p>First, calculate the variance of $Y$ (and identically $Z$, by symmetry):</p>
+    <div class="math-display">
+        $$Var(Y) = E[Y^2] - (E[Y])^2 = E[X_1^2 X_2^2] - (E[X_1 X_2])^2$$
+    </div>
+    <p>By independence, expectations of products separate:</p>
+    <div class="math-display">
+        $$Var(Y) = E[X_1^2]E[X_2^2] - (E[X_1]E[X_2])^2 = (\mu^2 + \sigma^2)^2 - (\mu^2)^2 = \mu^4 + 2\mu^2\sigma^2 + \sigma^4 - \mu^4 = \sigma^2(2\mu^2 + \sigma^2)$$
+    </div>
+    <p>Next, calculate the covariance between $Y$ and $Z$:</p>
+    <div class="math-display">
+        $$Cov(Y, Z) = E[YZ] - E[Y]E[Z] = E[X_1 X_2^2 X_3] - E[X_1 X_2]E[X_2 X_3]$$
+    </div>
+    <div class="math-display">
+        $$Cov(Y, Z) = \mu \cdot (\mu^2 + \sigma^2) \cdot \mu - \mu^2 \cdot \mu^2 = \mu^4 + \mu^2\sigma^2 - \mu^4 = \mu^2\sigma^2$$
+    </div>
+    <p>Now, calculate the correlation coefficient $\rho$:</p>
+    <div class="math-display">
+        $$\rho = \frac{Cov(Y,Z)}{\sqrt{Var(Y)Var(Z)}} = \frac{\mu^2\sigma^2}{\sigma^2(2\mu^2 + \sigma^2)} = \frac{\mu^2}{2\mu^2 + \sigma^2}$$
+    </div>
+    <p>Divide the numerator and denominator by $\mu^2$:</p>
+    <div class="math-display">
+        $$\rho = \frac{1}{2 + (\sigma/\mu)^2}$$
+    </div>
+    <p>Because $\sigma^2 > 0$ and $\mu > 0$, the ratio $(\sigma/\mu)^2 > 0$. Therefore, the denominator $2 + (\sigma/\mu)^2$ is strictly greater than 2. This implies $\rho < \frac{1}{2}$. Also, since all terms are positive, $\rho > 0$. Thus, $0 < \rho < 1/2$.</p>
+
+    <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+    <p><strong>Part (b): Proving the Expectation Bound</strong></p>
+    <p>Let $S = \sqrt{X_1^2 + X_2^2 + X_3^2}$. We are evaluating $E\left[\frac{X_1}{S}\right] + E\left[\frac{X_2}{S}\right]$. Due to the i.i.d. nature of the variables, $E\left[\frac{X_1}{S}\right] = E\left[\frac{X_2}{S}\right] = E\left[\frac{X_3}{S}\right] = I$. Thus, we want to prove that $2I < \frac{2}{\sqrt{3}}$, or equivalently, $3I < \sqrt{3}$.</p>
+    <p>Consider the total symmetric sum: $3I = E\left[ \frac{X_1 + X_2 + X_3}{S} \right]$.</p>
+    <p>By the <strong>Cauchy-Schwarz Inequality</strong> for vectors $(X_1, X_2, X_3)$ and $(1, 1, 1)$:</p>
+    <div class="math-display">
+        $$(X_1 \cdot 1 + X_2 \cdot 1 + X_3 \cdot 1)^2 \le (X_1^2 + X_2^2 + X_3^2)(1^2 + 1^2 + 1^2)$$
+    </div>
+    <div class="math-display">
+        $$(X_1 + X_2 + X_3)^2 \le 3 S^2$$
+    </div>
+    <p>Taking the positive square root (since $X_i > 0$):</p>
+    <div class="math-display">
+        $$X_1 + X_2 + X_3 \le \sqrt{3} S \implies \frac{X_1 + X_2 + X_3}{S} \le \sqrt{3}$$
+    </div>
+    <p>The Cauchy-Schwarz inequality holds with strict equality <em>if and only if</em> the vectors are linearly dependent, meaning $X_1 = X_2 = X_3$. However, because the variables are independent and non-degenerate, $P(X_1 = X_2 = X_3) < 1$. This guarantees that the strict inequality holds with positive probability. Therefore, taking expectations preserves the strict inequality:</p>
+    <div class="math-display">
+        $$E\left[ \frac{X_1 + X_2 + X_3}{S} \right] < E[\sqrt{3}] = \sqrt{3}$$
+    </div>
+    <p>Since $3I < \sqrt{3}$, it implies $I < \frac{1}{\sqrt{3}}$. Thus, the expectation for two variables is $2I < \frac{2}{\sqrt{3}}$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong><br>
+        (a) We explicitly derived $\rho = \frac{1}{2 + (\sigma/\mu)^2}$. Since $\sigma > 0$, this establishes $0 < \rho < 1/2$.<br>
+        (b) Utilizing symmetry and the Cauchy-Schwarz inequality, the strict bound $E\left[ \frac{X_1 + X_2}{S} \right] < \frac{2}{\sqrt{3}}$ is proved due to the non-degeneracy of the variables.
+    </div>
+</div>
+
+<div class="question-section" id="q10">
+    <h2>📌 Q10 Orthogonal Projections and Least Squares Models (12 Marks)</h2>
+
+    <div class="problem-box">
+        <strong>Problem Statement:</strong> Consider the linear model $Y = X_1\beta_1 + X_2\beta_2 + \epsilon$. Suppose $\hat{\beta}_2$ is the least squares estimator of $\beta_2$ in the above model. Alternatively, one analyses the linear model $Y = X_1\beta_1 + \epsilon_1$ such that the vector of least squares residuals is $Z$. If the least squares estimator of $\beta_2$ based on the linear model $Z = X_2\beta_2 + \epsilon_2$ be denoted as $\hat{\beta}_2^*$, show that:
+        <div class="math-display">
+            $$\langle X_2\hat{\beta}_2^*, X_2\hat{\beta}_2 \rangle \le \|X_2\hat{\beta}_2\|^2$$
+        </div>
+        Under what conditions will equality hold?
+    </div>
+
+    <h3>🧠 Approach &amp; Key Concepts</h3>
+    <p>This problem uses concepts closely related to the <strong>Frisch-Waugh-Lovell (FWL) Theorem</strong>, but carefully manipulates the regression matrices. We will use projection matrices. Let $P_1 = X_1(X_1^T X_1)^{-1}X_1^T$ be the projection matrix onto the column space of $X_1$, and let $M_1 = I - P_1$ be the residual maker matrix. From regression theory, the residuals $Z$ from regressing $Y$ on $X_1$ are simply $Z = M_1 Y$. We will solve the normal equations algebraically, substitute the derived estimators into the inner product, and use the fact that $P_1$ is positive semi-definite to prove the inequality.</p>
+
+    <h3>✍️ Step-by-Step Proof / Derivation</h3>
+    
+    <p><strong>Step 1: Define the Estimators Algebraically</strong></p>
+    <p>From the full partitioned regression model, standard block-matrix inversion (or FWL theory) gives the formula for $\hat{\beta}_2$:</p>
+    <div class="math-display">
+        $$\hat{\beta}_2 = (X_2^T M_1 X_2)^{-1} X_2^T M_1 Y$$
+    </div>
+    <p>Now consider the alternative model. The residuals $Z$ are given by $Z = M_1 Y$. The estimator $\hat{\beta}_2^*$ is formed by regressing $Z$ strictly on $X_2$ (without partialing $X_1$ out of $X_2$). Using standard OLS formulas:</p>
+    <div class="math-display">
+        $$\hat{\beta}_2^* = (X_2^T X_2)^{-1} X_2^T Z = (X_2^T X_2)^{-1} X_2^T M_1 Y$$
+    </div>
+
+    <p><strong>Step 2: Evaluate the Left-Hand Side (Inner Product)</strong></p>
+    <p>We expand the inner product $\langle X_2\hat{\beta}_2^*, X_2\hat{\beta}_2 \rangle = (X_2\hat{\beta}_2^*)^T (X_2\hat{\beta}_2)$:</p>
+    <div class="math-display">
+        $$LHS = (\hat{\beta}_2^*)^T X_2^T X_2 \hat{\beta}_2$$
+    </div>
+    <p>Substitute the expression for $\hat{\beta}_2^*$: $\hat{\beta}_2^* = (X_2^T X_2)^{-1} X_2^T M_1 Y$. Because $(X_2^T X_2)^{-1}$ is symmetric, its transpose is itself:</p>
+    <div class="math-display">
+        $$LHS = \left[ Y^T M_1^T X_2 (X_2^T X_2)^{-1} \right] X_2^T X_2 \hat{\beta}_2$$
+    </div>
+    <p>The term $(X_2^T X_2)^{-1} X_2^T X_2$ collapses to the identity matrix $I$. Also, $M_1$ is symmetric ($M_1^T = M_1$). Thus:</p>
+    <div class="math-display">
+        $$LHS = Y^T M_1 X_2 \hat{\beta}_2$$
+    </div>
+    <p>Now, let's rearrange the defining normal equation for $\hat{\beta}_2$. We know $\hat{\beta}_2 = (X_2^T M_1 X_2)^{-1} X_2^T M_1 Y$, which implies:</p>
+    <div class="math-display">
+        $$(X_2^T M_1 X_2) \hat{\beta}_2 = X_2^T M_1 Y$$
+    </div>
+    <p>Taking the transpose of both sides (noting all matrices involved are symmetric): $\hat{\beta}_2^T X_2^T M_1 X_2 = Y^T M_1 X_2$. Substitute this back into the LHS equation:</p>
+    <div class="math-display">
+        $$LHS = \left( \hat{\beta}_2^T X_2^T M_1 X_2 \right) \hat{\beta}_2 = \hat{\beta}_2^T X_2^T M_1 X_2 \hat{\beta}_2$$
+    </div>
+
+    <p><strong>Step 3: Compare LHS to RHS</strong></p>
+    <p>The right-hand side is simply the squared Euclidean norm of $X_2\hat{\beta}_2$:</p>
+    <div class="math-display">
+        $$RHS = \|X_2\hat{\beta}_2\|^2 = (X_2\hat{\beta}_2)^T (X_2\hat{\beta}_2) = \hat{\beta}_2^T X_2^T X_2 \hat{\beta}_2$$
+    </div>
+    <p>We need to show $LHS \le RHS$. Substitute $M_1 = I - P_1$ into our simplified LHS expression:</p>
+    <div class="math-display">
+        $$LHS = \hat{\beta}_2^T X_2^T (I - P_1) X_2 \hat{\beta}_2 = \hat{\beta}_2^T X_2^T X_2 \hat{\beta}_2 - \hat{\beta}_2^T X_2^T P_1 X_2 \hat{\beta}_2$$
+    </div>
+    <p>Notice that the first term is exactly the RHS. The inequality holds if and only if the second term is non-negative. We can rewrite the second term using the fact that the projection matrix $P_1$ is idempotent ($P_1^2 = P_1$) and symmetric:</p>
+    <div class="math-display">
+        $$\hat{\beta}_2^T X_2^T P_1 X_2 \hat{\beta}_2 = \hat{\beta}_2^T X_2^T P_1^T P_1 X_2 \hat{\beta}_2 = (P_1 X_2 \hat{\beta}_2)^T (P_1 X_2 \hat{\beta}_2) = \| P_1 X_2 \hat{\beta}_2 \|^2$$
+    </div>
+    <p>Because the squared norm of any real vector is strictly non-negative ($\| P_1 X_2 \hat{\beta}_2 \|^2 \ge 0$), we have:</p>
+    <div class="math-display">
+        $$LHS = RHS - \| P_1 X_2 \hat{\beta}_2 \|^2 \implies LHS \le RHS$$
+    </div>
+
+    <p><strong>Step 4: Establish Conditions for Equality</strong></p>
+    <p>Equality holds if and only if the subtracted term is exactly zero:</p>
+    <div class="math-display">
+        $$\| P_1 X_2 \hat{\beta}_2 \|^2 = 0 \iff P_1 X_2 \hat{\beta}_2 = \mathbf{0}$$
+    </div>
+    <p>Because $P_1$ projects vectors onto the column space of $X_1$, this condition dictates that the fitted vector $X_2\hat{\beta}_2$ must lie entirely in the null space of $P_1$. Geometrically, this means $X_2\hat{\beta}_2$ must be perfectly <strong>orthogonal to the column space of $X_1$</strong>. This practically happens when the active regressors in $X_2$ are orthogonal to the regressors in $X_1$, or if $\hat{\beta}_2 = \mathbf{0}$.</p>
+
+    <div class="conclusion-box">
+        <strong>Final Answer / Q.E.D:</strong> By expressing both sides using the residual maker matrix $M_1$ and the positive semi-definite projection matrix $P_1$, the inequality is proven. 
+        <br><br><strong>Equality Condition:</strong> Equality holds if and only if $P_1 X_2 \hat{\beta}_2 = \mathbf{0}$, meaning the vector $X_2 \hat{\beta}_2$ is strictly orthogonal to the column space of $X_1$.
+    </div>
+</div>
+
+</div>
+
+</body>
+
+</html>
