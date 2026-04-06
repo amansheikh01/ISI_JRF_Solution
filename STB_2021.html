@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI STB 2021 Model Solutions</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2b6cb0;
+            --light-bg: #f7fafc;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+            --bg-color: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--bg-color); margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .nav-menu { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a { text-decoration: none; color: white; background-color: var(--secondary-blue); padding: 10px 20px; border-radius: 5px; margin: 0 10px; font-weight: bold; transition: background 0.3s; }
+        .nav-menu a:hover { background-color: var(--primary-blue); }
+        .header { text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.4em; margin: 0 0 10px 0; }
+        .header p { color: #718096; font-size: 1.1em; font-style: italic; }
+        .question-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px dashed var(--border-color); }
+        h2 { color: var(--primary-blue); background-color: var(--light-bg); padding: 12px 20px; border-left: 5px solid var(--secondary-blue); border-radius: 4px; margin-top: 0; }
+        h3 { color: var(--secondary-blue); margin-top: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        th, td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+        th { background-color: var(--primary-blue); color: white; }
+        tr:nth-child(even) { background-color: var(--light-bg); }
+        .math-display { overflow-x: auto; padding: 15px 0; text-align: center; background: #fdfdfd; border-radius: 8px; margin: 15px 0; }
+        .conclusion-box { background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .hint-box { background-color: #f0fff4; border-left: 5px solid #38a169; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box { background-color: #f8fafc; padding: 15px; border-left: 4px solid #4a5568; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    
+<div class="nav-menu">
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <div class="header">
+        <h1>🏛️ ISI Advanced Examination Practice</h1>
+        <h2>STB 2021 — Model Solutions (Q1 - Q3)</h2>
+        <div class="badges" style="margin: 15px 0;">
+            <img src="https://img.shields.io/badge/Subject-Probability_%26_Statistics-blue?style=for-the-badge" alt="Subject">
+            <img src="https://img.shields.io/badge/Level-ISI_STB-red?style=for-the-badge" alt="Level">
+        </div>
+        <p>Rigorous mathematical proofs and derivations for the Indian Statistical Institute Entrance Examination.</p>
+    </div>
+
+    
+<div class="question-section" id="q1">
+        <h2>📌 Q1 Borel-Cantelli Lemmas & Almost Sure Convergence (15 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> For $n \geq 1$, $X_n$ are independent random variables with the probability distribution:
+            <div class="math-display">
+                $$ X_n = \begin{cases} 
+                0 & \text{with probability } (1 - \frac{1}{n}) \\
+                \frac{1}{n} & \text{with probability } \frac{1}{n}(1 - \frac{1}{n}) \\
+                n & \text{with probability } \frac{1}{n^2}
+                \end{cases} $$
+            </div>
+            (a) Show that $\{X_n = n\}$ occurs only finitely many times with probability 1. Also show that $\{X_n = \frac{1}{n}\}$ occurs infinitely often with probability 1.<br>
+            (b) Determine if the sequence $\{X_n\}$ converges almost surely or not.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem directly tests your understanding of the <strong>Borel-Cantelli Lemmas</strong>. To determine if an event happens infinitely often (i.o.) or finitely many times, we examine the infinite series of their probabilities. If the sum converges, the event occurs finitely many times almost surely (First Lemma). If the sum diverges and the events are independent, it occurs infinitely often almost surely (Second Lemma). For part (b), we leverage these limiting behaviors to establish pointwise limits for the random sequence.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: First Borel-Cantelli Lemma for $\{X_n = n\}$</strong></p>
+        <p>Let $A_n$ be the event that $\{X_n = n\}$. The probability of this event occurring is strictly given by:</p>
+        <div class="math-display">
+            $$ P(A_n) = \frac{1}{n^2} $$
+        </div>
+        <p>We analyze the infinite sum of these probabilities:</p>
+        <div class="math-display">
+            $$ \sum_{n=1}^{\infty} P(A_n) = \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6} < \infty $$
+        </div>
+        <p>Because the sum converges to a finite value, the <strong>First Borel-Cantelli Lemma</strong> guarantees that the probability of $A_n$ occurring infinitely often is zero. Thus, $P(\limsup_{n \to \infty} A_n) = 0$, meaning the event $\{X_n = n\}$ occurs only finitely many times with probability 1.</p>
+
+        <p><strong>Step 2: Second Borel-Cantelli Lemma for $\{X_n = 1/n\}$</strong></p>
+        <p>Let $B_n$ be the event that $\{X_n = \frac{1}{n}\}$. The probability is:</p>
+        <div class="math-display">
+            $$ P(B_n) = \frac{1}{n} \left(1 - \frac{1}{n}\right) = \frac{1}{n} - \frac{1}{n^2} $$
+        </div>
+        <p>We analyze the infinite sum of these probabilities:</p>
+        <div class="math-display">
+            $$ \sum_{n=1}^{\infty} P(B_n) = \sum_{n=1}^{\infty} \left( \frac{1}{n} - \frac{1}{n^2} \right) = \sum_{n=1}^{\infty} \frac{1}{n} - \sum_{n=1}^{\infty} \frac{1}{n^2} $$
+        </div>
+        <p>Since the harmonic series $\sum \frac{1}{n}$ strictly diverges to $\infty$ and $\sum \frac{1}{n^2}$ is a finite constant, the total sum diverges: $\sum P(B_n) = \infty$. Furthermore, the problem explicitly states that the random variables $X_n$ are <em>independent</em>. By the <strong>Second Borel-Cantelli Lemma</strong>, $P(\limsup_{n \to \infty} B_n) = 1$. Therefore, $\{X_n = \frac{1}{n}\}$ occurs infinitely often with probability 1.</p>
+
+        <p><strong>Step 3: Determining Almost Sure Convergence (Part b)</strong></p>
+        <p>We must determine if $X_n \xrightarrow{a.s.} X$. Let's examine the sample paths $X_n(\omega)$ for an arbitrary outcome $\omega \in \Omega$, excluding the probability 0 set where $A_n$ occurs infinitely often. For almost all $\omega$, there exists an integer $N(\omega)$ such that for all $n > N(\omega)$, the event $A_n$ does not occur.</p>
+        <p>Therefore, for all $n > N(\omega)$, $X_n(\omega)$ strictly takes values from the set $\{0, \frac{1}{n}\}$.</p>
+        <p>Since both candidate values in the tail sequence strictly converge to 0 (i.e., $\lim_{n \to \infty} 0 = 0$ and $\lim_{n \to \infty} \frac{1}{n} = 0$), the sequence itself must squeeze to zero:</p>
+        <div class="math-display">
+            $$ \lim_{n \to \infty} X_n(\omega) = 0 \quad \text{for almost all } \omega $$
+        </div>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) By the 1st Borel-Cantelli Lemma, $\sum \frac{1}{n^2} < \infty \implies \{X_n=n\}$ occurs finitely many times a.s. By the 2nd Lemma, because of independence and $\sum (\frac{1}{n} - \frac{1}{n^2}) = \infty$, $\{X_n=1/n\}$ occurs infinitely often a.s.<br>
+            (b) Because the explosive term $n$ vanishes for large $n$, and the remaining states $0$ and $1/n$ both trivially tend to $0$, the sequence strictly converges almost surely to $0$ ($X_n \xrightarrow{a.s.} 0$).
+        </div>
+    </div>
+
+
+<div class="question-section" id="q2">
+        <h2>📌 Q2 Normal MLE with Integer Parameter Space (15 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Let $X_1, X_2, \dots, X_n$ be a random sample from $N(\theta, 1)$ where $\theta$ is an unknown integer. <br>
+            (a) Find the maximum likelihood estimator $\hat{\theta}_n$ of $\theta$.<br>
+            (b) Prove that it is not possible to find a sequence of real constants $a_n$ such that $a_n(\hat{\theta}_n - \theta)$ converges to a non-degenerate limiting distribution.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This problem introduces a restriction on the parameter space: $\theta \in \mathbb{Z}$. Standard calculus derivatives cannot strictly optimize a discrete parameter space. Instead, we algebraically maximize the likelihood by minimizing the spatial distance between the sample mean and the integer candidates. For part (b), because the true parameter is an integer, as the sample size grows, the standard continuous MLE ($\bar{X}$) becomes so "tight" around $\theta$ that the rounded discrete MLE will exactly equal the true parameter with a probability converging to 1, causing any scaled distribution to collapse into a degenerate point mass.</p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding the MLE (Part a)</strong></p>
+        <p>The joint likelihood function for a Normal distribution with unit variance is:</p>
+        <div class="math-display">
+            $$ L(\theta) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2}(X_i - \theta)^2\right) \propto \exp\left(-\frac{1}{2} \sum_{i=1}^{n} (X_i - \theta)^2\right) $$
+        </div>
+        <p>We can rewrite the sum of squares by introducing the sample mean $\bar{X}$:</p>
+        <div class="math-display">
+            $$ \sum_{i=1}^{n} (X_i - \theta)^2 = \sum_{i=1}^{n} ((X_i - \bar{X}) + (\bar{X} - \theta))^2 = \sum_{i=1}^{n} (X_i - \bar{X})^2 + n(\bar{X} - \theta)^2 $$
+        </div>
+        <p>To maximize $L(\theta)$, we must strictly minimize the exponent component $n(\bar{X} - \theta)^2$. Thus, we need to find the integer $\theta$ that is closest to the continuous sample mean $\bar{X}$.</p>
+        <p>The MLE is the nearest integer function applied to the sample mean:</p>
+        <div class="math-display">
+            $$ \hat{\theta}_n = \lfloor \bar{X} \rceil \quad (\text{or mathematically: } \text{argmin}_{\theta \in \mathbb{Z}} |\bar{X} - \theta|) $$
+        </div>
+
+        <p><strong>Step 2: Analyzing the Distribution of the MLE (Part b)</strong></p>
+        <p>Because $X_i \sim N(\theta, 1)$ i.i.d., the sample mean has the exact distribution $\bar{X} \sim N(\theta, \frac{1}{n})$. Therefore, the standardized distance is exactly normal:</p>
+        <div class="math-display">
+            $$ \sqrt{n}(\bar{X} - \theta) \sim N(0, 1) $$
+        </div>
+        <p>The discrete MLE $\hat{\theta}_n$ will exactly equal the true integer parameter $\theta$ if and only if $\bar{X}$ is closer to $\theta$ than any other integer. This happens when:</p>
+        <div class="math-display">
+            $$ \bar{X} \in (\theta - 0.5, \theta + 0.5) $$
+        </div>
+
+        <p><strong>Step 3: Calculating the Asymptotic Probability</strong></p>
+        <p>Let's find the probability that the estimator makes an error of zero:</p>
+        <div class="math-display">
+            $$ P(\hat{\theta}_n = \theta) = P(-0.5 < \bar{X} - \theta < 0.5) $$
+        </div>
+        <p>Multiply the inequality by $\sqrt{n}$ to transform the inner variable to the standard normal $Z$:</p>
+        <div class="math-display">
+            $$ P(\hat{\theta}_n = \theta) = P\left(-0.5\sqrt{n} < Z < 0.5\sqrt{n}\right) $$
+        </div>
+        <p>As $n \to \infty$, the boundaries $-0.5\sqrt{n} \to -\infty$ and $0.5\sqrt{n} \to \infty$. Thus:</p>
+        <div class="math-display">
+            $$ \lim_{n \to \infty} P(\hat{\theta}_n = \theta) = P(-\infty < Z < \infty) = 1 $$
+        </div>
+
+        <p><strong>Step 4: Implication for any Sequence $a_n$</strong></p>
+        <p>We are tasked with examining the random variable $Y_n = a_n(\hat{\theta}_n - \theta)$.</p>
+        <p>Because $P(\hat{\theta}_n - \theta = 0) \to 1$, the random variable $Y_n$ evaluates exactly to $a_n(0) = 0$ with probability approaching 1, absolutely regardless of how fast or slow the sequence of constants $a_n$ grows.</p>
+        <p>Therefore, $Y_n \xrightarrow{P} 0$, which strictly implies that $Y_n$ converges in distribution to a degenerate point mass at 0. It is structurally impossible to obtain a non-degenerate distribution.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The MLE is the nearest integer to the sample mean: $\hat{\theta}_n = \lfloor \bar{X} \rceil$.<br>
+            (b) Because the probability of the estimator exactly hitting the true parameter converges to 1 ($P(\hat{\theta}_n = \theta) \to 1$), the scaled difference $a_n(\hat{\theta}_n - \theta)$ strictly collapses to a degenerate mass at 0 for any sequence $a_n$.
+        </div>
+    </div>
+
+
+<div class="question-section" id="q3">
+        <h2>📌 Q3 Linear Estimation and Confidence Regions (15 Marks)</h2>
+        
+        <div class="problem-box">
+            <strong>Problem Statement:</strong> Suppose the observable random vector $(Y_1, Y_2, \dots, Y_5)'$ is normally distributed with mean $( (\alpha+\beta), (\alpha+\beta), (\alpha-\gamma), (\alpha-\gamma), (\delta-\alpha) )'$ and covariance matrix $\sigma^2 I$. $\alpha, \beta, \gamma, \delta, \sigma^2$ are fixed unknown parameters.<br>
+            (a) Find the class of linear unbiased estimators of $(\delta - \alpha)$.<br>
+            (b) For observed $(y_1, \dots, y_5)' = (10, 12, 6, 10, 22)'$, find a $100(1-\theta)\%$ confidence region for $(\alpha+\beta, \alpha-\gamma)'$ in terms of a quantile of a known distribution, where $0 < \theta < 1$.
+        </div>
+
+        <h3>🧠 Approach &amp; Key Concepts</h3>
+        <p>This is a classic <strong>Linear Models (Gauss-Markov)</strong> problem. 
+        <ul>
+            <li><strong>Part (a):</strong> To find a linear unbiased estimator, we propose a linear combination $\mathbf{c}^T Y = \sum c_i Y_i$, take its expectation, equate it strictly to the target parameter $\delta - \alpha$, and solve the resulting system of linear constraints on the coefficients $c_i$.</li>
+            <li><strong>Part (b):</strong> We recognize the means as grouped parameters: $\phi_1 = \alpha+\beta$ and $\phi_2 = \alpha-\gamma$. We estimate these parameters via localized sample means, calculate the Error Sum of Squares (SSE) to estimate $\sigma^2$, and construct an $F$-statistic to generate an elliptical joint confidence region.</li>
+        </ul></p>
+
+        <h3>✍️ Step-by-Step Proof / Derivation</h3>
+        
+        <p><strong>Step 1: Finding Linear Unbiased Estimators (Part a)</strong></p>
+        <p>Let an arbitrary linear estimator be $T = c_1Y_1 + c_2Y_2 + c_3Y_3 + c_4Y_4 + c_5Y_5$. Its expectation must strictly equal $\delta - \alpha$ for all possible values of the parameters:</p>
+        <div class="math-display">
+            $$ \mathbb{E}(T) = c_1(\alpha+\beta) + c_2(\alpha+\beta) + c_3(\alpha-\gamma) + c_4(\alpha-\gamma) + c_5(\delta-\alpha) $$
+        </div>
+        <p>Group the coefficients by the Greek parameters:</p>
+        <div class="math-display">
+            $$ \mathbb{E}(T) = \alpha(c_1+c_2+c_3+c_4-c_5) + \beta(c_1+c_2) + \gamma(-c_3-c_4) + \delta(c_5) \equiv -\alpha + \delta $$
+        </div>
+        <p>By equating coefficients, we obtain a linear system:</p>
+        <ul>
+            <li>For $\delta$: $c_5 = 1$</li>
+            <li>For $\beta$: $c_1 + c_2 = 0 \implies c_2 = -c_1$</li>
+            <li>For $\gamma$: $-c_3 - c_4 = 0 \implies c_4 = -c_3$</li>
+            <li>For $\alpha$: $c_1 + c_2 + c_3 + c_4 - c_5 = -1$. Substituting the previous constraints yields $0 + 0 - 1 = -1$, which is perfectly consistent.</li>
+        </ul>
+        <p>Thus, the class of linear unbiased estimators is given by any linear combination of the form:</p>
+        <div class="math-display">
+            $$ T = c_1(Y_1 - Y_2) + c_3(Y_3 - Y_4) + Y_5 \quad \text{for any } c_1, c_3 \in \mathbb{R} $$
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 30px 0;">
+
+        <p><strong>Step 2: Defining Parametric Groups and Least Squares (Part b)</strong></p>
+        <p>Let $\phi_1 = \alpha+\beta$ and $\phi_2 = \alpha-\gamma$. Since $Y_1, Y_2$ share mean $\phi_1$, and $Y_3, Y_4$ share mean $\phi_2$, the optimal Least Squares Estimators (also MLEs for normal data) are their respective sample averages:</p>
+        <div class="math-display">
+            $$ \hat{\phi}_1 = \frac{Y_1 + Y_2}{2} = \frac{10 + 12}{2} = 11 $$
+        </div>
+        <div class="math-display">
+            $$ \hat{\phi}_2 = \frac{Y_3 + Y_4}{2} = \frac{6 + 10}{2} = 8 $$
+        </div>
+        <p>The variance for each of these estimates is exactly $\frac{\sigma^2}{2}$, and they are strictly independent.</p>
+
+        <p><strong>Step 3: Calculating Error Sum of Squares (SSE)</strong></p>
+        <p>The SSE is the sum of squared residuals from the estimated means. Notice $Y_5$ fits its mean $\delta-\alpha$ perfectly, so it contributes 0 to the error variance. The error degrees of freedom is $n - \text{rank}(X) = 5 - 3 = 2$.</p>
+        <div class="math-display">
+            $$ SSE = \sum (Y_i - \hat{Y}_i)^2 = (Y_1 - \hat{\phi}_1)^2 + (Y_2 - \hat{\phi}_1)^2 + (Y_3 - \hat{\phi}_2)^2 + (Y_4 - \hat{\phi}_2)^2 $$
+        </div>
+        <p>Plugging in the observed data:</p>
+        <div class="math-display">
+            $$ SSE = (10 - 11)^2 + (12 - 11)^2 + (6 - 8)^2 + (10 - 8)^2 = (-1)^2 + (1)^2 + (-2)^2 + (2)^2 = 1 + 1 + 4 + 4 = 10 $$
+        </div>
+        <p>We compute the Mean Squared Error ($MSE$): $MSE = SSE / \text{df}_{error} = 10 / 2 = 5$.</p>
+
+        <p><strong>Step 4: Constructing the F-Statistic</strong></p>
+        <p>Because $\hat{\phi}_1 \sim N(\phi_1, \sigma^2/2)$ and $\hat{\phi}_2 \sim N(\phi_2, \sigma^2/2)$ independently, the sum of their squared standardizations follows a $\chi^2$ distribution with 2 degrees of freedom:</p>
+        <div class="math-display">
+            $$ \frac{(\hat{\phi}_1 - \phi_1)^2}{\sigma^2/2} + \frac{(\hat{\phi}_2 - \phi_2)^2}{\sigma^2/2} \sim \chi^2_2 \implies \frac{2}{\sigma^2} [(\hat{\phi}_1 - \phi_1)^2 + (\hat{\phi}_2 - \phi_2)^2] \sim \chi^2_2 $$
+        </div>
+        <p>We divide this by its degrees of freedom (2), and then divide by the independent error term $(SSE/\sigma^2)/2$ to form the $F$-statistic:</p>
+        <div class="math-display">
+            $$ F = \frac{\frac{1}{\sigma^2} [(\hat{\phi}_1 - \phi_1)^2 + (\hat{\phi}_2 - \phi_2)^2]}{MSE / \sigma^2} = \frac{(\hat{\phi}_1 - \phi_1)^2 + (\hat{\phi}_2 - \phi_2)^2}{MSE} \sim F_{2, 2} $$
+        </div>
+        <p>Substituting our empirical values $\hat{\phi}_1 = 11$, $\hat{\phi}_2 = 8$, and $MSE = 5$, the bounding probability equation is $P(F \leq F_{2, 2, \theta}) = 1 - \theta$, where $F_{2, 2, \theta}$ is the upper $\theta$ quantile of the $F$-distribution.</p>
+
+        <div class="conclusion-box">
+            <strong>Final Answer / Q.E.D:</strong><br>
+            (a) The class of linear unbiased estimators for $\delta - \alpha$ is exactly $\{c_1(Y_1 - Y_2) + c_3(Y_3 - Y_4) + Y_5\}$ for any real $c_1, c_3$.<br>
+            (b) The $100(1-\theta)\%$ confidence region for the vector $(\alpha+\beta, \alpha-\gamma)'$ is the set of all points satisfying the elliptical inequality:
+            <div class="math-display" style="background:transparent; margin-top:10px; margin-bottom:0;">
+                $$ (\alpha+\beta - 11)^2 + (\alpha-\gamma - 8)^2 \leq 5 F_{2, 2, \theta} $$
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
